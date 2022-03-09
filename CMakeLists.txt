@@ -20,6 +20,8 @@ add_subdirectory(Log)
 include_directories(include)
 include_directories(Log/include)
 
+include_directories(Indexer/include)
+
 file (GLOB_RECURSE CXX_SOURCES "src/**.cpp")
 file (GLOB_RECURSE HEADERS "include/**.h")
 file (GLOB_RECURSE UI_FILES "ui/**.ui")
@@ -53,7 +55,7 @@ else()
 	endif()
 endif()
 
-target_link_libraries(FileIndex PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(FileIndex PRIVATE Qt${QT_VERSION_MAJOR}::Widgets log indexer)
 
 if(QT_VERSION_MAJOR EQUAL 6)
 	qt_finalize_executable(FileIndex)
