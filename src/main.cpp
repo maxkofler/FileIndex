@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <chrono>
+#include <fstream>
 
 #include "log.h"
 #include "indexer.h"
@@ -29,7 +30,10 @@ int main(int argc, char *argv[]){
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
 
-		Indexer indexer;
+		std::ofstream outFile;
+		outFile.open("results.txt", std::ios::out);
+
+		Indexer indexer(outFile);
 
 		auto start = high_resolution_clock::now();
 
@@ -37,6 +41,8 @@ int main(int argc, char *argv[]){
 
 		auto end  = high_resolution_clock::now();
 		auto duration = duration_cast<milliseconds>(end - start);
+
+		outFile.close();
 
 		std::cout << "Indexing took " << duration.count() << " ms" << std::endl;
 		std::cout << "Enter to proceed: ";

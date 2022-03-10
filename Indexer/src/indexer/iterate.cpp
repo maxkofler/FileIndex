@@ -46,6 +46,7 @@ void Indexer::iterate(fs::directory_entry entry){
 	#endif
 
 	_entries.push_back(entry.path().string());
+	_out << entry.path().string() << std::endl;
 
 	//Skip link entries
 	if (isLink){

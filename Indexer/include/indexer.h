@@ -4,11 +4,16 @@
 #include <list>
 #include <string>
 #include <filesystem>
+#include <ostream>
 
 class Indexer{
 
 public:
-	Indexer();
+	/**
+	 * @brief	Contructor
+	 * @param	out							An output stream to write the files to line by line
+	 */
+	Indexer(std::ostream& out);
 
 	/**
 	 * @brief	Indexes the supplied directory
@@ -23,6 +28,7 @@ public:
 	void									clear();
 
 private:
+	std::ostream&							_out;
 	std::list<std::string>					_entries;
 
 	bool									_failOnError = false;
