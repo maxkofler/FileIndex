@@ -9,6 +9,7 @@
 #include "log.h"
 #include "indexer.h"
 #include "error.h"
+#include "directory.h"
 
 Log::Log* hlog;
 
@@ -25,6 +26,16 @@ int main(int argc, char *argv[]){
 
 	try{
 		FUN();
+
+		std::string rootName = "root";
+		Directory dir(&rootName);
+
+		std::string childName = "child";
+		Directory child(&childName);
+
+		dir.addEntry(&child);
+
+		LOGD(child.getPathString());
 
 		std::string in;
 		std::cout << "Enter to proceed: ";
