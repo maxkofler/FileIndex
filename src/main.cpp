@@ -10,6 +10,7 @@
 #include "indexer.h"
 #include "error.h"
 #include "directory.h"
+#include "file.h"
 
 Log::Log* hlog;
 
@@ -33,9 +34,14 @@ int main(int argc, char *argv[]){
 		std::string childName = "child";
 		Directory child(&childName);
 
+		std::string fileName = "file";
+		File file(&fileName);
+
+		child.addEntry(&file);
+
 		dir.addEntry(&child);
 
-		LOGD(child.getPathString());
+		LOGD(file.getPathString());
 
 		std::string in;
 		std::cout << "Enter to proceed: ";

@@ -5,5 +5,10 @@
 void Directory::addEntry(FSEntry* entry){
 	FUN();
 
+	if (entry == nullptr)
+		return;
+
+	_entries.push_back(entry);
+
 	entry->_parent = this;
 }
