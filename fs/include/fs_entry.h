@@ -15,8 +15,17 @@ namespace FS{
 class FSEntry{
 
 public:
-	FSEntry(std::string* name);
+	/**
+	 * @brief	Creates a new filesystem entry
+	 * @param	name					A pointer to the name string
+	 * @param	shouldManageMemory		If the memory should be managed by this class (default: false)
+	 */
+	FSEntry(std::string* name, bool shouldManageMemory);
+	~FSEntry();
 
+	/**
+	 * @brief	Returns the file system entry type
+	 */
 	virtual FS::entry_type				type() = 0;
 
 	/**
@@ -50,6 +59,7 @@ private:
 
 	FSEntry*							_parent = nullptr;
 
+	bool								_ownsName = false;
 	std::string*						_name = nullptr;
 
 };

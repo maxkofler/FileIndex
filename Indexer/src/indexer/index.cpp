@@ -5,9 +5,11 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
-bool Indexer::index(std::string dir, bool failOnError){
+bool Indexer::index(bool failOnError){
 	FUN();
 	_failOnError = failOnError;
+
+	std::string dir = _curDir->getPathString();
 
 	{	//Check if the supplied path is a directory
 		std::error_code ec;

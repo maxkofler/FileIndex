@@ -8,7 +8,12 @@
 class Directory : public FSEntry{
 
 public:
-	Directory(std::string* name);
+	/**
+	 * @brief	Creates a new filesystem entry
+	 * @param	name					A pointer to the name string
+	 * @param	shouldManageMemory		If the memory should be managed by this class (default: false)
+	 */
+	Directory(std::string* name, bool ownsName = false);
 
 	FS::entry_type						type();
 

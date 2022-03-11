@@ -1,6 +1,8 @@
 #ifndef __INDEXER_H__
 #define __INDEXER_H__
 
+#include "directory.h"
+
 #include <list>
 #include <string>
 #include <filesystem>
@@ -11,25 +13,18 @@ class Indexer{
 public:
 	/**
 	 * @brief	Contructor
-	 * @param	out							An output stream to write the files to line by line
+	 * @param	rootDir						The root directory filesystem entry
 	 */
-	Indexer(std::ostream& out);
+	Indexer(Directory* rootDir);
 
 	/**
 	 * @brief	Indexes the supplied directory
-	 * @param	directory					The directory to index
 	 * @param	failOnError					Whether to fail on error or not (default: true)
 	 */
-	bool									index(std::string directory, bool failOnError = true);
-
-	/**
-	 * @brief	Clears the entries contained
-	 */
-	void									clear();
+	bool									index(bool failOnError = true);
 
 private:
-	std::ostream&							_out;
-	std::list<std::string>					_entries;
+	Directory*								_curDir;
 
 	bool									_failOnError = false;
 

@@ -5,6 +5,7 @@ project(Indexer)
 include_directories(include)
 include_directories(../include)
 include_directories(../Log/include)
+include_directories(../fs/include)
 
 if (CMAKE_BUILD_TYPE)
 	if (CMAKE_BUILD_TYPE MATCHES Debug)

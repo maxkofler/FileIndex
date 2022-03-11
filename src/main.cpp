@@ -15,7 +15,7 @@
 Log::Log* hlog;
 
 int main(int argc, char *argv[]){
-	hlog = new Log::Log(Log::F);
+	hlog = new Log::Log(Log::MEM);
 	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
 
 	using namespace std::chrono;
@@ -28,8 +28,8 @@ int main(int argc, char *argv[]){
 	try{
 		FUN();
 
-		std::string rootName = "root";
-		Directory dir(&rootName);
+		std::string rootName(argv[1]);
+		Directory root(&rootName);
 
 		std::string childName = "child";
 		Directory child(&childName);
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
 		child.addEntry(&file);
 
-		dir.addEntry(&child);
+		root.addEntry(&child);
 
 		LOGD(file.getPathString());
 
@@ -47,23 +47,21 @@ int main(int argc, char *argv[]){
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
 
-		std::ofstream outFile;
-		outFile.open("results.txt", std::ios::out);
-
-		Indexer indexer(outFile);
+		Indexer indexer(&root);
 
 		auto start = high_resolution_clock::now();
 
-		indexer.index(argv[1], false);
+		indexer.index(false);
 
 		auto end  = high_resolution_clock::now();
 		auto duration = duration_cast<milliseconds>(end - start);
 
-		outFile.close();
-
 		std::cout << "Indexing took " << duration.count() << " ms" << std::endl;
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
+
+		std::string* newName = new std::string("NewName");
+		Directory(newName, true);
 
 	} catch (Error* e){
 		LOGE("Failed: " + e->what());

@@ -45,8 +45,8 @@ void Indexer::iterate(fs::directory_entry entry){
 	LOGF("Found entry: " + entry.path().string());
 	#endif
 
-	_entries.push_back(entry.path().string());
-	_out << entry.path().string() << std::endl;
+	//_entries.push_back(entry.path().string());
+	//_out << entry.path().string() << std::endl;
 
 	//Skip link entries
 	if (isLink){
