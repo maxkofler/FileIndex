@@ -31,37 +31,39 @@ int main(int argc, char *argv[]){
 		std::string rootName(argv[1]);
 		Directory root(&rootName);
 
-		std::string childName = "child";
-		Directory child(&childName);
-
-		std::string fileName = "file";
-		File file(&fileName);
-
-		child.addEntry(&file);
-
-		root.addEntry(&child);
-
-		LOGD(file.getPathString());
-
 		std::string in;
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
 
-		Indexer indexer(&root);
+		{
+			Indexer indexer(&root);
 
-		auto start = high_resolution_clock::now();
+			auto start = high_resolution_clock::now();
 
-		indexer.index(false);
+			indexer.index(false);
 
-		auto end  = high_resolution_clock::now();
-		auto duration = duration_cast<milliseconds>(end - start);
+			auto end = high_resolution_clock::now();
+			auto duration = duration_cast<milliseconds>(end - start);
 
-		std::cout << "Indexing took " << duration.count() << " ms" << std::endl;
+			LOGI("Indexing took " + std::to_string(duration.count()) + " ms");
+		}
+		
+
+		LOGD("File overview:");
+
+		{
+			auto res = root.getRecursiveEntries();
+
+			for (FSEntry* entry : res){
+				if (entry->type() == FS::ENTRY_DIRECTORY)
+					LOGD("DIR: " + entry->getPathString());
+				else
+					LOGD("FIL: " + entry->getPathString());
+			}
+		}
+
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
-
-		std::string* newName = new std::string("NewName");
-		Directory(newName, true);
 
 	} catch (Error* e){
 		LOGE("Failed: " + e->what());

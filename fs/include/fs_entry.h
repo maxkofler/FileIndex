@@ -10,6 +10,7 @@ namespace FS{
 
 #include <stdint.h>
 #include <vector>
+#include <deque>
 #include <string>
 
 class FSEntry{

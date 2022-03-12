@@ -9,6 +9,19 @@ bool Indexer::index(bool failOnError){
 	FUN();
 	_failOnError = failOnError;
 
+	if (!isDirectory(_rootDir->getPathString()))
+		throw new IndexerError("Can not index fs entry " + _rootDir->getPathString() + ": has to be a directory");
+
+	iterate(_rootDir);
+
+	return true;
+}
+
+/*
+bool Indexer::index(bool failOnError){
+	FUN();
+	_failOnError = failOnError;
+
 	std::string dir = _curDir->getPathString();
 
 	{	//Check if the supplied path is a directory
@@ -33,4 +46,4 @@ bool Indexer::index(bool failOnError){
 	iterate(rootDir);
 
 	return true;
-}
+}*/

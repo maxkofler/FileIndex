@@ -2,73 +2,51 @@
 #include "indexer.h"
 #include "indexerError.h"
 
+#include "directory.h"
+#include "file.h"
+
+#include <filesystem>
+
 namespace fs = std::filesystem;
 
-void Indexer::iterate(fs::directory_entry entry){
+void Indexer::iterate(Directory* directory){
 	FUN();
 
-	bool isDir = false;
+	std::string name = directory->getName();
+	std::string path = directory->getPathString();
 
-	{	//Check the directory entry
-		std::error_code ec;
+	std::error_code ec;
+	fs::directory_iterator it(path, ec);
 
-		isDir = fs::is_directory(entry, ec);
-
-		if (ec){
-			if (_failOnError){
-				throw new IndexerError("FS error when checking " + entry.path().string() + ": " + ec.message());
-			} else {
-				LOGW("FS error when checking " + entry.path().string() + ": " + ec.message() + ", trying to continue...");
-				return;
-			}
+	if (ec){
+		if (_failOnError)
+			throw new IndexerError("FS error while trying to iterate " + path + ": " + ec.message());
+		else {
+			LOGW("WARNING: FS error while trying to iterate " + path + ": " + ec.message() + ", trying to continue");
+			return;
 		}
 	}
 
-	bool isLink = false;
-
-	{	//Check if the entry is a symlink, skip it
-		std::error_code ec;
-
-		isLink = fs::is_symlink(entry, ec);
-
-		if (ec){
-			if (_failOnError){
-				throw new IndexerError("FS error when checking " + entry.path().string() + ": " + ec.message());
-			} else {
-				LOGW("FS error when checking " + entry.path().string() + ": " + ec.message() + ", trying to continue...");
-				return;
-			}
+	for (fs::directory_entry entry : it){
+		if (isSymlink(entry.path().string())){
+			#ifdef DEBUG
+			LOGI("Skipping symlink " + entry.path().string());
+			#endif
+			continue;
 		}
-	}
 
-	#ifdef DEBUG
-	LOGF("Found entry: " + entry.path().string());
-	#endif
+		bool isDir = isDirectory(entry.path().string(), false);
 
-	//_entries.push_back(entry.path().string());
-	//_out << entry.path().string() << std::endl;
+		FSEntry* newEntry;
+		
+		if (isDir)
+			newEntry = new Directory(new std::string(entry.path().filename().string()), true);
+		else
+			newEntry = new File(new std::string(entry.path().filename().string()), true);
 
-	//Skip link entries
-	if (isLink){
-		#ifdef DEBUG
-		LOGD("Skipping symlink indexing of " + entry.path().string());
-		#endif
-		return;
-	}
+		directory->addEntry(newEntry);
 
-	if (isDir){
-		std::error_code ec;
-		for (fs::directory_entry newEntry : fs::directory_iterator(entry, ec)){
-			if (ec){
-				if (_failOnError) {
-					throw new IndexerError("FS error while iterating " + entry.path().string() + ": " + ec.message());
-				} else {
-					LOGW("FS error while iterating " + entry.path().string() + ": " + ec.message() + " trying to continue...");
-					break;
-				}
-			}
-
-			iterate(newEntry);
-		}
+		if (isDir)
+			iterate((Directory*)newEntry);
 	}
 }

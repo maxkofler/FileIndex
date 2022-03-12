@@ -17,11 +17,15 @@ FSEntry* FSEntry::getParent(){
 }
 
 std::string FSEntry::getPathString(){
-	auto paths = getParents();
 	std::string path;
+	auto parents = getParents();
 
-	for(FSEntry* entry : paths)
-		path += '/' + entry->getName();
+	if (parents.size() > 0){
+		path += parents[0]->getName();
+
+		for (int i = 1; i < parents.size(); i++)
+			path += '/' + parents[i]->getName();
+	}
 
 	if (type() == FS::ENTRY_DIRECTORY)
 		path += '/';

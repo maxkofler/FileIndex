@@ -5,7 +5,6 @@
 
 #include <list>
 #include <string>
-#include <filesystem>
 #include <ostream>
 
 class Indexer{
@@ -23,12 +22,26 @@ public:
 	 */
 	bool									index(bool failOnError = true);
 
+	/**
+	 * @brief	Checks if the supplied path is a directory
+	 * @param	path						The path to check
+	 * @param	isCritical					If a fs error should throw an exception (depends on _failOnError too, default: true)
+	 */
+	bool									isDirectory(std::string path, bool isCritical = true);
+
+	/**
+	 * @brief	Checks if the supplied path is a symlink
+	 * @param	path						The path to check
+	 * @param	isCritical					If a fs error should throw an exception (depends on _failOnError too, default: true)
+	 */
+	bool									isSymlink(std::string path, bool isCritical = true);
+
 private:
-	Directory*								_curDir;
+	Directory*								_rootDir;
 
 	bool									_failOnError = false;
 
-	void									iterate(std::filesystem::directory_entry entry);
+	void									iterate(Directory* dir);
 
 };
 

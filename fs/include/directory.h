@@ -3,7 +3,7 @@
 
 #include "fs_entry.h"
 
-#include <vector>
+#include <deque>
 
 class Directory : public FSEntry{
 
@@ -24,12 +24,17 @@ public:
 	void								addEntry(FSEntry* entry);
 
 	/**
-	 * @brief	Returns a reference to the entries contained in this directory 
+	 * @brief	Returns a reference to the entries contained in this directory
 	 */
-	std::vector<FSEntry*>&				getEntries();
+	std::deque<FSEntry*>&				getEntries();
+
+	/**
+	 * @brief	Returns a deque containing all the entries recursively
+	 */
+	std::deque<FSEntry*>				getRecursiveEntries();
 
 private:
-	std::vector<FSEntry*>				_entries;
+	std::deque<FSEntry*>				_entries;
 
 };
 

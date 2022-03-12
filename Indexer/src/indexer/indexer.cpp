@@ -9,6 +9,6 @@ namespace fs = std::filesystem;
 Indexer::Indexer(Directory* rootDir){
 	FUN();
 
-	_curDir = rootDir;
+	_rootDir = rootDir;
 }
 
