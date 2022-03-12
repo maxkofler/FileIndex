@@ -47,20 +47,6 @@ int main(int argc, char *argv[]){
 
 			LOGI("Indexing took " + std::to_string(duration.count()) + " ms");
 		}
-		
-
-		LOGD("File overview:");
-
-		{
-			auto res = root.getRecursiveEntries();
-
-			for (FSEntry* entry : res){
-				if (entry->type() == FS::ENTRY_DIRECTORY)
-					LOGD("DIR: " + entry->getPathString());
-				else
-					LOGD("FIL: " + entry->getPathString());
-			}
-		}
 
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;

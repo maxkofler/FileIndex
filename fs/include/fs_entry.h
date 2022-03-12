@@ -9,7 +9,6 @@ namespace FS{
 }
 
 #include <stdint.h>
-#include <vector>
 #include <deque>
 #include <string>
 
@@ -50,9 +49,9 @@ public:
 	FSEntry*							getParent();
 
 	/**
-	 * @brief	Returns a vector containing all the parent directories
+	 * @brief	Returns a deque containing all the parent directories
 	 */
-	std::vector<FSEntry*>				getParents();
+	std::deque<FSEntry*>				getParents();
 
 #ifndef FRIEND_FS_ENTRY
 private:

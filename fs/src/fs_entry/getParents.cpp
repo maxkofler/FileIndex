@@ -1,10 +1,10 @@
 #include "log.h"
 #include "fs_entry.h"
 
-std::vector<FSEntry*> FSEntry::getParents(){
+std::deque<FSEntry*> FSEntry::getParents(){
 	FUN();
 
-	std::vector<FSEntry*> entries;
+	std::deque<FSEntry*> entries;
 	
 	if (_parent != nullptr)
 		entries = _parent->getParents();
