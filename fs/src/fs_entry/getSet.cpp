@@ -16,6 +16,13 @@ FSEntry* FSEntry::getParent(){
 	return _parent;
 }
 
+FSEntry* FSEntry::getRootEntry(){
+	if (_parent == nullptr)
+		return this;
+
+	return _parent->getRootEntry();
+}
+
 std::string FSEntry::getPathString(){
 	std::string path;
 	auto parents = getParents();

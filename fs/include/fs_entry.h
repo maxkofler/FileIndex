@@ -49,6 +49,11 @@ public:
 	FSEntry*							getParent();
 
 	/**
+	 * @brief	Returns the root entry of this entry
+	 */
+	FSEntry*							getRootEntry();
+
+	/**
 	 * @brief	Returns a deque containing all the parent directories
 	 */
 	std::deque<FSEntry*>				getParents();
