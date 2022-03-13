@@ -51,6 +51,25 @@ int main(int argc, char *argv[]){
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
 
+		{//Now export the indexes
+			auto entries = root.getRecursiveEntries();
+
+			std::ofstream outFile;
+			outFile.open("index.txt", std::ios::out);
+
+			if (entries.size() != 0){
+				FSEntry* last = &root;
+				for(FSEntry* entry : entries){
+					std::string path = last->getPathTo(entry);
+					if (entry->type() == FS::ENTRY_DIRECTORY){
+						path += '/';
+						last = entry;
+					}
+					outFile << path << std::endl;
+				}
+			}
+		}
+
 	} catch (Error* e){
 		LOGE("Failed: " + e->what());
 	}

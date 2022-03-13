@@ -28,7 +28,7 @@ void Indexer::iterate(Directory* directory){
 	}
 
 	for (fs::directory_entry entry : it){
-		if (isSymlink(entry.path().string())){
+		if (isSymlink(entry.path().string(), false)){
 			#ifdef DEBUG
 			LOGI("Skipping symlink " + entry.path().string());
 			#endif

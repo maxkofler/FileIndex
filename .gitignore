@@ -74,3 +74,6 @@ Thumbs.db
 
 build/
 *.txt.user
+
+#FileIndex result file
+index.txt

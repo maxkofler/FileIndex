@@ -11,7 +11,7 @@ bool Indexer::isDirectory(std::string path, bool isCritical){
 	bool isDir = std::filesystem::is_directory(path, ec);
 
 	if (ec){
-		if (isCritical)
+		if (isCritical && _failOnError)
 			throw new IndexerError("FS error while checking " + path + ": " + ec.message());
 		else{
 			LOGW("WARNING: FS error while checking " + path + ": " + ec.message());
