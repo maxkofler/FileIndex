@@ -1,14 +1,14 @@
-#ifndef __INDEXER_ERROR_H__
-#define __INDEXER_ERROR_H__
+#ifndef __FS_ERROR_H__
+#define __FS_ERROR_H__
 
 #include "error.h"
 
 #include <system_error>
 
-class IndexerError : public Error{
+class FSError : public Error{
 
 public:
-	IndexerError(std::string cause);
+	FSError(std::string cause);
 
 	std::string 			what();
 
