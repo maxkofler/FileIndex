@@ -19,7 +19,7 @@ public:
 	 * @param	shouldManageMemory		If the memory should be managed by this class (default: false)
 	 */
 	FSEntry(std::string* name, bool shouldManageMemory);
-	~FSEntry();
+	virtual ~FSEntry();
 
 	/**
 	 * @brief	Returns the file system entry type
