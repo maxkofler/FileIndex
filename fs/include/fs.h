@@ -17,10 +17,10 @@ public:
 	 * @brief	Adds a new entry to the file systems
 	 * @param	type			The type of the entry (DIR or FILE)
 	 * @param	name			The name of the new entry
-	 * @param	parent			The parent of the entry
+	 * @param	parent			The parent of the entry, nullptr (default) = create in root directory
 	 * @return	FSEntry*		A pointer to the newly created entry
 	 */
-	FSEntry*					newEntry(entry_type type, std::string name, Directory* parent);
+	FSEntry*					newEntry(entry_type type, std::string name, Directory* parent = nullptr);
 
 private:
 	Directory*					_root;

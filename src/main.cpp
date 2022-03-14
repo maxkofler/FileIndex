@@ -31,6 +31,7 @@ int main(int argc, char *argv[]){
 		FUN();
 
 		FS fs(argv[1]);
+		fs.newEntry(ENTRY_FILE, "test.txt");
 
 		std::string rootName(argv[1]);
 		Directory root(&rootName);
