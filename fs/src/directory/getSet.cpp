@@ -1,8 +1,8 @@
 #include "log.h"
 #include "directory.h"
 
-FS::entry_type Directory::type(){
-	return FS::ENTRY_DIRECTORY;
+entry_type Directory::type(){
+	return ENTRY_DIRECTORY;
 }
 
 std::deque<FSEntry*>& Directory::getEntries(){
@@ -20,7 +20,7 @@ std::deque<FSEntry*> Directory::getRecursiveEntries(){
 
 		foundEntries.push_back(entry);
 
-		if (entry->type() == FS::ENTRY_DIRECTORY){
+		if (entry->type() == ENTRY_DIRECTORY){
 			auto res = ((Directory*) entry)->getRecursiveEntries();
 
 			foundEntries.insert(foundEntries.end(), res.begin(), res.end());

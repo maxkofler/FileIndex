@@ -1,6 +1,8 @@
 #ifndef __FS_FILE_H__
 #define __FS_FILE_H__
 
+class File;
+
 #include "fs_entry.h"
 
 class File : public FSEntry{
@@ -13,7 +15,7 @@ public:
 	 */
 	File(std::string* name, bool ownsName = false);
 
-	FS::entry_type						type();
+	entry_type							type();
 
 };
 

@@ -1,12 +1,10 @@
 #ifndef __FILESYSTEM_ENTRY_H__
 #define __FILESYSTEM_ENTRY_H__
 
-namespace FS{
-	enum entry_type{
-		ENTRY_DIRECTORY,
-		ENTRY_FILE
-	};
-}
+enum entry_type{
+	ENTRY_DIRECTORY,
+	ENTRY_FILE
+};
 
 #include <stdint.h>
 #include <deque>
@@ -26,7 +24,7 @@ public:
 	/**
 	 * @brief	Returns the file system entry type
 	 */
-	virtual FS::entry_type				type() = 0;
+	virtual entry_type					type() = 0;
 
 	/**
 	 * @brief	Returns the path to this filesystem entry

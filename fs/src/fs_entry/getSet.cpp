@@ -34,7 +34,7 @@ std::string FSEntry::getPathString(){
 			path += '/' + parents[i]->getName();
 	}
 
-	if (type() == FS::ENTRY_DIRECTORY)
+	if (type() == ENTRY_DIRECTORY)
 		path += '/';
 
 	return path;

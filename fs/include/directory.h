@@ -1,6 +1,8 @@
 #ifndef __FS_DIRECTORY_H__
 #define __FS_DIRECTORY_H__
 
+class Directory;
+
 #include "fs_entry.h"
 
 #include <deque>
@@ -16,7 +18,7 @@ public:
 	 */
 	Directory(std::string* name, bool shouldManageMemory = false);
 
-	FS::entry_type						type();
+	entry_type							type();
 
 	/**
 	 * @brief	Adds the supplied filesystem entry to this directory

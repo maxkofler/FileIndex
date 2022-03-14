@@ -12,6 +12,8 @@
 #include "directory.h"
 #include "file.h"
 
+#include "fs.h"
+
 Log::Log* hlog;
 
 int main(int argc, char *argv[]){
@@ -27,6 +29,8 @@ int main(int argc, char *argv[]){
 
 	try{
 		FUN();
+
+		FS fs(argv[1]);
 
 		std::string rootName(argv[1]);
 		Directory root(&rootName);
