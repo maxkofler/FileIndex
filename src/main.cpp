@@ -52,22 +52,14 @@ int main(int argc, char *argv[]){
 		std::cin >> in;
 
 		{//Now export the indexes
-			auto entries = root.getRecursiveEntries();
+			LOGI("Exporting indexes...");
 
 			std::ofstream outFile;
 			outFile.open("index.txt", std::ios::out);
 
-			if (entries.size() != 0){
-				FSEntry* last = &root;
-				for(FSEntry* entry : entries){
-					std::string path = last->getPathTo(entry);
-					if (entry->type() == FS::ENTRY_DIRECTORY){
-						path += '/';
-						last = entry;
-					}
-					outFile << path << std::endl;
-				}
-			}
+			root.printRecursiveEntries(outFile);
+
+			outFile.close();
 		}
 
 	} catch (Error* e){

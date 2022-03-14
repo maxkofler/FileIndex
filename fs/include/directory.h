@@ -4,6 +4,7 @@
 #include "fs_entry.h"
 
 #include <deque>
+#include <ostream>
 
 class Directory : public FSEntry{
 
@@ -13,7 +14,7 @@ public:
 	 * @param	name					A pointer to the name string
 	 * @param	shouldManageMemory		If the memory should be managed by this class (default: false)
 	 */
-	Directory(std::string* name, bool ownsName = false);
+	Directory(std::string* name, bool shouldManageMemory = false);
 
 	FS::entry_type						type();
 
@@ -32,6 +33,12 @@ public:
 	 * @brief	Returns a deque containing all the entries recursively
 	 */
 	std::deque<FSEntry*>				getRecursiveEntries();
+
+	/**
+	 * @brief	Outputs the entries recursively to the ostream
+	 * @param	out						The ostream to output to
+	 */
+	void								printRecursiveEntries(std::ostream& out);
 
 private:
 	std::deque<FSEntry*>				_entries;
