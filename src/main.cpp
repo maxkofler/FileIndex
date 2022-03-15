@@ -29,43 +29,22 @@ int main(int argc, char *argv[]){
 
 	try{
 		FUN();
+		std::string in;
 
 		FS fs(argv[1]);
-		fs.createEntry(ENTRY_FILE, "test.txt");
+		fs.createEntry(ENTRY_FILE, "myFile.txt");
 
-		std::string rootName(argv[1]);
-		Directory root(&rootName);
+		FS newFS("monn");
+		
+		auto start = high_resolution_clock::now();
+		fs.index(nullptr, true);
+		auto end = high_resolution_clock::now();
+		auto duration = duration_cast<milliseconds>(end - start);
 
-		std::string in;
-		std::cout << "Enter to proceed: ";
-		std::cin >> in;
-
-		{
-			Indexer indexer(&root);
-
-			auto start = high_resolution_clock::now();
-
-			indexer.index(false);
-
-			auto end = high_resolution_clock::now();
-			auto duration = duration_cast<milliseconds>(end - start);
-
-			LOGI("Indexing took " + std::to_string(duration.count()) + " ms");
-		}
+		LOGI("Indexing took " + std::to_string(duration.count()) + " ms");
 
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
-
-		{//Now export the indexes
-			LOGI("Exporting indexes...");
-
-			std::ofstream outFile;
-			outFile.open("index.txt", std::ios::out);
-
-			root.printRecursiveEntries(outFile);
-
-			outFile.close();
-		}
 
 	} catch (Error* e){
 		LOGE("Failed: " + e->what());

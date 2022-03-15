@@ -27,7 +27,7 @@ public:
 	 * @param	directory		The directory to index
 	 * @param	recursive		If the indexing should be recursive (default: true)
 	 */
-	void						index(std::string directory, bool recursive = true);
+	void						index(Directory* directory, bool recursive = true);
 
 	/**
 	 * @brief	Checks if the fs entry is of a certain type
@@ -37,11 +37,16 @@ public:
 	 */
 	bool						is(entry_type type, std::string path, bool isCritical);
 
+	/**
+	 * @brief	Returns a pointer to this filesystems root directory
+	 */
+	Directory*					getRoot();
+
 private:
 	Directory*					_root;
 
 	bool						_owns_names = true;
-	std::vector<std::string>*	_names = nullptr;
+	std::vector<std::string*>*	_names = nullptr;
 
 	std::deque<FSEntry*>		_entries;
 

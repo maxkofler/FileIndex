@@ -5,12 +5,12 @@
 void Directory::addEntry(FSEntry* entry){
 	FUN();
 
-	#ifdef DEBUG
-	LOGMEM("Adding " + entry->getName() + " to " + getPathString());
-	#endif
-
 	if (entry == nullptr)
 		return;
+
+	#ifdef DEBUG
+	LOGMEM("Adding " + entry->getName() + " to " + this->getPathString());
+	#endif
 
 	_entries.push_back(entry);
 

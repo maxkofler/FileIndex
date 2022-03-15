@@ -3,7 +3,7 @@
 #include "fsError.h"
 #include "fs_entry.h"
 
-FSEntry* FS::createEntry(entry_type type, std::string name, Directory* parent){
+FSEntry* FS::createEntry(entry_type type, std::string newName, Directory* parent){
 	FUN();
 
 	if (parent == nullptr)
@@ -12,17 +12,19 @@ FSEntry* FS::createEntry(entry_type type, std::string name, Directory* parent){
 	if (parent->getRootEntry() != _root)
 		throw new FSError("Tried to create new entry in directory not present in this filesystem");
 
-	_names->push_back(name);
+	//TODO: check for already exising filenames
+	_names->push_back(new std::string(newName));
+	std::string* name = _names->back();
 
 	FSEntry* nE;
 
 	switch (type){
 		case ENTRY_DIRECTORY:
-			nE = new Directory(&(_names->back()), false);
+			nE = new Directory(name, false);
 			break;
 		
 		case ENTRY_FILE:
-			nE = new File(&(_names->back()), false);
+			nE = new File(name, false);
 			break;
 
 		default:
@@ -30,7 +32,7 @@ FSEntry* FS::createEntry(entry_type type, std::string name, Directory* parent){
 	}
 
 	_entries.push_back(nE);
-	_root->addEntry(nE);
+	parent->addEntry(nE);
 
 	return nE;
 }
