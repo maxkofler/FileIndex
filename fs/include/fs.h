@@ -22,6 +22,21 @@ public:
 	 */
 	FSEntry*					createEntry(entry_type type, std::string name, Directory* parent = nullptr);
 
+	/**
+	 * @brief	Indexes the supplied directory to this filesystem
+	 * @param	directory		The directory to index
+	 * @param	recursive		If the indexing should be recursive (default: true)
+	 */
+	void						index(std::string directory, bool recursive = true);
+
+	/**
+	 * @brief	Checks if the fs entry is of a certain type
+	 * @param	type			The expected type
+	 * @param	path			The path to check
+	 * @param	isCritical		If true, an FS error when checking will throw an exception
+	 */
+	bool						is(entry_type type, std::string path, bool isCritical);
+
 private:
 	Directory*					_root;
 

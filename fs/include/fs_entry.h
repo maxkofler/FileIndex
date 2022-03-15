@@ -3,7 +3,8 @@
 
 enum entry_type{
 	ENTRY_DIRECTORY,
-	ENTRY_FILE
+	ENTRY_FILE,
+	ENTRY_SYMLINK
 };
 
 #include <stdint.h>
