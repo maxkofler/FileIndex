@@ -14,13 +14,13 @@ public:
 	~FS();
 
 	/**
-	 * @brief	Adds a new entry to the file systems
+	 * @brief	Creates a new file system entry in this filesystem
 	 * @param	type			The type of the entry (DIR or FILE)
 	 * @param	name			The name of the new entry
 	 * @param	parent			The parent of the entry, nullptr (default) = create in root directory
 	 * @return	FSEntry*		A pointer to the newly created entry
 	 */
-	FSEntry*					newEntry(entry_type type, std::string name, Directory* parent = nullptr);
+	FSEntry*					createEntry(entry_type type, std::string name, Directory* parent = nullptr);
 
 private:
 	Directory*					_root;

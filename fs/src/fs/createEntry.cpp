@@ -3,7 +3,7 @@
 #include "fsError.h"
 #include "fs_entry.h"
 
-FSEntry* FS::newEntry(entry_type type, std::string name, Directory* parent){
+FSEntry* FS::createEntry(entry_type type, std::string name, Directory* parent){
 	FUN();
 
 	if (parent == nullptr)
