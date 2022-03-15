@@ -46,6 +46,8 @@ int main(int argc, char *argv[]){
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
 
+		FS::getRoot(fs.getRoot());
+
 	} catch (Error* e){
 		LOGE("Failed: " + e->what());
 	}

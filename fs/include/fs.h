@@ -42,6 +42,12 @@ public:
 	 */
 	Directory*					getRoot();
 
+	/**
+	 * @brief	Returns the root directory of a fs entry
+	 * @param	entry			The entry to process
+	 */
+	static Directory*			getRoot(FSEntry* entry);
+
 private:
 	Directory*					_root;
 
