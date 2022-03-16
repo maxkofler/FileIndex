@@ -32,9 +32,8 @@ int main(int argc, char *argv[]){
 		std::string in;
 
 		FS fs(argv[1]);
-		fs.createEntry(ENTRY_FILE, "myFile.txt");
-
-		FS newFS("monn");
+		FSEntry* entry = fs.createEntry(ENTRY_FILE, "myFile.txt");
+		LOGD("Path to myFile.txt: " + FS::getPathString(entry));
 		
 		auto start = high_resolution_clock::now();
 		fs.index(nullptr, true);
@@ -45,6 +44,8 @@ int main(int argc, char *argv[]){
 
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
+
+
 
 		FS::getRoot(fs.getRoot());
 
