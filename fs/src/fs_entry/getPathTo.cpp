@@ -37,7 +37,7 @@ std::string FSEntry::getPathTo(FSEntry* entry){
 
 	//Then add the path from the entry of difference to the desired entry
 	for (int i = pos; i < path_other.size(); i++){
-		path += path_other[i]->getName() + '/';
+		path += FS::getName(path_other[i]) + '/';
 	}
 
 	//Cut the last '/'

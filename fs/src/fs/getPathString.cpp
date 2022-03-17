@@ -9,7 +9,7 @@ std::string FS::getPathString(FSEntry* entry){
 	std::string res = "";
 
 	for (FSEntry* entry : path){
-		res += entry->getName() + '/';
+		res += FS::getName(entry) + '/';
 	}
 
 	if (path.back()->type() != ENTRY_DIRECTORY)

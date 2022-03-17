@@ -10,7 +10,7 @@ void Directory::addEntry(FSEntry* entry){
 		return;
 
 	#ifdef DEBUG
-	LOGMEM("Adding " + entry->getName() + " to " + FS::getPathString(this));
+	LOGMEM("Adding " + FS::getName(entry) + " to " + FS::getPathString(this));
 	#endif
 
 	_entries.push_back(entry);

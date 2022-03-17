@@ -28,21 +28,6 @@ public:
 	virtual entry_type					type() = 0;
 
 	/**
-	 * @brief	Returns the name of this filesystem entry
-	 */
-	std::string							getName();
-
-	/**
-	 * @brief	Returns a pointer to the filesystem entry name (can be nullptr!)
-	 */
-	std::string*						getNamePtr();
-
-	/**
-	 * @brief	Returns the parent of this filesystem entry, nullptr if this is the root
-	 */
-	FSEntry*							getParent();
-
-	/**
 	 * @brief	Uses the system fs api to get the relative path to the entry provided
 	 * @param	entry					The target entry
 	 */
