@@ -30,7 +30,7 @@ FSEntry* Filesystem::createEntry(entry_type type, std::string newName, Directory
 			throw new FSError("Tried to create entry of unknown type");
 	}
 
-	_entries.push_back(nE);
+	_cache_entries->push_back(nE);
 	parent->addEntry(nE);
 
 	_entryCount++;

@@ -6,7 +6,7 @@ std::string* Filesystem::createName(std::string nameContent){
 
 	_namesRequested++;
 
-	for (std::string* name : *_names){
+	for (std::string* name : *_cache_names){
 		if (*name == nameContent){
 			_duplicateNamesSaved++;
 			return name;
@@ -17,6 +17,6 @@ std::string* Filesystem::createName(std::string nameContent){
 
 	std::string* res = new std::string(nameContent);
 	res->shrink_to_fit();
-	_names->push_back(res);
+	_cache_names->push_back(res);
 	return res;
 }

@@ -54,12 +54,9 @@ public:
 
 private:
 	Directory*						_root;
-
-	bool							_owns_names = true;
-	std::vector<std::string*>*		_names = nullptr;
-
-	std::deque<FSEntry*>			_entries;
-
+	
+	std::vector<std::string*>*		_cache_names = nullptr;
+	std::deque<FSEntry*>*			_cache_entries = nullptr;
 
 	size_t							_entryCount = 0;
 	size_t							_namesRequested = 0;
