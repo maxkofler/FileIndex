@@ -1,24 +1,23 @@
 #include "log.h"
 #include "fs.h"
-#include "fs_entry.h"
 #include "fsError.h"
 
-#include <filesystem>
-namespace fs = std::filesystem;
-
-std::string FSEntry::getPathTo(FSEntry* entry){
+std::string FS::getPathTo(FSEntry* from, FSEntry* to){
 	FUN();
 
-	if (entry == nullptr)
-		throw new FSError("Tried to get path of nullptr");
+	if (from == nullptr)
+		throw new FSError("Tried to get path from nullptr");
+
+	if (to == nullptr)
+		throw new FSError("Tried to get path to nullptr");
 
 	//Check if the entries share the same root
-	if (FS::getRoot(this) != FS::getRoot(entry))
-		throw new FSError("Tried to get path to entry under another root");
+	if (FS::getRoot(from) != FS::getRoot(to))
+		throw new FSError("Tried to get path to entries under different roots");
 
 	//Get the paths to the files
-	auto path_this = FS::getPath(this);
-	auto path_other = FS::getPath(entry);
+	auto path_this = FS::getPath(from);
+	auto path_other = FS::getPath(to);
 
 	//Until there are no differences in the path, don't care
 	int pos = 0;
@@ -45,7 +44,7 @@ std::string FSEntry::getPathTo(FSEntry* entry){
 		path.erase(path.length()-1);
 
 	#ifdef DEBUG
-	LOGF("Calculated path from " + FS::getPathString(this) + " to " + FS::getPathString(entry) + ": " + path);
+	LOGF("Calculated path from " + FS::getPathString(from) + " to " + FS::getPathString(to) + ": " + path);
 	#endif
 
 	return path;

@@ -27,12 +27,6 @@ public:
 	 */
 	virtual entry_type					type() = 0;
 
-	/**
-	 * @brief	Uses the system fs api to get the relative path to the entry provided
-	 * @param	entry					The target entry
-	 */
-	std::string							getPathTo(FSEntry* entry);
-
 #ifndef FRIEND_FS_ENTRY
 private:
 #endif

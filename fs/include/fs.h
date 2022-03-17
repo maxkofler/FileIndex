@@ -45,6 +45,13 @@ namespace FS{
 	 * @param	entry				The entry to get the path of
 	 */
 	std::string						getPathString(FSEntry* entry);
+
+	/**
+	 * @brief	Returns the path to get from one entry to the other
+	 * @param	from				The entry to start from
+	 * @param	to					The entry to go to
+	 */
+	std::string						getPathTo(FSEntry* from, FSEntry* to);
 }
 
 #endif
