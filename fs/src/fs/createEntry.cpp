@@ -9,7 +9,7 @@ FSEntry* FS::createEntry(entry_type type, std::string newName, Directory* parent
 	if (parent == nullptr)
 		parent = _root;
 
-	if (parent->getRootEntry() != _root)
+	if (FS::getRoot(parent) != _root)
 		throw new FSError("Tried to create new entry in directory not present in this filesystem");
 
 	//TODO: check for already exising filenames

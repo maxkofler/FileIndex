@@ -13,7 +13,7 @@ void FS::index(Directory* directory, bool recursive){
 	if (directory == nullptr)
 		directory = _root;
 
-	std::string dirPath = directory->getPathString();
+	std::string dirPath = FS::getPathString(directory);
 
 	if (!is(ENTRY_DIRECTORY, dirPath, false))
 		throw new FSError("Tried to index non-directory");

@@ -1,5 +1,6 @@
 #define FRIEND_FS_ENTRY
 #include "log.h"
+#include "fs.h"
 #include "directory.h"
 
 void Directory::addEntry(FSEntry* entry){
@@ -9,7 +10,7 @@ void Directory::addEntry(FSEntry* entry){
 		return;
 
 	#ifdef DEBUG
-	LOGMEM("Adding " + entry->getName() + " to " + this->getPathString());
+	LOGMEM("Adding " + entry->getName() + " to " + FS::getPathString(this));
 	#endif
 
 	_entries.push_back(entry);

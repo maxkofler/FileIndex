@@ -7,7 +7,6 @@
 #include <fstream>
 
 #include "log.h"
-#include "indexer.h"
 #include "error.h"
 #include "directory.h"
 #include "file.h"

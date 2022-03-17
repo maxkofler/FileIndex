@@ -10,7 +10,7 @@ FS::FS(std::string root){
 	_names->push_back(new std::string(root));
 	_root = new Directory(_names->back());
 
-	LOGI("Created new FS with root " + _root->getPathString());
+	LOGI("Created new FS with root " + FS::getPathString(_root));
 }
 
 FS::~FS(){

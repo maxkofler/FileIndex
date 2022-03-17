@@ -14,14 +14,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-add_subdirectory(Indexer)
 add_subdirectory(fs)
 add_subdirectory(Log)
 
 include_directories(include)
 include_directories(Log/include)
 
-include_directories(Indexer/include)
 include_directories(fs/include)
 
 file (GLOB_RECURSE CXX_SOURCES "src/**.cpp")
@@ -57,7 +55,7 @@ else()
 	endif()
 endif()
 
-target_link_libraries(FileIndex PRIVATE Qt${QT_VERSION_MAJOR}::Widgets log indexer filesystem)
+target_link_libraries(FileIndex PRIVATE Qt${QT_VERSION_MAJOR}::Widgets log filesystem)
 
 if(QT_VERSION_MAJOR EQUAL 6)
 	qt_finalize_executable(FileIndex)

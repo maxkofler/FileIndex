@@ -28,11 +28,6 @@ public:
 	virtual entry_type					type() = 0;
 
 	/**
-	 * @brief	Returns the path to this filesystem entry
-	 */
-	std::string							getPathString();
-
-	/**
 	 * @brief	Returns the name of this filesystem entry
 	 */
 	std::string							getName();
@@ -46,16 +41,6 @@ public:
 	 * @brief	Returns the parent of this filesystem entry, nullptr if this is the root
 	 */
 	FSEntry*							getParent();
-
-	/**
-	 * @brief	Returns the root entry of this entry
-	 */
-	FSEntry*							getRootEntry();
-
-	/**
-	 * @brief	Returns a deque containing all the parent directories
-	 */
-	std::deque<FSEntry*>				getParents();
 
 	/**
 	 * @brief	Uses the system fs api to get the relative path to the entry provided
