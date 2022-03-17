@@ -8,67 +8,24 @@
 #include <vector>
 #include <deque>
 
-class FS{
-
-public:
-	FS(std::string rootName);
-	~FS();
-
-	/**
-	 * @brief	Creates a new file system entry in this filesystem
-	 * @param	type				The type of the entry (DIR or FILE)
-	 * @param	name				The name of the new entry
-	 * @param	parent				The parent of the entry, nullptr (default) = create in root directory
-	 * @return	FSEntry*			A pointer to the newly created entry
-	 */
-	FSEntry*						createEntry(entry_type type, std::string name, Directory* parent = nullptr);
-
-	/**
-	 * @brief	Indexes the supplied directory to this filesystem
-	 * @param	directory			The directory to index
-	 * @param	recursive			If the indexing should be recursive (default: true)
-	 */
-	void							index(Directory* directory, bool recursive = true);
-
-	/**
-	 * @brief	Checks if the fs entry is of a certain type
-	 * @param	type				The expected type
-	 * @param	path				The path to check
-	 * @param	isCritical			If true, an FS error when checking will throw an exception
-	 */
-	bool							is(entry_type type, std::string path, bool isCritical);
-
-	/**
-	 * @brief	Returns a pointer to this filesystems root directory
-	 */
-	Directory*						getRoot();
-
+namespace FS{
 	/**
 	 * @brief	Returns the root directory of a fs entry
 	 * @param	entry				The entry to process
 	 */
-	static Directory*				getRoot(FSEntry* entry);
+	Directory*						getRoot(FSEntry* entry);
 
 	/**
 	 * @brief	Returns a deque containing all the fs entries constructing the path
 	 * @param	entry				The entry to get the path of
 	 */
-	static std::deque<FSEntry*>		getPath(FSEntry* entry);
+	std::deque<FSEntry*>			getPath(FSEntry* entry);
 
 	/**
 	 * @brief	Returns the path to the provided fs entry
 	 * @param	entry				The entry to get the path of
 	 */
-	static std::string				getPathString(FSEntry* entry);
-
-private:
-	Directory*						_root;
-
-	bool							_owns_names = true;
-	std::vector<std::string*>*		_names = nullptr;
-
-	std::deque<FSEntry*>			_entries;
-
-};
+	std::string						getPathString(FSEntry* entry);
+}
 
 #endif

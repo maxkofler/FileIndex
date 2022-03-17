@@ -1,10 +1,10 @@
 #include "log.h"
-#include "fs.h"
+#include "filesystem.h"
 #include "fsError.h"
 
 #include <filesystem>
 
-bool FS::is(entry_type type, std::string path, bool isCritical){
+bool Filesystem::is(entry_type type, std::string path, bool isCritical){
 	FUN();
 
 	std::error_code ec;

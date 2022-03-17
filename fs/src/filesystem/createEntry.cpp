@@ -1,9 +1,10 @@
 #include "log.h"
 #include "fs.h"
+#include "filesystem.h"
 #include "fsError.h"
 #include "fs_entry.h"
 
-FSEntry* FS::createEntry(entry_type type, std::string newName, Directory* parent){
+FSEntry* Filesystem::createEntry(entry_type type, std::string newName, Directory* parent){
 	FUN();
 
 	if (parent == nullptr)

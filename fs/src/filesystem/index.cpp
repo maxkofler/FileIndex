@@ -1,13 +1,14 @@
 #define FRIEND_FS_ENTRY
 #include "log.h"
 #include "fs.h"
+#include "filesystem.h"
 #include "fsError.h"
 #include "fs_entry.h"
 
 #include <filesystem>
 namespace fs = std::filesystem;
 
-void FS::index(Directory* directory, bool recursive){
+void Filesystem::index(Directory* directory, bool recursive){
 	FUN();
 
 	if (directory == nullptr)

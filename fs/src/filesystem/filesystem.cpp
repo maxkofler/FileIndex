@@ -1,7 +1,8 @@
 #include "log.h"
 #include "fs.h"
+#include "filesystem.h"
 
-FS::FS(std::string root){
+Filesystem::Filesystem(std::string root){
 	FUN();
 
 	_owns_names = true;
@@ -13,7 +14,7 @@ FS::FS(std::string root){
 	LOGI("Created new FS with root " + FS::getPathString(_root));
 }
 
-FS::~FS(){
+Filesystem::~Filesystem(){
 	FUN();
 
 	if (_owns_names && _names != nullptr)

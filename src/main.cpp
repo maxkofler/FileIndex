@@ -12,6 +12,7 @@
 #include "file.h"
 
 #include "fs.h"
+#include "filesystem.h"
 
 Log::Log* hlog;
 
@@ -30,7 +31,7 @@ int main(int argc, char *argv[]){
 		FUN();
 		std::string in;
 
-		FS fs(argv[1]);
+		Filesystem fs(argv[1]);
 		FSEntry* entry = fs.createEntry(ENTRY_FILE, "myFile.txt");
 		LOGD("Path to myFile.txt: " + FS::getPathString(entry));
 		
