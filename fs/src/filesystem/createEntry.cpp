@@ -13,9 +13,7 @@ FSEntry* Filesystem::createEntry(entry_type type, std::string newName, Directory
 	if (FS::getRoot(parent) != _root)
 		throw new FSError("Tried to create new entry in directory not present in this filesystem");
 
-	//TODO: check for already exising filenames
-	_names->push_back(new std::string(newName));
-	std::string* name = _names->back();
+	std::string* name = createName(newName);
 
 	FSEntry* nE;
 
@@ -34,6 +32,8 @@ FSEntry* Filesystem::createEntry(entry_type type, std::string newName, Directory
 
 	_entries.push_back(nE);
 	parent->addEntry(nE);
+
+	_entryCount++;
 
 	return nE;
 }

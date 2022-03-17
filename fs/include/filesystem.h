@@ -22,6 +22,12 @@ public:
 	FSEntry*						createEntry(entry_type type, std::string name, Directory* parent = nullptr);
 
 	/**
+	 * @brief	Allocates memory for the internal storage of the provided name
+	 * @param	name				The name to store
+	 */
+	std::string*					createName(std::string name);
+
+	/**
 	 * @brief	Indexes the supplied directory to this filesystem
 	 * @param	directory			The directory to index
 	 * @param	recursive			If the indexing should be recursive (default: true)
@@ -41,6 +47,11 @@ public:
 	 */
 	Directory*						getRoot();
 
+	size_t							getEntryCount(){return _entryCount;}
+	size_t							getNamesRequested(){return _namesRequested;}
+	size_t							getNamesAllocated(){return _namesAllocated;}
+	size_t							getDuplicateNamesSaved(){return _duplicateNamesSaved;}
+
 private:
 	Directory*						_root;
 
@@ -48,6 +59,13 @@ private:
 	std::vector<std::string*>*		_names = nullptr;
 
 	std::deque<FSEntry*>			_entries;
+
+
+	size_t							_entryCount = 0;
+	size_t							_namesRequested = 0;
+	size_t							_namesAllocated = 0;
+	size_t							_duplicateNamesSaved = 0;
+	
 
 };
 

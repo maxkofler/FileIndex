@@ -41,6 +41,10 @@ int main(int argc, char *argv[]){
 		auto duration = duration_cast<milliseconds>(end - start);
 
 		LOGI("Indexing took " + std::to_string(duration.count()) + " ms");
+		LOGI("Holding " + std::to_string(fs.getEntryCount()) + " entries");
+		LOGI("Requested names: " + std::to_string(fs.getNamesRequested()));
+		LOGI("Allocated names: " + std::to_string(fs.getNamesAllocated()));
+		LOGI("Name duplicates saved: " + std::to_string(fs.getDuplicateNamesSaved()));
 
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
