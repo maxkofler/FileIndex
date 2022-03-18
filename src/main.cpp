@@ -32,8 +32,6 @@ int main(int argc, char *argv[]){
 		std::string in;
 
 		Filesystem fs(argv[1]);
-		FSEntry* entry = fs.createEntry(ENTRY_FILE, "myFile.txt");
-		LOGD("Path to myFile.txt: " + FS::getPathString(entry));
 		
 		auto start = high_resolution_clock::now();
 		fs.index(nullptr, true);

@@ -19,13 +19,15 @@ Filesystem::~Filesystem(){
 
 	if (_cache_names != nullptr){
 		for (std::string* name : *_cache_names)
-			delete name;
+            if (name != nullptr)
+                delete name;
 		delete _cache_names;
 	}
 
-	for (FSEntry* entry : *_cache_entries){
-		if (entry != nullptr)
-			delete entry;
-		delete _cache_entries;
-	}
+    if (_cache_entries != nullptr){
+        for (FSEntry* entry : *_cache_entries)
+            if (entry != nullptr)
+                delete entry;
+        delete _cache_entries;
+    }
 }
