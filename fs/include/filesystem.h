@@ -35,6 +35,12 @@ public:
 	void							index(Directory* directory, bool recursive = true);
 
 	/**
+	 * @brief	Writes an index of this filesystem to the output stream
+	 * @param	out					The stream to write to
+	 */
+	void							printIndex(std::ostream& out);
+
+	/**
 	 * @brief	Checks if the fs entry is of a certain type
 	 * @param	type				The expected type
 	 * @param	path				The path to check

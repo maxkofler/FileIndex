@@ -76,5 +76,6 @@ build/
 build*/
 *.txt.user
 
-#FileIndex result file
+#FileIndex testing files
 index.txt
+names.txt

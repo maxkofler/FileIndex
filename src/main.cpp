@@ -47,10 +47,19 @@ int main(int argc, char *argv[]){
 		std::cout << "Enter to proceed: ";
 		std::cin >> in;
 
-		std::ofstream outFile;
-		outFile.open("index.txt", std::ios::out);
-		fs.getRoot()->printRecursiveEntries(outFile);
-		outFile.close();
+		{
+			std::ofstream outFile;
+			outFile.open("index.txt", std::ios::out);
+			fs.getRoot()->printRecursiveEntries(outFile);
+			outFile.close();
+		}
+
+		{
+			std::ofstream outFile;
+			outFile.open("names.txt", std::ios::out);
+			fs.printIndex(outFile);
+			outFile.close();
+		}
 
 	} catch (Error* e){
 		LOGE("Failed: " + e->what());
