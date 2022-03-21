@@ -1,6 +1,8 @@
 #ifndef __FILESYSTEM_ENTRY_H__
 #define __FILESYSTEM_ENTRY_H__
 
+class FSEntry;
+
 enum entry_type{
 	ENTRY_DIRECTORY,
 	ENTRY_FILE,
