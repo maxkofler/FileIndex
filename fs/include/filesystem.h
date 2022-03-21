@@ -76,7 +76,12 @@ private:
 	size_t							_namesRequested = 0;
 	size_t							_namesAllocated = 0;
 	size_t							_duplicateNamesSaved = 0;
-	
+
+	/**
+	 * @brief	Returns a pointer to the name entry
+	 * @param	name				The name to get the pointer of
+	 */
+	fs_name_entry*					getNamePtr(fs_name name);	
 
 };
 

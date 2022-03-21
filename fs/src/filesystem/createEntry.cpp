@@ -31,6 +31,7 @@ FSEntry* Filesystem::createEntry(entry_type type, std::string newName, Directory
 	}
 
 	_cache_entries->push_back(nE);
+	getNamePtr(name)->entries->addEntry(nE);
 	parent->addEntry(nE);
 
 	_entryCount++;

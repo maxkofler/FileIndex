@@ -10,6 +10,7 @@ fs_name Filesystem::createName(std::string nameContent){
 	fs_name_entry* newName = new fs_name_entry;
 	newName->len_name = nameContent.size();
 	newName->name = new char[newName->len_name+1];
+	newName->entries = new FSEntryList(false, 10);
 
 	//Copy the name content
 	std::strcpy(newName->name, nameContent.c_str());

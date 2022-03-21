@@ -4,7 +4,7 @@
 void FSEntryList::addEntry(FSEntry* entry){
 	FUN();
 
-	if (_entries_used >= _entries_allocated){
+	if (_entries_used >= _entries_allocated-1){
 		reallocate(1);
 	}
 
