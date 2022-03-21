@@ -9,10 +9,6 @@ void Directory::addEntry(FSEntry* entry){
 	if (entry == nullptr)
 		return;
 
-	#ifdef DEBUG
-	LOGMEM("Adding " + FS::getName(entry) + " to " + FS::getPathString(this));
-	#endif
-
 	_entries.push_back(entry);
 
 	entry->_parent = this;

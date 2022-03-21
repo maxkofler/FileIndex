@@ -14,7 +14,7 @@ void Directory::printRecursiveEntries(std::ostream& out){
 	if (entries.size() > 0){
 		FSEntry* last = this;
 		for (FSEntry* entry : entries){
-			out << FS::getPathTo(last, entry);
+			//out << FS::getPathTo(last, entry);
 			if (entry->type() == ENTRY_DIRECTORY){
 				out << '/';
 				last = entry;

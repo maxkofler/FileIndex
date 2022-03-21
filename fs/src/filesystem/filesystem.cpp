@@ -11,7 +11,7 @@ Filesystem::Filesystem(std::string root){
 	fs_name rootName = createName(root);
 	_root = new Directory(rootName);
 
-	LOGI("Created new FS with root " + FS::getPathString(_root));
+	LOGI("Created new FS with root " + FS::getPathString(this, _root));
 }
 
 Filesystem::~Filesystem(){

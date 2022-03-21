@@ -29,6 +29,13 @@ public:
 	fs_name							createName(std::string name);
 
 	/**
+	 * @brief	Returns a copy of the name of the supplied entry
+	 * @param	entry				The entry to get the name of 
+	 */
+	std::string						getName(fs_name entry);
+	std::string						getName(FSEntry* entry);
+
+	/**
 	 * @brief	Indexes the supplied directory to this filesystem
 	 * @param	directory			The directory to index
 	 * @param	recursive			If the indexing should be recursive (default: true)

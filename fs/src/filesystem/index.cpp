@@ -14,7 +14,7 @@ void Filesystem::index(Directory* directory, bool recursive){
 	if (directory == nullptr)
 		directory = _root;
 
-	std::string dirPath = FS::getPathString(directory);
+	std::string dirPath = FS::getPathString(this, directory);
 
 	if (!is(ENTRY_DIRECTORY, dirPath, false))
 		throw new FSError("Tried to index non-directory");

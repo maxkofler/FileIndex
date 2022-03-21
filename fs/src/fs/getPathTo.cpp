@@ -2,7 +2,7 @@
 #include "fs.h"
 #include "fsError.h"
 
-std::string FS::getPathTo(FSEntry* from, FSEntry* to){
+std::string FS::getPathTo(Filesystem* fs, FSEntry* from, FSEntry* to){
 	FUN();
 
 	if (from == nullptr)
@@ -36,7 +36,7 @@ std::string FS::getPathTo(FSEntry* from, FSEntry* to){
 
 	//Then add the path from the entry of difference to the desired entry
 	for (int i = pos; i < path_other.size(); i++){
-		path += FS::getName(path_other[i]) + '/';
+		path += fs->getName(path_other[i]) + '/';
 	}
 
 	//Cut the last '/'
