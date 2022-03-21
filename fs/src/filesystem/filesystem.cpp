@@ -17,11 +17,12 @@ Filesystem::Filesystem(std::string root){
 Filesystem::~Filesystem(){
 	FUN();
 
-	//TODO: free memory of string
 	if (_cache_names != nullptr){
 		for (fs_name_entry* name : *_cache_names)
-            if (name != nullptr)
-                delete name;
+            if (name != nullptr){
+				delete name->name;
+				delete name;
+			}
 		delete _cache_names;
 	}
 
