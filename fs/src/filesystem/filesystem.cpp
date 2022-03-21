@@ -5,11 +5,11 @@
 Filesystem::Filesystem(std::string root){
 	FUN();
 
-	_cache_names = new std::vector<std::string*>();
+	_cache_names = new std::vector<fs_name_entry*>();
 	_cache_entries = new std::deque<FSEntry*>();
 
-	_cache_names->push_back(new std::string(root));
-	_root = new Directory(_cache_names->back());
+	fs_name rootName = createName(root);
+	_root = new Directory(rootName);
 
 	LOGI("Created new FS with root " + FS::getPathString(_root));
 }
@@ -17,8 +17,9 @@ Filesystem::Filesystem(std::string root){
 Filesystem::~Filesystem(){
 	FUN();
 
+	//TODO: free memory of string
 	if (_cache_names != nullptr){
-		for (std::string* name : *_cache_names)
+		for (fs_name_entry* name : *_cache_names)
             if (name != nullptr)
                 delete name;
 		delete _cache_names;

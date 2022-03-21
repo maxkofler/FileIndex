@@ -1,6 +1,6 @@
 #include "log.h"
 #include "file.h"
 
-File::File(std::string* name, bool owns) : FSEntry(name, owns){
+File::File(fs_name name) : FSEntry(name){
 	FUN();
 }

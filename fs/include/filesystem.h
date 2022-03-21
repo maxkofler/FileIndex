@@ -2,6 +2,7 @@
 #define __FILESYSTEM_H__
 
 #include "directory.h"
+#include "fs_name.h"
 
 #include <vector>
 #include <deque>
@@ -25,7 +26,7 @@ public:
 	 * @brief	Allocates memory for the internal storage of the provided name
 	 * @param	name				The name to store
 	 */
-	std::string*					createName(std::string name);
+	fs_name							createName(std::string name);
 
 	/**
 	 * @brief	Indexes the supplied directory to this filesystem
@@ -61,7 +62,7 @@ public:
 private:
 	Directory*						_root;
 	
-	std::vector<std::string*>*		_cache_names = nullptr;
+	std::vector<fs_name_entry*>*	_cache_names = nullptr;
 	std::deque<FSEntry*>*			_cache_entries = nullptr;
 
 	size_t							_entryCount = 0;

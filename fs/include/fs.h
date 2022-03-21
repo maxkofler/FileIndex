@@ -2,6 +2,7 @@
 #define __FS_H__
 
 #include "fs_entry.h"
+#include "fs_name.h"
 #include "directory.h"
 #include "file.h"
 

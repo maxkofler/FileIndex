@@ -1,6 +1,6 @@
 #include "log.h"
 #include "directory.h"
 
-Directory::Directory(std::string* name, bool owns) : FSEntry(name, owns){
+Directory::Directory(fs_name name) : FSEntry(name){
 	FUN();
 }

@@ -3,5 +3,5 @@
 #include "fs.h"
 
 std::string FS::getName(FSEntry* entry){
-	return std::string(*entry->_name);
+	return "Currently unavailable";
 }

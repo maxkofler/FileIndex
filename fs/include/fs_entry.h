@@ -11,15 +11,16 @@ enum entry_type{
 #include <deque>
 #include <string>
 
+#include "fs_name.h"
+
 class FSEntry{
 
 public:
 	/**
 	 * @brief	Creates a new filesystem entry
-	 * @param	name					A pointer to the name string
-	 * @param	shouldManageMemory		If the memory should be managed by this class (default: false)
+	 * @param	name					A pointer to the fs_name
 	 */
-	FSEntry(std::string* name, bool shouldManageMemory);
+	FSEntry(fs_name name);
 	virtual ~FSEntry();
 
 	/**
@@ -33,8 +34,7 @@ private:
 
 	FSEntry*							_parent = nullptr;
 
-	bool								_ownsName = false;
-	std::string*						_name = nullptr;
+	fs_name								_name;
 
 };
 
