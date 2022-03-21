@@ -15,12 +15,14 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 add_subdirectory(fs)
+add_subdirectory(indexParser)
 add_subdirectory(Log)
 
 include_directories(include)
 include_directories(Log/include)
 
 include_directories(fs/include)
+include_directories(indexParser/include)
 
 file (GLOB_RECURSE CXX_SOURCES "src/**.cpp")
 file (GLOB_RECURSE HEADERS "include/**.h")
