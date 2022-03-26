@@ -44,7 +44,7 @@ std::string FS::getPathTo(Filesystem* fs, FSEntry* from, FSEntry* to){
 		path.erase(path.length()-1);
 
 	#ifdef DEBUG
-	LOGF("Calculated path from " + FS::getPathString(from) + " to " + FS::getPathString(to) + ": " + path);
+	LOGF("Calculated path from " + FS::getPathString(fs, from) + " to " + FS::getPathString(fs, to) + ": " + path);
 	#endif
 
 	return path;

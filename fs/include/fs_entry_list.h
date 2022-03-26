@@ -30,8 +30,8 @@ public:
 
 private:
 
-	size_t							_entries_allocated;
-	size_t							_entries_used;
+	size_t							_entries_allocated = 0;
+	size_t							_entries_used = 0;
 
 	bool							_managesEntries;
 	FSEntry**						_entries;
