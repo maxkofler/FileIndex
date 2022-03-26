@@ -18,7 +18,9 @@ fs_name Filesystem::createName(std::string nameContent){
 	//Add the entry
 	_cache_names->push_back(newName);
 
+	#ifdef DEBUG
 	LOGD("Created new name \"" + std::string(newName->name) + "\"");
+	#endif
 
 	//Return the entry handle
 	fs_name handle;
