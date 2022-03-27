@@ -3,7 +3,9 @@
 
 class FSEntryList;
 
-#include "fs_entry.h"
+#include "fsEntry.h"
+
+#include <stdint.h>
 
 class FSEntryList{
 
