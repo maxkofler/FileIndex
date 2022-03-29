@@ -7,6 +7,8 @@
 #include "log.h"
 #include "error.h"
 
+#include "namesDB.h"
+
 Log::Log* hlog;
 
 int main(int argc, char *argv[]){
@@ -27,6 +29,11 @@ int main(int argc, char *argv[]){
 		auto start = high_resolution_clock::now();
 		
 		//Do something
+		NamesDB db;
+
+		for (int i = 0; i < 1000; i++){
+			db.createName("name" + std::to_string(i));
+		}
 
 		auto end = high_resolution_clock::now();
 		auto duration = duration_cast<milliseconds>(end - start);

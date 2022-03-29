@@ -5,14 +5,18 @@
 
 #include "fs_entry_list.h"
 
+#define TYPE_FS_NAME_ENTRY_ENTRIES 	FSEntryList*
+#define TYPE_FS_NAME_ENTRY_LEN_NAME uint8_t
+#define TYPE_FS_NAME_ENTRY_NAME		char
+
 /**
  * @brief	A fs_name_entry is an entry in the array of names
  */
 typedef struct {
 
-	FSEntryList*	entries;			//A pointer to the list containing the entries that point to this name
-	uint8_t			len_name;			//The length of the name
-	char*			name;				//The name pointer
+	TYPE_FS_NAME_ENTRY_ENTRIES	entries;	//A pointer to the list containing the entries that point to this name
+	TYPE_FS_NAME_ENTRY_LEN_NAME	len_name;	//The length of the name
+	TYPE_FS_NAME_ENTRY_NAME		name[];		//The name pointer
 
 } fs_name_entry;
 
