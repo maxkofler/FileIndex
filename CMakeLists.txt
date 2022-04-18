@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.5)
 project(FileIndex)
 
+set(CMAKE_CXX_STANDARD 17)
+
 add_subdirectory(Log)
+include_directories(Log/include)
+
+include_directories(include)
 
 if (CMAKE_BUILD_TYPE)
 	if (CMAKE_BUILD_TYPE MATCHES Debug)

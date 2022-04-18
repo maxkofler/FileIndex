@@ -1,5 +1,5 @@
 
-set(TEST_NAME Test)
+set(TEST_NAME NamesDBTest)
 
 file(GLOB_RECURSE sources "./src/**.cpp")
 

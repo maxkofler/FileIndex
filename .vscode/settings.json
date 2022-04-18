@@ -72,6 +72,11 @@
 		"variant": "cpp",
 		"vector": "cpp",
 		"filesystem": "cpp",
-		"qapplication": "cpp"
+		"qapplication": "cpp",
+		"__bits": "cpp",
+		"clocale": "cpp",
+		"compare": "cpp",
+		"complex": "cpp",
+		"concepts": "cpp"
 	}
 }

@@ -1,8 +1,8 @@
-#include "../t_xxx.h"
+#include "../t_.h"
 
 #include <fstream>
 
-TEST(XXX, xxx_debug){
+TEST(, ){
 	FUN();
 
 }
