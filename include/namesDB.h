@@ -39,10 +39,16 @@ private:
 	size_t						_blockSize;
 
 	/**
+	 * @brief	The size of the entries field in blocks
+	 */
+	size_t						_size_entries = 0;
+
+	/**
 	 * @brief	All the entries
 	 * This is the entry point into the names, this is NOT an array!
+	 * This is allocated in bytes, hence the uint8_t
 	 */
-	struct entry_namesDB*		_entries = nullptr;
+	uint8_t*					_entries = nullptr;
 
 };
 

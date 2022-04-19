@@ -7,16 +7,20 @@
 TEST(NamesDB, NamesDB_constructor_debug){
 	FUN();
 
+	std::string funName = "NamesDB::NamesDB()";
+
 	try{
-		DEBUG_FAIL_FUN("NamesDB::NamesDB()");
+		DEBUG_FAIL_FUN(funName);
 
 		NamesDB db;
 
-		F_NOTHROW("NamesDB::NamesDB() - debug");
+		F_NOTHROW(funName + " - debug");
 	} catch (DebugException* e){
-
+		if (e->what() != funName){
+			F_WRONGTHROW(funName, e);
+		}
 	} catch (...){
-		F_WRONGEXCEPTION("NamesDB::NamesDB() - debug");
+		F_WRONGEXCEPTION(funName + " - debug");
 	}
 }
 

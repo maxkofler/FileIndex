@@ -10,4 +10,6 @@ NamesDB::NamesDB(size_t blockSize){
 	LOGMEM("Creating new names database with block size " + std::to_string(blockSize));
 
 	this->_blockSize = blockSize;
+
+	this->expand(1);
 }
