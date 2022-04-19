@@ -6,6 +6,7 @@
 
 #include "log.h"
 #include "debug.h"
+#include "fails.h"
 
 #define FRIEND_NAMES_DB
 
