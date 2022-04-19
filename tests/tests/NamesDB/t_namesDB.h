@@ -10,4 +10,6 @@
 
 #define FRIEND_NAMES_DB
 
+#include "namesDB.h"
+
 #endif

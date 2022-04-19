@@ -13,3 +13,9 @@ NamesDB::NamesDB(size_t blockSize){
 
 	this->expand(1);
 }
+
+NamesDB::~NamesDB(){
+	FUN();
+
+	this->clean();
+}

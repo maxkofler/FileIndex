@@ -20,6 +20,7 @@ public:
 	 * @param	blockSize		The size of the blocks that get allocated
 	 */
 	NamesDB(size_t blockSize = 1024);
+	~NamesDB();
 
 	/**
 	 * @brief	Expands the internal database by the supplied amount of blocks
@@ -28,6 +29,11 @@ public:
 	 * 			Typically this happens when the system is out of memory
 	 */
 	bool						expand(uint8_t count = 1);
+
+	/**
+	 * @brief	Cleans the whole database, including every allocated object
+	 */
+	void						clean();
 
 #ifndef FRIEND_NAMES_DB
 private:

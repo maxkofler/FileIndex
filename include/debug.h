@@ -24,10 +24,16 @@ private:
 
 #ifdef DEBUG
 	bool function_should_fail(std::string funName);
+	void prepare_fun_failure(std::string funName);
+	void teardown_function_failure(std::string funName);
 
-	#define DEBUG_FAIL_FUN(name) Fun_Fail_Guard functionFailGuard(name);
-	#define DEBUG_RET(name) if (function_should_fail(name)) return false;
-	#define DEBUG_EX(name) if (function_should_fail(name)) throw new DebugException(name);
+	#define DEBUG_FAIL_FUN(name) Fun_Fail_Guard functionFailGuard(name)
+
+	#define DEBUG_PREPARE_FAIL(name) prepare_fun_failure(name)
+	#define DEBUG_TEARDOWN_FAIL(name) teardown_function_failure(name)
+
+	#define DEBUG_RET(name) if (function_should_fail(name)) return false
+	#define DEBUG_EX(name) if (function_should_fail(name)) throw new DebugException(name)
 #else
 	#define DEBUG_RET(name)
 	#define DEBUG_EX(name)

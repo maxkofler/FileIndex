@@ -1,9 +1,5 @@
 #include "../t_namesDB.h"
 
-#include <fstream>
-
-#include "namesDB.h"
-
 TEST(NamesDB, NamesDB_constructor_debug){
 	FUN();
 

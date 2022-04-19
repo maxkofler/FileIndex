@@ -1,9 +1,4 @@
 #include "../t_namesDB.h"
-
-#include <fstream>
-
-#include "namesDB.h"
-
 /**
  * @brief	Tests if the constructor calls expand
  */
