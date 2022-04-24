@@ -30,3 +30,17 @@ TEST(NamesDB, clean_debug){
 		F_WRONGEXCEPTION(funName + " - debug");
 	}
 }
+
+/**
+ * @brief	Tests if NamesDB::clean() works correctly
+ */
+TEST(NamesDB, clean_correct){
+	FUN();
+
+	NamesDB db;
+
+	db.clean();
+
+	ASSERT_EQ(nullptr, db._entries);
+	ASSERT_EQ(0, db._size_entries);
+}
