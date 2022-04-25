@@ -37,9 +37,17 @@ public:
 	 * @brief	Adds the supplied string to the database
 	 * @param	str				The string to add
 	 * @param	entry			The entry to register
-	 * @return	size_t			The index of the string
+	 * @return	size_t			The id of the name
 	 */
 	size_t						add(std::string str, void* entry);
+
+	/**
+	 * @brief	Gets the entry with the specified id of this database (is really slow, read note)
+	 * @param	id				The id to search, (received from add())
+	 * @return	void*			The entry previously supplied to add(), nullptr if out of range
+	 * @note	This function is slow, it iterates over every entry, don't use it if not necessary
+	 */
+	void*						get(size_t id);
 
 #ifndef FRIEND_NAMES_DB
 private:
