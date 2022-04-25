@@ -15,3 +15,4 @@ add_subdirectory(test_main)
 add_subdirectory(tests/Sanity)
 
 add_subdirectory(tests/NamesDB)
+add_subdirectory(tests/NamesDB_Stress)
