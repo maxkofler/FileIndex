@@ -43,11 +43,19 @@ public:
 
 	/**
 	 * @brief	Gets the entry with the specified id of this database (is really slow, read note)
-	 * @param	id				The id to search, (received from add())
+	 * @param	id				The id to search (received from add())
 	 * @return	void*			The entry previously supplied to add(), nullptr if out of range
 	 * @note	This function is slow, it iterates over every entry, don't use it if not necessary
 	 */
 	void*						getEntry(size_t id);
+
+	/**
+	 * @brief	Gets the name string of the specified id (is really slow, read note)
+	 * @param	id				The id to search (received from add())
+	 * @return	std::string		The name previously supplied to add(), empty if out of range
+	 * @note	This function is slow, it iterates over every entry, don't use it if not necessary
+	 */
+	std::string					getName(size_t id);
 
 #ifndef FRIEND_NAMES_DB
 private:

@@ -27,16 +27,16 @@ private:
 	void prepare_fun_failure(std::string funName);
 	void teardown_function_failure(std::string funName);
 
-	#define DEBUG_FAIL_FUN(name) Fun_Fail_Guard functionFailGuard(name)
+	#define DEBUG_FAIL_FUN(function_full_name) Fun_Fail_Guard functionFailGuard(function_full_name)
 
-	#define DEBUG_PREPARE_FAIL(name) prepare_fun_failure(name)
-	#define DEBUG_TEARDOWN_FAIL(name) teardown_function_failure(name)
+	#define DEBUG_PREPARE_FAIL(function_full_name) prepare_fun_failure(function_full_name)
+	#define DEBUG_TEARDOWN_FAIL(function_full_name) teardown_function_failure(function_full_name)
 
-	#define DEBUG_RET(name) if (function_should_fail(name)) return false
-	#define DEBUG_EX(name) if (function_should_fail(name)) throw new DebugException(name)
+	#define DEBUG_RET(function_full_name) if (function_should_fail(function_full_name)) return false
+	#define DEBUG_EX(function_full_name) if (function_should_fail(function_full_name)) throw new DebugException(function_full_name)
 #else
-	#define DEBUG_RET(name)
-	#define DEBUG_EX(name)
+	#define DEBUG_RET(function_full_name)
+	#define DEBUG_EX(function_full_name)
 #endif
 
 
