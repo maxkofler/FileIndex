@@ -3,14 +3,12 @@
 
 #include "namesDB.h"
 
+#include <assert.h>
+static_assert(sizeof(entry_namesDB*) + sizeof(void*) + sizeof(uint8_t) == sizeof(entry_namesDB), "Size of entry_namesDB changed, adjust this file!");
+
 size_t NamesDB::add(std::string str, void* entry_insert){
 	FUN();
 	DEBUG_EX("NamesDB::add()");
-
-	//If this assertion fails, the size of entry_namesDB has changed
-	//and this needs to be rewritten!
-	uint8_t size_struct = sizeof(entry_namesDB*) + sizeof(void*) + sizeof(uint8_t);
-	assert(sizeof(entry_namesDB) == size_struct);
 
 	//Not the amount of bytes needed for this entry
 	uint8_t size_entry = sizeof(entry_namesDB) + str.length();

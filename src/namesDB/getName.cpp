@@ -4,7 +4,6 @@
 #include "namesDB.h"
 
 #include <assert.h>
-
 static_assert(sizeof(entry_namesDB*) + sizeof(void*) + sizeof(uint8_t) == sizeof(entry_namesDB), "Size of entry_namesDB changed, adjust this file!");
 
 std::string NamesDB::getName(size_t id){
