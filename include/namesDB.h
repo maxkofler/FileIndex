@@ -47,7 +47,7 @@ public:
 	 * @return	void*			The entry previously supplied to add(), nullptr if out of range
 	 * @note	This function is slow, it iterates over every entry, don't use it if not necessary
 	 */
-	void*						get(size_t id);
+	void*						getEntry(size_t id);
 
 #ifndef FRIEND_NAMES_DB
 private:

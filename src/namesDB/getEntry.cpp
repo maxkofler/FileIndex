@@ -3,9 +3,9 @@
 
 #include "namesDB.h"
 
-void* NamesDB::get(size_t id){
+void* NamesDB::getEntry(size_t id){
 	FUN();
-	DEBUG_EX("NamesDB::get()");
+	DEBUG_EX("NamesDB::getEntry()");
 
 	//Check if the ID is out of bounds
 	if (id >= _count_entries){

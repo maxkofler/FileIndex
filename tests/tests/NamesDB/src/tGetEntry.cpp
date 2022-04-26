@@ -1,15 +1,15 @@
 #include "../t_namesDB.h"
 
-TEST(NamesDB, get_debug){
+TEST(NamesDB, getEntry_debug){
 	FUN();
 
-	std::string funName = "NamesDB::get()";
+	std::string funName = "NamesDB::getEntry()";
 
 	try{
 		DEBUG_FAIL_FUN(funName);
 
 		NamesDB db;
-		db.get(db.add("NewEntry", nullptr));
+		db.getEntry(db.add("NewEntry", nullptr));
 
 		F_NOTHROW(funName + " - debug");
 	} catch (DebugException* e){
@@ -22,21 +22,21 @@ TEST(NamesDB, get_debug){
 }
 
 //Tests if get() reacts correctly to a id that is out of bounds
-TEST(NamesDB, get_id_out_of_range){
+TEST(NamesDB, getEntry_id_out_of_range){
 	FUN();
 
 	NamesDB db;
 
-	EXPECT_EQ(nullptr, db.get(0));
-	EXPECT_EQ(nullptr, db.get(1));
-	EXPECT_EQ(nullptr, db.get(3498023));
+	EXPECT_EQ(nullptr, db.getEntry(0));
+	EXPECT_EQ(nullptr, db.getEntry(1));
+	EXPECT_EQ(nullptr, db.getEntry(3498023));
 
 	db.add("Name", nullptr);
 
-	EXPECT_EQ(nullptr, db.get(1));
+	EXPECT_EQ(nullptr, db.getEntry(1));
 }
 
-TEST(NamesDB, get_correct_return){
+TEST(NamesDB, getEntry_correct_return){
 	FUN();
 
 	std::string name = "This is my name!";
@@ -47,14 +47,14 @@ TEST(NamesDB, get_correct_return){
 	size_t id = db.add(name, &name);
 	size_t id2 = db.add(name2, &name2);
 
-	EXPECT_EQ(&name, db.get(id));
-	EXPECT_EQ(&name2, db.get(id2));
+	EXPECT_EQ(&name, db.getEntry(id));
+	EXPECT_EQ(&name2, db.getEntry(id2));
 }
 
-TEST(NamesDB, get_empty){
+TEST(NamesDB, getEntry_empty){
 	FUN();
 
 	NamesDB db;
 
-	EXPECT_EQ(nullptr, db.get(0));
+	EXPECT_EQ(nullptr, db.getEntry(0));
 }

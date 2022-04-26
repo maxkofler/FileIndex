@@ -10,7 +10,7 @@ include_directories(include)
 
 option(BUILD_DOCS "Generate Docs" ON)
 if(BUILD_DOCS)
-	add_subdirectory()(${CMAKE_CURRENT_SOURCE_DIR}/docs)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/docs)
 endif()
 
 if (CMAKE_BUILD_TYPE)
