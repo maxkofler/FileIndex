@@ -57,6 +57,14 @@ public:
 	 */
 	std::string					getName(size_t id);
 
+	/**
+	 * @brief	Searches for the first occurrence of the specified name
+	 * @param	name			The name to search for
+	 * @param	start_id		The id to start searching from
+	 * @return	entry_namesDB*	The entry_namesDB found
+	 */
+	entry_namesDB*				searchFirst(std::string name, size_t start_id = 0);
+
 #ifndef FRIEND_NAMES_DB
 private:
 #endif
