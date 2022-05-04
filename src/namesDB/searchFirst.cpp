@@ -7,6 +7,8 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 	FUN();
 	DEBUG_EX("NamesDB::searchFirst()");
 
+	LOGD("Searching for \"" + search + "\" from position " + std::to_string(search_start) + "...");
+
 	//Create a local c string for fast access
 	size_t len_search = search.length();
 	//char* name_cStr = new char[len_name+1];
@@ -41,11 +43,20 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 			}
 		}
 
+		#ifdef DEBUG
+		std::string name_entry_string = std::string(name_entry, curEntry->nameLen);
+
+		LOGMEM(	"Matching characters between " + search + " and " + name_entry_string + ": " + 
+				std::to_string(matching_chars) + "/" + std::to_string(search.length()));
+		#endif
+
 		if (matching_chars == len_search)
 			return curEntry;
 
 		curEntry = curEntry->next;
 	}
+
+	LOGD("Could not find name \"" + search + "\"");
 
 	return nullptr;
 }
