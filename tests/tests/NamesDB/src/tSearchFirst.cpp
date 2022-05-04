@@ -108,3 +108,12 @@ TEST(NamesDB, searchFirst_find_content_end){
 	ASSERT_NE(nullptr, db.searchFirst(content)) << "Could not find the required string";
 	ASSERT_EQ(&db, db.searchFirst(content)->entry) << "Found the wrong entry";	//FAILS BECAUSE IMPLEMENTATION IS FLAWED!
 }
+
+//Tests if the argument "search_start" works
+TEST(NamesDB, searchFirst_find_from_start_index){
+	FUN();
+
+	GTEST_SKIP();
+
+	FAIL() << "Feature not implemented";
+}

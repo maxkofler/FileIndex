@@ -24,7 +24,7 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 
 		//Check if the entry is valid
 		if (curEntry == nullptr)
-			break;
+			continue;
 
 		//If the name of the entry is shorter, skip this entry
 		if (curEntry->nameLen < len_search){
