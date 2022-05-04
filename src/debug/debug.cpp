@@ -25,7 +25,7 @@ void teardown_function_failure(std::string funName){
 bool function_should_fail(std::string funName){
 	FUN();
 
-	//LOGMEM("Checking if \"" + funName + "\" should fail");
+	LOGFUNCALLS("Checking if \"" + funName + "\" should fail");
 
 	if (function_failures.count(funName) > 0)
 		if (function_failures[funName])
