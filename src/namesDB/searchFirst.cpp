@@ -30,7 +30,7 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 
 		//If the name of the entry is shorter, skip this entry
 		if (curEntry->nameLen < len_search){
-			curEntry = curEntry->next;
+			curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);
 			continue;
 		}
 
@@ -53,7 +53,7 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 		if (matching_chars == len_search)
 			return curEntry;
 
-		curEntry = curEntry->next;
+		curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);
 	}
 
 	LOGD("Could not find name \"" + search + "\"");

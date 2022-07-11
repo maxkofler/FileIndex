@@ -18,6 +18,9 @@ bool NamesDB::expand(uint8_t count){
 		if (_entries == nullptr)
 			return false;
 
+		//Clear the memory out
+		memset(_entries, 0, _blockSize*count);
+
 		//We now have <count> blocks available
 		_size_entries = count;
 		return true;
@@ -30,9 +33,13 @@ bool NamesDB::expand(uint8_t count){
 
 		//Allocate the memory for the new field
 		uint8_t* newEntries = new uint8_t[_blockSize * newCount];
+		
 		//Check if it is ok
-		if (_entries == nullptr)
+		if (newEntries == nullptr)
 			return false;
+
+		//Clear the new memory
+		memset(newEntries+(_size_entries*_blockSize), 0, _blockSize*count);
 
 		//Copy the memory
 		std::memcpy(newEntries, _entries, _size_entries*_blockSize);

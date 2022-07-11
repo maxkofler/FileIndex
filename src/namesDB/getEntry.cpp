@@ -13,14 +13,13 @@ void* NamesDB::getEntry(size_t id){
 		return nullptr;
 	}
 
-
 	//Get the pointer to the first entry
 	entry_namesDB* curEntry = (entry_namesDB*)_entries;
 
 	//Iterate over every entry until we found the entry
 	for (size_t i = 1; i <= id; i++){
-		if (curEntry->next != nullptr)
-			curEntry = curEntry->next;
+		if (curEntry->entry != nullptr)
+			curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);
 	}
 
 	return curEntry->entry;

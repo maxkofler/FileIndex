@@ -3,8 +3,10 @@
 
 #include <stdlib.h>			//size_t
 
+//If the entry of a namesDB entry is submitted as nullptr, replace it with this
+#define ENTRY_NULLPTR 0xFFFFFFFFFFFFFFFF
+
 struct entry_namesDB{
-	struct entry_namesDB*		next;
 	void*						entry;
 	uint8_t						nameLen;
 } __attribute__((packed));

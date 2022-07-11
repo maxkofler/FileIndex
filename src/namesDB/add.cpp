@@ -4,7 +4,7 @@
 #include "namesDB.h"
 
 #include <assert.h>
-static_assert(sizeof(entry_namesDB*) + sizeof(void*) + sizeof(uint8_t) == sizeof(entry_namesDB), "Size of entry_namesDB changed, adjust this file!");
+static_assert(sizeof(void*) + sizeof(uint8_t) == sizeof(entry_namesDB), "Size of entry_namesDB changed, adjust this file!");
 
 size_t NamesDB::add(std::string str, void* entry_insert){
 	FUN();
@@ -12,22 +12,22 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 
 	LOGMEM("Adding new name to database: \"" + str + "\"");
 
-	//Not the amount of bytes needed for this entry
+	//Note the amount of bytes needed for this entry
 	uint8_t size_entry = sizeof(entry_namesDB) + str.length();
 
 	//Allocate enough memory for this operation
-	while(_size_entries * _blockSize < _used_bytes + size_entry)
+	while((_size_entries * _blockSize) < (_used_bytes + size_entry))
 		expand();
 
 	//Get a pointer to the begin of this new entry
 	entry_namesDB* entry = (entry_namesDB*)(_entries + _used_bytes);
-	
-	//Set this entry as the next entry for the previous entry
-	if (_last_entry != nullptr)
-		_last_entry->next = entry;
 
 	//Set the entries carried entry
-	entry->entry = entry_insert;
+	if (entry_insert == nullptr){
+		LOGMEM("[NamesDB] Replacing entry 'nullptr' with custom representation 0xFFFFFFFFFFFFFFFF");
+		entry->entry = (void*) ENTRY_NULLPTR;
+	} else 
+		entry->entry = entry_insert;
 
 	//Set the entry name length and copy the name
 	entry->nameLen = str.length();
