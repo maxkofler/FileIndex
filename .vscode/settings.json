@@ -78,6 +78,7 @@
 		"compare": "cpp",
 		"complex": "cpp",
 		"concepts": "cpp",
-		"__functional_base_03": "cpp"
+		"__functional_base_03": "cpp",
+		"thread": "cpp"
 	}
 }

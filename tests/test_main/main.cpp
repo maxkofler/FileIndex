@@ -7,6 +7,8 @@ Log::Log* hlog;
 int glob_argc;
 char** glob_argv;
 
+#include <fstream>
+
 GTEST_API_ int main(int argc, char **argv) {
   printf("Running main() from %s\n", __FILE__);
   glob_argc = argc;
@@ -17,19 +19,31 @@ GTEST_API_ int main(int argc, char **argv) {
 
   hlog = new Log::Log(Log::MEM);
   hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
-  FUN();
+  hlog->setFeature(Log::FEATURE_PROFILE, true);
 
-  LOGU("Starting tests...");
+  std::ofstream outFile;
+  outFile.open("trace.json", std::ios::out);
+  hlog->setProfileStream(&outFile);
 
   int res = 0;
-  try {
-    res = RUN_ALL_TESTS();
-  } catch (...) {
-    LOGUE("Other error");
+
+  {
+    FUN();
+
+    LOGU("Starting tests...");
+
+    try {
+      res = RUN_ALL_TESTS();
+    } catch (...) {
+      LOGUE("Other error");
+    }
   }
   
 
   delete hlog;
+
+  outFile.flush();
+  outFile.close();
 
   return res;
 }
