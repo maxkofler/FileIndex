@@ -103,6 +103,13 @@ private:
 	 */
 	entry_namesDB*				_last_entry = nullptr;
 
+	/**
+	 * @brief	Searches for the database entry with the supplied id and returns a pointer to it
+	 * @param	id				The id of the searched entry
+	 * @return	entry_namesDB*	A pointer to the db entry
+	 */
+	entry_namesDB*				getDBEntry(size_t id);
+
 };
 
 #endif

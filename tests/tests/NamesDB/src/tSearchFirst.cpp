@@ -41,6 +41,21 @@ TEST(NamesDB, searchFirst_find_name){
 	ASSERT_EQ(wrongpointer, db.searchFirst(name2)->entry);
 }
 
+//Tests if searchFirst() finds a name that is scattered throughout a string
+TEST(NamesDB, searchFirst_find_scattered_name){
+	FUN();
+
+	std::string name = "SomeRandomName";
+
+	void* wrongpointer = (void*) &name;
+
+	NamesDB db;
+
+	size_t id = db.add(name, &db);
+
+	ASSERT_EQ(nullptr, db.searchFirst("Content")) << "Could not find the entry";
+}
+
 //Tests if searchFirst() finds a similar string, what it should not do
 TEST(NamesDB, searchFirst_similar){
 	FUN();
@@ -117,7 +132,30 @@ TEST(NamesDB, searchFirst_find_content_end){
 TEST(NamesDB, searchFirst_find_from_start_index){
 	FUN();
 
-	GTEST_SKIP();
+	std::string searchedString = "Content";
+	std::string otherString = "Some random entry in the database...";
 
-	FAIL() << "Feature not implemented";
+	NamesDB db;
+
+	void* firstPointer = (void*) 1;
+	void* secondPointer = (void*) 2;
+
+	db.add(searchedString, firstPointer);
+	db.add(otherString, nullptr);
+	db.add(searchedString, secondPointer);
+
+	{
+		entry_namesDB* res = db.searchFirst(searchedString);
+
+		ASSERT_NE(nullptr, res) << "Database search failed";
+		ASSERT_EQ(firstPointer, res->entry) << "searchFirst() could not find the first occurence";
+	}
+
+	{
+		entry_namesDB* res = db.searchFirst(searchedString);
+
+		ASSERT_NE(nullptr, res) << "Database search failed";
+		ASSERT_EQ(firstPointer, res->entry) << "searchFirst() could not find the second occurence";
+	}
+
 }

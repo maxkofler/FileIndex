@@ -7,7 +7,7 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 	FUN();
 	DEBUG_EX("NamesDB::searchFirst()");
 
-	LOGD("Searching for \"" + search + "\" from position " + std::to_string(search_start) + "...");
+	LOGD("[NamesDB][searchFirst] Searching for \"" + search + "\" from position " + std::to_string(search_start) + "...");
 
 	//Create a local c string for fast access
 	size_t len_search = search.length();
@@ -17,7 +17,11 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 	const char* search_cStr = search.c_str();
 
 	//Get the pointer to the first entry
-	entry_namesDB* curEntry = (entry_namesDB*)_entries;
+	//entry_namesDB* curEntry = (entry_namesDB*)_entries;
+	entry_namesDB* curEntry = getDBEntry(search_start);
+
+	if (curEntry == nullptr)
+		return nullptr;
 
 	size_t matching_chars = 0;
 	char* name_entry = nullptr;
@@ -46,7 +50,7 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 		#ifdef DEBUG
 		std::string name_entry_string = std::string(name_entry, curEntry->nameLen);
 
-		LOGMEM(	"Matching characters between " + search + " and " + name_entry_string + ": " + 
+		LOGMEM(	"[NamesDB][searchFirst] Matching characters between " + search + " and " + name_entry_string + ": " + 
 				std::to_string(matching_chars) + "/" + std::to_string(search.length()));
 		#endif
 
@@ -56,7 +60,7 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 		curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);
 	}
 
-	LOGD("Could not find name \"" + search + "\"");
+	LOGD("[NamesDB][searchFirst] Could not find name \"" + search + "\"");
 
 	return nullptr;
 }
