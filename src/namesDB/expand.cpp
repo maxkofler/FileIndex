@@ -7,7 +7,7 @@ bool NamesDB::expand(uint8_t count){
 	FUN();
 	DEBUG_EX("NamesDB::expand()");
 
-	LOGMEM("Expanding database by " + std::to_string(count) + " to " + std::to_string(_size_entries+count) + " blocks...");
+	LOGMEM("[NamesDB][expand] Expanding database by " + std::to_string(count) + " to " + std::to_string(_size_entries+count) + " blocks...");
 
 	//If the entries field has not been allocated yet
 	if (_entries == nullptr){

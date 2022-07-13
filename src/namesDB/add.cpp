@@ -10,7 +10,7 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 	FUN();
 	DEBUG_EX("NamesDB::add()");
 
-	LOGMEM("Adding new name to database: \"" + str + "\"");
+	LOGMEM("[NamesDB][add] Adding new name to database: \"" + str + "\"");
 
 	//Note the amount of bytes needed for this entry
 	uint8_t size_entry = sizeof(entry_namesDB) + str.length();
@@ -24,7 +24,7 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 
 	//Set the entries carried entry
 	if (entry_insert == nullptr){
-		LOGMEM("[NamesDB] Replacing entry 'nullptr' with custom representation 0xFFFFFFFFFFFFFFFF");
+		LOGMEM("[NamesDB][add]  Replacing entry 'nullptr' with custom representation 0xFFFFFFFFFFFFFFFF");
 		entry->entry = (void*) ENTRY_NULLPTR;
 	} else 
 		entry->entry = entry_insert;

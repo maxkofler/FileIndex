@@ -12,7 +12,7 @@ std::string NamesDB::getName(size_t id){
 
 	//Check if the ID is out of bounds
 	if (id >= _count_entries){
-		LOGE("ID " + std::to_string(id) + " is out of bounds");
+		LOGE("[NamesDB][getName] ID " + std::to_string(id) + " is out of bounds");
 		return std::string();
 	}
 
