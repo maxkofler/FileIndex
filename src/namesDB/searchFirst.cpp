@@ -50,7 +50,8 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 		#ifdef DEBUG
 		std::string name_entry_string = std::string(name_entry, curEntry->nameLen);
 
-		LOGMEM(	"[NamesDB][searchFirst] Matching characters between " + search + " and " + name_entry_string + ": " + 
+		LOGMEM(	"[NamesDB][searchFirst] Matching characters between " + search + " and " + name_entry_string + 
+				" at pos " + std::to_string(indexEntries) + ": " + 
 				std::to_string(matching_chars) + "/" + std::to_string(search.length()));
 		#endif
 

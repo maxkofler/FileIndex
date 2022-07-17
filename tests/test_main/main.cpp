@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
+#include <fstream>
+
 #include "random.h"
 #include "log.h"
 
 int glob_argc;
 char** glob_argv;
-
-#include <fstream>
 
 GTEST_API_ int main(int argc, char **argv) {
   printf("Running main() from %s\n", __FILE__);
@@ -19,30 +19,25 @@ GTEST_API_ int main(int argc, char **argv) {
   hlog = new Log::Log(Log::MEM);
   hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
   hlog->setFeature(Log::FEATURE_PROFILE, true);
+  FUN();
 
-  std::ofstream outFile;
-  outFile.open("trace.json", std::ios::out);
-  hlog->setProfileStream(&outFile);
+  std::ofstream* outFile = new std::ofstream();
+  outFile->open("profile.json");
+  hlog->setProfileStream(outFile);
+
+  LOGU("Starting tests...");
 
   int res = 0;
-
-  {
-    FUN();
-
-    LOGU("Starting tests...");
-
-    try {
-      res = RUN_ALL_TESTS();
-    } catch (...) {
-      LOGUE("Other error");
-    }
+  try {
+    res = RUN_ALL_TESTS();
+  } catch (...) {
+    LOGUE("Other error");
   }
-  
 
   delete hlog;
 
-  outFile.flush();
-  outFile.close();
+  outFile->flush();
+  outFile->close();
 
   return res;
 }

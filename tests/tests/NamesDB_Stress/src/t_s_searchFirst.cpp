@@ -8,8 +8,8 @@ TEST(NamesDB_Stress, searchFirst_loads_of_names){
 
 	NamesDB db;
 
-	for (size_t i = 0; i < 500; i++){
-		db.add("Entry" + std::to_string(i),  &db);
+	for (size_t i = 0; i < 100000; i++){
+		db.add("Entry" + std::to_string(i), &db);
 	}
 
 	db.add(finalName, &finalName);
