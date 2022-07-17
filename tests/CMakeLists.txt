@@ -16,3 +16,5 @@ add_subdirectory(tests/Sanity)
 
 add_subdirectory(tests/NamesDB)
 add_subdirectory(tests/NamesDB_Stress)
+
+add_subdirectory(tests/FileIndex)
