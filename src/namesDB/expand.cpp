@@ -3,6 +3,8 @@
 
 #include "namesDB.h"
 
+#include <cstring>
+
 bool NamesDB::expand(uint8_t count){
 	FUN();
 	DEBUG_EX("NamesDB::expand()");

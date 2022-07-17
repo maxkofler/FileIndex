@@ -3,6 +3,8 @@
 
 #include "namesDB.h"
 
+#include <cstring>
+
 #include <assert.h>
 static_assert(sizeof(void*) + sizeof(uint8_t) == sizeof(entry_namesDB), "Size of entry_namesDB changed, adjust this file!");
 
