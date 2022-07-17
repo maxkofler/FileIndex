@@ -2,6 +2,7 @@
 #define __FILEINDEX_H__
 
 #include "namesDB.h"
+#include "fstypes.h"
 
 class FileIndex{
 
