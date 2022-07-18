@@ -10,7 +10,7 @@ typedef struct fsentry_s {
 } __attribute__((packed)) fs_entry;
 
 /**
- * @brief	An internal representatino of a file in a filesystem tree
+ * @brief	An internal representation of a file in a filesystem tree
  */
 typedef struct s_fs_file : public fsentry_s{
 	s_fs_file(){
