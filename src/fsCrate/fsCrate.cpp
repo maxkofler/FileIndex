@@ -49,7 +49,10 @@ uint32_t FSCrate_add(fs_crate* crate, fs_entry* entry){
 	if (expandRes == 0)
 		return expandRes;
 
-	#warning Implementation missing
+	crate->entries[crate->count] = entry;
+	crate->count++;
+
+	return crate->count;
 }
 
 uint32_t FSCrate_add(fs_crate* crate, fs_entry** entries, uint32_t amount){
@@ -65,5 +68,16 @@ uint32_t FSCrate_add(fs_crate* crate, fs_entry** entries, uint32_t amount){
 		return 0;
 	}
 
-	#warning Implementation missing
+	//Expand the crate by the needed amount
+	uint32_t expandRes = FSCrate_expand(crate, amount);
+
+	if (expandRes == 0)
+		return expandRes;
+
+	for (size_t i = 0; i < amount; i++){
+		crate->entries[crate->count] = entries[i];
+		crate->count++;
+	}
+
+	return crate->count;
 }
