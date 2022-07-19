@@ -6,6 +6,7 @@
  */
 typedef struct fsentry_s {
 	bool				isDir;
+	size_t				nameID;
 	struct s_fs_dir*	parent = nullptr;
 } __attribute__((packed)) fs_entry;
 
