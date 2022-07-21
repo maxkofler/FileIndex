@@ -60,8 +60,10 @@ namesDB_searchRes NamesDB::searchFirst(std::string search, size_t search_start){
 
 		if (matching_chars == len_search){
 			namesDB_searchRes res;
+			res.code = 0;
 			res.data = curEntry->entry;
 			res.id = indexEntries;
+			res.dbEntry = curEntry;
 			return res;
 		}
 

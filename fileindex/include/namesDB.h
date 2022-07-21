@@ -18,6 +18,7 @@ struct namesDB_searchRes{
 	int8_t						code = 0;
 	void*						data;
 	size_t						id;
+	entry_namesDB*				dbEntry;
 };
 
 class NamesDB{
