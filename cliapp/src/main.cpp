@@ -6,7 +6,7 @@
 #include <fstream>
 
 int main(int argc, char** argv){
-	hlog = new Log::Log(Log::U);
+	hlog = new Log::Log(Log::F);
 
 	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
 	hlog->setFeature(Log::FEATURE_PROFILE, true);
@@ -32,6 +32,9 @@ int main(int argc, char** argv){
 
 		LOGU(	"Done! " + std::to_string(index.getDB()->getEntriesCount()) + " entries in database, " + 
 				std::to_string(index.getDB()->getBytesUsed()) + " bytes used");
+
+		LOGU(	"Total entries indexed: " + std::to_string(index.getIndexedEntriesCount()));
+		LOGU(	"Saved duplicated names: " + std::to_string(index.getSavedDuplicatesCount()));
 
 		std::cin >> rootName;
 		

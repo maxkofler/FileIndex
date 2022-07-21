@@ -7,7 +7,7 @@ namesDB_searchRes NamesDB::searchFirst(std::string search, size_t search_start){
 	FUN();
 	DEBUG_EX("NamesDB::searchFirst()");
 
-	LOGD("[NamesDB][searchFirst] Searching for \"" + search + "\" from position " + std::to_string(search_start) + "...");
+	LOGMEM("[NamesDB][searchFirst] Searching for \"" + search + "\" from position " + std::to_string(search_start) + "...");
 
 	//Create a local c string for fast access
 	size_t len_search = search.length();
@@ -70,7 +70,7 @@ namesDB_searchRes NamesDB::searchFirst(std::string search, size_t search_start){
 		curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);
 	}
 
-	LOGD("[NamesDB][searchFirst] Could not find name \"" + search + "\"");
+	LOGMEM("[NamesDB][searchFirst] Could not find name \"" + search + "\"");
 
 	namesDB_searchRes res;
 	res.code = SEARCHRES_NOTFOUND;

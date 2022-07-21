@@ -10,7 +10,7 @@
  */
 typedef struct {
 	uint32_t	count;
-	fs_entry**	entries;
+	fs_entry**	entries = nullptr;
 } fs_crate;
 
 /**

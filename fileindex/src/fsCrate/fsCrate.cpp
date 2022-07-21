@@ -18,13 +18,16 @@ uint32_t FSCrate_expand(fs_crate* crate, uint32_t amount){
 	//Allocate memory for the new array
 	fs_entry** newEntries = new fs_entry*[newSpace];
 
-	//Copy the old array
-	for (uint32_t i = 0; i < prevCount; i++){
-		newEntries[i] = crate->entries[i];
+	//Copy the old array if there was an old array
+	if (crate->entries != nullptr){
+		for (uint32_t i = 0; i < prevCount; i++){
+			newEntries[i] = crate->entries[i];
+		}
 	}
 
-	//Delete the old array
-	delete crate->entries;
+	//Delete the old array if one exists
+	if (crate->entries != nullptr)
+		delete crate->entries;
 
 	//Set the new entries
 	crate->entries = newEntries;

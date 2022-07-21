@@ -45,13 +45,14 @@ uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
 		return 0;
 	}
 
-	std::string curPath;
+	std::string curPath, curName;
 	uint64_t indexedFiles = 0;
 
 	//Start indexing
 	for (fs::directory_entry entry : dirIt){
 		curPath = entry.path().string();
-		LOGF("[FileIndex][index] Found directory entry \"" + curPath + "\"");
+		curName = entry.path().stem().string() + entry.path().extension().string();
+		LOGF("[FileIndex][index] Found directory entry \"" + curPath + "\", DB name: \"" + curName + "\"");
 
 		//Ignore symlinks
 		if (entry.is_symlink())
@@ -63,11 +64,10 @@ uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
 			fs_dir* newDir = new fs_dir;
 			newDir->parent = parent;
 
-			#warning This currently adds duplicates!
-			newDir->nameID = _db->add(entry.path().stem().string(), newDir);
+			db_add_entry(curName, newDir);
 
 			if (recursive){
-				LOGF("[FileIndex][index] Entering directory \"" + curPath + "\"");
+				LOGIO("[FileIndex][index] Entering directory \"" + curPath + "\"");
 				index(newDir, curPath, recursive);
 			}
 		} else {
@@ -75,14 +75,13 @@ uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
 			fs_file* newFile = new fs_file;
 			newFile->parent = parent;
 			
-			#warning This currently adds duplicates!
-			newFile->nameID = _db->add(entry.path().stem().string() + entry.path().extension().string(), newFile);
+			db_add_entry(curName, newFile);
 		}
 
 		indexedFiles++;
 	}
 
-	LOGD("[FileIndex][index] Indexed " + std::to_string(indexedFiles) + " files");
+	LOGMEM("[FileIndex][index] Indexed " + std::to_string(indexedFiles) + " files");
 
 	return indexedFiles;
 }
