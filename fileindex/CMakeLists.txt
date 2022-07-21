@@ -10,10 +10,6 @@ add_library(fileindex ${HEADERS} ${CXXSOURCES})
 
 include_directories(../Log/include)
 
-if (BUILD_TESTS)
-	add_subdirectory(tests)
-endif()
-
 if (LOG_PROFILE)
 	target_compile_definitions(fileindex PUBLIC "LOG_ENABLE_PROFILING")
 endif()

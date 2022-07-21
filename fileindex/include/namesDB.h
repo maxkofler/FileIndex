@@ -12,6 +12,14 @@ struct entry_namesDB{
 	uint8_t						nameLen;
 } __attribute__((packed));
 
+#define SEARCHRES_NOTFOUND -1
+
+struct namesDB_searchRes{
+	int8_t						code = 0;
+	void*						data;
+	size_t						id;
+};
+
 class NamesDB{
 
 public:
@@ -64,9 +72,9 @@ public:
 	 * @brief	Searches for the first occurrence of the specified name
 	 * @param	name			The name to search for
 	 * @param	start_id		The id to start searching from
-	 * @return	entry_namesDB*	The entry_namesDB found
+	 * @return	namesDB_searchRes	The search result
 	 */
-	entry_namesDB*				searchFirst(std::string name, size_t start_id = 0);
+	namesDB_searchRes			searchFirst(std::string name, size_t start_id = 0);
 
 	/**
 	 * @brief	Returns the amount of entries stored in this database

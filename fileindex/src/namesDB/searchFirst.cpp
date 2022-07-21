@@ -3,7 +3,7 @@
 
 #include "namesDB.h"
 
-entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
+namesDB_searchRes NamesDB::searchFirst(std::string search, size_t search_start){
 	FUN();
 	DEBUG_EX("NamesDB::searchFirst()");
 
@@ -20,8 +20,11 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 	//entry_namesDB* curEntry = (entry_namesDB*)_entries;
 	entry_namesDB* curEntry = getDBEntry(search_start);
 
-	if (curEntry == nullptr)
-		return nullptr;
+	if (curEntry == nullptr){
+		namesDB_searchRes res;
+		res.code = -2;
+		return res;
+	}
 
 	size_t matching_chars = 0;
 	char* name_entry = nullptr;
@@ -55,13 +58,20 @@ entry_namesDB* NamesDB::searchFirst(std::string search, size_t search_start){
 				std::to_string(matching_chars) + "/" + std::to_string(search.length()));
 		#endif
 
-		if (matching_chars == len_search)
-			return curEntry;
+		if (matching_chars == len_search){
+			namesDB_searchRes res;
+			res.data = curEntry->entry;
+			res.id = indexEntries;
+			return res;
+		}
 
 		curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);
 	}
 
 	LOGD("[NamesDB][searchFirst] Could not find name \"" + search + "\"");
 
-	return nullptr;
+	namesDB_searchRes res;
+	res.code = SEARCHRES_NOTFOUND;
+	return res;
+
 }

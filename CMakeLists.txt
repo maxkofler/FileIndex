@@ -18,6 +18,7 @@ endif()
 if (BUILD_TESTS)
 	enable_testing(true)
 	add_subdirectory(Log/googletest)
+	add_subdirectory(fileindex/tests)
 	target_compile_definitions(fileindex PUBLIC "DEBUG" PUBLIC "LOG_ENABLE_PROFILING")
 endif()
 
