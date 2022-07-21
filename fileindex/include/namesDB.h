@@ -2,6 +2,7 @@
 #define __NAMES_DB_H__
 
 #include <stdlib.h>			//size_t
+#include <string>
 
 //If the entry of a namesDB entry is submitted as nullptr, replace it with this
 #define ENTRY_NULLPTR 0xFFFFFFFFFFFFFFFF
@@ -66,6 +67,16 @@ public:
 	 * @return	entry_namesDB*	The entry_namesDB found
 	 */
 	entry_namesDB*				searchFirst(std::string name, size_t start_id = 0);
+
+	/**
+	 * @brief	Returns the amount of entries stored in this database
+	 */
+	size_t						getEntriesCount();
+
+	/**
+	 * @brief	Returns the bytes used by this database
+	 */
+	size_t						getBytesUsed();
 
 #ifndef FRIEND_NAMES_DB
 private:

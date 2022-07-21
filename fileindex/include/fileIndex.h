@@ -4,6 +4,8 @@
 #include "namesDB.h"
 #include "fstypes.h"
 
+#include <string>
+
 class FileIndex{
 
 public:
