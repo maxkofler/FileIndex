@@ -29,7 +29,7 @@ namesDB_searchRes NamesDB::searchFirst(std::string search, size_t search_start){
 	size_t matching_chars = 0;
 	char* name_entry = nullptr;
 
-	for (size_t indexEntries = 0; indexEntries < _count_entries; indexEntries++){
+	for (size_t indexEntries = search_start; indexEntries < _count_entries; indexEntries++){
 
 		//Check if the entry is valid
 		if (curEntry == nullptr)

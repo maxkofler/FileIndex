@@ -62,12 +62,26 @@ public:
 	void*						getEntry(size_t id);
 
 	/**
+	 * @brief	Searches for the database entry with the supplied id and returns a pointer to it
+	 * @param	id				The id of the searched entry
+	 * @return	entry_namesDB*	A pointer to the db entry
+	 */
+	entry_namesDB*				getDBEntry(size_t id);
+
+	/**
 	 * @brief	Gets the name string of the specified id (is really slow, read note)
 	 * @param	id				The id to search (received from add())
 	 * @return	std::string		The name previously supplied to add(), empty if out of range
 	 * @note	This function is slow, it iterates over every entry, don't use it if not necessary
 	 */
 	std::string					getName(size_t id);
+
+	/**
+	 * @brief	Gets the name string of the specified entry
+	 * @param	entry			The entry to get the name from
+	 * @return	std::string		The name previously supplied to add()
+	 */
+	static std::string			getEntryName(entry_namesDB* entry);
 
 	/**
 	 * @brief	Searches for the first occurrence of the specified name
@@ -86,6 +100,13 @@ public:
 	 * @brief	Returns the bytes used by this database
 	 */
 	size_t						getBytesUsed();
+
+	/**
+	 * @brief	Calculates the next database entry pointer from the provided pointer
+	 * @param	cur				The entry to calculate from
+	 * @return	entry_namesDB*	The calculated next entry (not guaranteed to be valid)
+	 */
+	static entry_namesDB*		getNextEntry(entry_namesDB* cur);
 
 #ifndef FRIEND_NAMES_DB
 private:
@@ -122,13 +143,6 @@ private:
 	 * @brief	The last entry to fill in the next pointer
 	 */
 	entry_namesDB*				_last_entry = nullptr;
-
-	/**
-	 * @brief	Searches for the database entry with the supplied id and returns a pointer to it
-	 * @param	id				The id of the searched entry
-	 * @return	entry_namesDB*	A pointer to the db entry
-	 */
-	entry_namesDB*				getDBEntry(size_t id);
 
 };
 

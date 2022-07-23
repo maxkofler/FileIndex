@@ -8,7 +8,7 @@ entry_namesDB* NamesDB::getDBEntry(size_t id){
 	DEBUG_EX("NamesDB::getDBEntry()");
 
 	//Check if the ID is out of bounds
-	if (id >= _count_entries){
+	if (id > _count_entries){
 		LOGE("[NamesDB][getDBEntry] ID " + std::to_string(id) + " is out of bounds");
 		return nullptr;
 	}

@@ -27,15 +27,21 @@ std::string NamesDB::getName(size_t id){
 			curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);;
 	}
 
+	return getEntryName(curEntry);
+}
+
+std::string NamesDB::getEntryName(entry_namesDB* entry){
+	FUN();
+
 	//Allocate memory for the name to copy to, including the nullterminator
-	char* name_cStr = new char[curEntry->nameLen+1];
+	char* name_cStr = new char[entry->nameLen+1];
 
 	//Construct a pointer to the start of the name in the _entries data block
-	uint8_t* start_name = (uint8_t*) curEntry + sizeof(entry_namesDB);
+	uint8_t* start_name = (uint8_t*) entry + sizeof(entry_namesDB);
 
 	//Copy the name using memcpy and append the nullterminator
-	std::memcpy(name_cStr, start_name, curEntry->nameLen);
-	name_cStr[curEntry->nameLen] = 0;
+	std::memcpy(name_cStr, start_name, entry->nameLen);
+	name_cStr[entry->nameLen] = 0;
 
 	//Put the name into a std::string
 	std::string ret = std::string(name_cStr);

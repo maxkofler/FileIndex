@@ -76,7 +76,7 @@ private:
 	 * @param	name		The name of the entry to add
 	 * @param	entry		The new entry to add
 	 */
-	bool					db_add_entry(std::string name, fs_entry* entry);
+	entry_namesDB*			db_add_entry(std::string name, fs_entry* entry);
 
 	/**
 	 * @brief	Indexes the supplied path blindly, no checks are made
@@ -85,6 +85,8 @@ private:
 	 * @param	recursive	If this function should enter subdirectories (default: true)
 	 */
 	void					index_blind(fs_dir* parent, std::string path, bool recursive = true);
+
+	void					optimizeDuplicates(std::string name, entry_namesDB* startEntry, size_t startEntryID);
 
 };
 
