@@ -8,7 +8,7 @@
 #define ENTRY_NULLPTR 0xFFFFFFFFFFFFFFFF
 
 struct entry_namesDB{
-	void*						entry;
+	void*						data;
 	uint8_t						nameLen;
 } __attribute__((packed));
 
@@ -89,17 +89,19 @@ public:
 	 * @param	name			The name to search for
 	 * @param	startEntry		The entry to start searching from
 	 * @param	startID			The id of the starting entry
+	 * @param	exact			If the string has to match exactly or if it can be a substring
 	 * @return	namesDB_searchRes	The search result
 	 */
-	namesDB_searchRes			searchFirstFromEntry(std::string name, entry_namesDB* startEntry, size_t startID);
+	namesDB_searchRes			searchFirstFromEntry(std::string name, entry_namesDB* startEntry, size_t startID, bool exact);
 
 	/**
 	 * @brief	Searches for the first occurrence of the specified name
 	 * @param	name			The name to search for
+	 * @param	exact			If the string has to match exactly or if it can be a substring
 	 * @param	start_id		The id to start searching from
 	 * @return	namesDB_searchRes	The search result
 	 */
-	namesDB_searchRes			searchFirst(std::string name, size_t start_id = 0);
+	namesDB_searchRes			searchFirst(std::string name, bool exact, size_t start_id = 0);
 
 	/**
 	 * @brief	Returns the amount of entries stored in this database

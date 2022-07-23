@@ -23,7 +23,7 @@ std::string NamesDB::getName(size_t id){
 
 	//Iterate over every entry until we found the entry
 	for (size_t i = 1; i <= id; i++){
-		if (curEntry->entry != nullptr)
+		if (curEntry->data != nullptr)
 			curEntry = (entry_namesDB*)(((uint8_t*)curEntry) + sizeof(entry_namesDB) + curEntry->nameLen);;
 	}
 

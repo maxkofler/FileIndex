@@ -27,9 +27,9 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 	//Set the entries carried entry
 	if (entry_insert == nullptr){
 		LOGMEM("[NamesDB][add]  Replacing entry 'nullptr' with custom representation 0xFFFFFFFFFFFFFFFF");
-		entry->entry = (void*) ENTRY_NULLPTR;
+		entry->data = (void*) ENTRY_NULLPTR;
 	} else 
-		entry->entry = entry_insert;
+		entry->data = entry_insert;
 
 	//Set the entry name length and copy the name
 	entry->nameLen = str.length();

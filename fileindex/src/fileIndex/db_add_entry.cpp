@@ -5,7 +5,7 @@
 entry_namesDB* FileIndex::db_add_entry(std::string name, fs_entry* entry){
 	FUN();
 
-	namesDB_searchRes searchRes = _db->searchFirst(name);
+	namesDB_searchRes searchRes = _db->searchFirst(name, true);
 	fs_crate* crate = nullptr;
 
 	if (searchRes.code == 0){

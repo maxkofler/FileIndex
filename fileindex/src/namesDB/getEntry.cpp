@@ -12,5 +12,5 @@ void* NamesDB::getEntry(size_t id){
 	if (curEntry == nullptr)
 		return nullptr;
 	else
-		return curEntry->entry;
+		return curEntry->data;
 }
