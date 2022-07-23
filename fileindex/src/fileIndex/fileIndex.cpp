@@ -14,6 +14,8 @@ FileIndex::FileIndex(NamesDB* db){
 		_db = db;
 		_externalDB = true;
 	}
+
+	_dirtyDB = new NamesDB();
 }
 
 FileIndex::~FileIndex(){
@@ -23,4 +25,6 @@ FileIndex::~FileIndex(){
 		LOGD("[FileIndex] Deleting internal database");
 		delete _db;
 	}
+
+	delete _dirtyDB;
 }

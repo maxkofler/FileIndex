@@ -79,3 +79,7 @@ build*/
 #FileIndex testing files
 index.txt
 names.txt
+
+#VSCode files
+.vscode/*
+.vscode

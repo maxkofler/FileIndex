@@ -36,6 +36,12 @@ public:
 	 */
 	size_t					getSavedDuplicatesCount();
 
+	/**
+	 * @brief	Cleans up the dirty database and moves its optimized entries to the main db, clears the main db
+	 * @return	size_t		The amount of entries transferred
+	 */
+	size_t					optimizeDB();
+
 #ifndef FRIEND_FILEINDEX
 private:
 #endif
@@ -44,6 +50,11 @@ private:
 	 * @brief	The database used for storing the indexed entries
 	 */
 	NamesDB*				_db = nullptr;
+
+	/**
+	 * @brief	The uncleaned database used for indexing only, gets cleaned after indexing
+	 */
+	NamesDB*				_dirtyDB = nullptr;
 
 	/**
 	 * @brief	If the database was supplied externally
@@ -66,6 +77,14 @@ private:
 	 * @param	entry		The new entry to add
 	 */
 	bool					db_add_entry(std::string name, fs_entry* entry);
+
+	/**
+	 * @brief	Indexes the supplied path blindly, no checks are made
+	 * @param	parent		The parent directory
+	 * @param	path		The path to index
+	 * @param	recursive	If this function should enter subdirectories (default: true)
+	 */
+	void					index_blind(fs_dir* parent, std::string path, bool recursive = true);
 
 };
 

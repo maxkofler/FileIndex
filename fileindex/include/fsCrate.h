@@ -8,7 +8,7 @@
 /**
  * @brief	A crate holding all fsentries with the same name
  */
-typedef struct {
+typedef struct s_fs_crate {
 	uint32_t	count;
 	fs_entry**	entries = nullptr;
 } fs_crate;
