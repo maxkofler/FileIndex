@@ -8,17 +8,23 @@ void FileIndex::optimizeDuplicates(std::string name, entry_namesDB* startEntry, 
 	entry_namesDB* cleanDBEntry = db_add_entry(name, (fs_entry*)startEntry->entry);
 	fs_crate* cleanDBCrate = (fs_crate*)cleanDBEntry->entry;
 
-	namesDB_searchRes curRes = _dirtyDB->searchFirst(name, startEntryID);
+	namesDB_searchRes curRes;
+	curRes.dbEntry = startEntry;
+	curRes.id = startEntryID-1;
 
-	while (curRes.code == 0){
+	while(true){
+		curRes.id += 1;
+		curRes = _dirtyDB->searchFirstFromEntry(name, NamesDB::getNextEntry(curRes.dbEntry), curRes.id);
 
-		if (curRes.data != nullptr){
-			LOGD("[FileIndex][optimizeDuplicates] Found duplicate for \"" + name + "\" at id=" + std::to_string(curRes.id));
-			FSCrate_add(cleanDBCrate, (fs_entry*)curRes.data);
-			curRes.dbEntry->entry = nullptr;
+		if (curRes.code != 0){
+			break;
 		}
 
-		curRes = _dirtyDB->searchFirst(name, curRes.id+1);
+		if (curRes.data != nullptr){
+			FSCrate_add(cleanDBCrate, (fs_entry*)curRes.data);
+			curRes.dbEntry->entry = nullptr;
+			_savedDuplicateNames++;
+		}
 	}
 
 	if (cleanDBCrate->count > 1)

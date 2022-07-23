@@ -42,6 +42,10 @@ public:
 	 */
 	size_t					optimizeDB();
 
+	void					cleanDirtyDB();
+
+	void					cleanDB();
+
 #ifndef FRIEND_FILEINDEX
 private:
 #endif

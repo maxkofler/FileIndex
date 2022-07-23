@@ -13,6 +13,7 @@ struct entry_namesDB{
 } __attribute__((packed));
 
 #define SEARCHRES_NOTFOUND -1
+#define SEARCHRES_INVALIDARG -2
 
 struct namesDB_searchRes{
 	int8_t						code = 0;
@@ -82,6 +83,15 @@ public:
 	 * @return	std::string		The name previously supplied to add()
 	 */
 	static std::string			getEntryName(entry_namesDB* entry);
+
+	/**
+	 * @brief	Searches for the first occurrence of the specified name
+	 * @param	name			The name to search for
+	 * @param	startEntry		The entry to start searching from
+	 * @param	startID			The id of the starting entry
+	 * @return	namesDB_searchRes	The search result
+	 */
+	namesDB_searchRes			searchFirstFromEntry(std::string name, entry_namesDB* startEntry, size_t startID);
 
 	/**
 	 * @brief	Searches for the first occurrence of the specified name

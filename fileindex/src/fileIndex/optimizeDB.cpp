@@ -23,7 +23,7 @@ size_t FileIndex::optimizeDB(){
 
 		curName = NamesDB::getEntryName(curEntry);
 
-		optimizeDuplicates(curName, curEntry, i+1);
+		optimizeDuplicates(curName, curEntry, i);
 
 	}
 
