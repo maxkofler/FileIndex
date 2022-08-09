@@ -42,5 +42,5 @@ uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
 
 	index_blind(parent, pathStr, recursive);
 
-	return optimizeDB();
+	return _indexedEntries;
 }

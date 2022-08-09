@@ -3,6 +3,7 @@
 
 #include <stdlib.h>			//size_t
 #include <string>
+#include <deque>
 
 //If the entry of a namesDB entry is submitted as nullptr, replace it with this
 #define ENTRY_NULLPTR 0xFFFFFFFFFFFFFFFF
@@ -95,6 +96,16 @@ public:
 	namesDB_searchRes			searchFirstFromEntry(std::string name, entry_namesDB* startEntry, size_t startID, bool exact);
 
 	/**
+	 * @brief	Searches all occurences of the specified name
+	 * @param	name			The name to search for
+	 * @param	startEntry		The entry to start searching from
+	 * @param	startID			The id of the starting entry
+	 * @param	exact			If the string has to match exactly or if it can be a substring
+	 * @return	A deque holding instances of namesDB_searchRes
+	 */
+	std::deque<namesDB_searchRes>	searchAllFromEntry(std::string name, entry_namesDB* startEntry, size_t startID, bool exact);
+
+	/**
 	 * @brief	Searches for the first occurrence of the specified name
 	 * @param	name			The name to search for
 	 * @param	exact			If the string has to match exactly or if it can be a substring
@@ -102,6 +113,15 @@ public:
 	 * @return	namesDB_searchRes	The search result
 	 */
 	namesDB_searchRes			searchFirst(std::string name, bool exact, size_t start_id = 0);
+
+	/**
+	 * @brief	Searches all occurences of the specified name
+	 * @param	name			The name to search for
+	 * @param	exact			If the string has to match exacltly or if it can be a substring
+	 * @param	start_id		The id to start searching from
+	 * @return	A deque holding instances of namesDB_searchRes
+	 */
+	std::deque<namesDB_searchRes>	searchAll(std::string name, bool exact, size_t start_id = 0);
 
 	/**
 	 * @brief	Returns the amount of entries stored in this database
