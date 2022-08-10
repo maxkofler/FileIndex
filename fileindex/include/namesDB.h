@@ -18,6 +18,8 @@ struct entry_namesDB{
 
 struct namesDB_searchRes{
 	int8_t						code = 0;
+	uint8_t						matchStart = 0;		//The place the match starts in the results name
+	uint8_t						matchRemaining = 0;	//The remaining characters that did not match of the name (is name.length - search.length)
 	void*						data;
 	size_t						id;
 	entry_namesDB*				dbEntry;

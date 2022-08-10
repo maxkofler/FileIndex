@@ -36,7 +36,8 @@ void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive)
 			fs_dir* newDir = new fs_dir;
 			newDir->parent = parent;
 
-			_db->add(curName, (fs_entry*)newDir);
+			_dirtyDB->add(curName, (fs_entry*)newDir);
+			//_db->add(curName, (fs_entry*)newDir);
 
 			if (recursive){
 				LOGIO("[FileIndex][index] Entering directory \"" + curPath + "\"");
@@ -47,7 +48,8 @@ void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive)
 			fs_file* newFile = new fs_file;
 			newFile->parent = parent;
 			
-			_db->add(curName, (fs_entry*)newFile);
+			_dirtyDB->add(curName, (fs_entry*)newFile);
+			//_db->add(curName, (fs_entry*)newFile);
 		}
 
 		indexedFiles++;

@@ -66,7 +66,8 @@ namesDB_searchRes NamesDB::searchFirstFromEntry(std::string search, entry_namesD
 		name_entry = (char*)curEntry + sizeof(entry_namesDB);
 
 		matching_chars = 0;
-		for (size_t sPos = 0; sPos < curEntry->nameLen && matching_chars < len_search; sPos++){
+		size_t sPos = 0;
+		for (sPos = 0; sPos < curEntry->nameLen && matching_chars < len_search; sPos++){
 			if (search_cStr[matching_chars] == name_entry[sPos]){
 				matching_chars++;
 			} else 
@@ -84,6 +85,8 @@ namesDB_searchRes NamesDB::searchFirstFromEntry(std::string search, entry_namesD
 		if (matching_chars == len_search){
 			res.code = 0;
 			res.data = curEntry->data;
+			res.matchStart = sPos - len_search;
+			res.matchRemaining = curEntry->nameLen - len_search;
 			res.id = indexEntries;
 			res.dbEntry = curEntry;
 			break;

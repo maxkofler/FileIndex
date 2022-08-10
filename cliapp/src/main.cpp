@@ -4,8 +4,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 int main(int argc, char** argv){
+	using namespace std::chrono;
 	hlog = new Log::Log(Log::F);
 
 	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
@@ -30,10 +32,17 @@ int main(int argc, char** argv){
 	root->parent = nullptr;
 	root->nameID = index.getDB()->add(rootName, root);
 
+	auto indexStart = high_resolution_clock::now();
 	index.index(root, rootName, true);
+	auto indexStop = high_resolution_clock::now();
+	auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
+
+	LOGD("Done indexing");
+
+	index.optimizeDB();
 
 	LOGU(	"Done! " + std::to_string(index.getDB()->getEntriesCount()) + " entries in database, " + 
-			std::to_string(index.getDB()->getBytesUsed()) + " bytes used");
+			std::to_string(index.getDB()->getBytesUsed()) + " bytes used in " + std::to_string(indexDuration.count()) + "ms");
 
 	LOGU(	"Total entries indexed: " + std::to_string(index.getIndexedEntriesCount()));
 	LOGU(	"Saved duplicated names: " + std::to_string(index.getSavedDuplicatesCount()));
@@ -47,13 +56,20 @@ int main(int argc, char** argv){
 		if (search.length() == 0)
 			break;
 
+		auto start = high_resolution_clock::now();
 		auto res = index.getDB()->searchAll(search, false);
 
+		std::sort(res.begin(), res.end(), [](const namesDB_searchRes &a, const namesDB_searchRes &b) -> bool {
+			return a.matchRemaining > b.matchRemaining;
+		});
+		auto stop = high_resolution_clock::now();
+		auto duration = duration_cast<milliseconds>(stop - start);
+
 		for (namesDB_searchRes entry : res){
-			std::cout << ">" << NamesDB::getEntryName(entry.dbEntry) << std::endl;
+			std::cout << "> " << NamesDB::getEntryName(entry.dbEntry) << std::endl;
 		}
 
-		std::cout << ">> " << res.size() << " hits" << std::endl;
+		std::cout << ">> " << res.size() << " hits in " << duration.count() << " ms" << std::endl;
 	}
 	
 
