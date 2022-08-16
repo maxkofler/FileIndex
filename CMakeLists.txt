@@ -3,12 +3,13 @@ project(FileIndex)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(fileindex)
+include_directories(include)
+include_directories(Log/include)
+include_directories(cliapp/include)
+include_directories(fileindex/include)
 
 add_subdirectory(Log)
-include_directories(Log/include)
-
-include_directories(include)
+add_subdirectory(fileindex)
 
 option(BUILD_DOCS "Generate Docs" OFF)
 if(BUILD_DOCS)
@@ -22,12 +23,6 @@ if (BUILD_TESTS)
 	target_compile_definitions(fileindex PUBLIC "DEBUG" PUBLIC "LOG_ENABLE_PROFILING")
 endif()
 
-if (LOG_PROFILE)
-	target_compile_definitions(fileindex PUBLIC "LOG_ENABLE_PROFILING")
-endif()
-
-include_directories(cliapp/include)
-include_directories(fileindex/include)
 file(GLOB_RECURSE CLI_CXX_SOURCES "cliapp/src/**.cpp")
 
 add_executable(fileindexcli ${CLI_CXX_SOURCES})
