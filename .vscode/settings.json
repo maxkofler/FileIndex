@@ -1,5 +1,7 @@
 {
 	"files.associations": {
+		"*.pyhook": "python",
+		"*.S": "gas",
 		"iosfwd": "cpp",
 		"__bit_reference": "cpp",
 		"__config": "cpp",
@@ -79,6 +81,11 @@
 		"complex": "cpp",
 		"concepts": "cpp",
 		"__functional_base_03": "cpp",
-		"thread": "cpp"
+		"thread": "cpp",
+		"*.tcc": "cpp",
+		"condition_variable": "cpp",
+		"numbers": "cpp",
+		"semaphore": "cpp",
+		"stop_token": "cpp"
 	}
 }

@@ -18,7 +18,6 @@ void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive)
 	}
 
 	std::string curPath, curName;
-	uint64_t indexedFiles = 0;
 
 	//Start indexing
 	for (fs::directory_entry entry : dirIt){
@@ -52,8 +51,8 @@ void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive)
 			//_db->add(curName, (fs_entry*)newFile);
 		}
 
-		indexedFiles++;
+		_indexedEntries++;
 	}
 
-	LOGMEM("[FileIndex][index] Indexed " + std::to_string(indexedFiles) + " files");
+	LOGMEM("[FileIndex][index] Indexed " + std::to_string(_indexedEntries) + " files");
 }

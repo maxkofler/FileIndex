@@ -3,6 +3,7 @@
 
 #include "namesDB.h"
 #include "fstypes.h"
+#include "fsCrate.h"
 
 #include <string>
 
@@ -91,6 +92,8 @@ private:
 	void					index_blind(fs_dir* parent, std::string path, bool recursive = true);
 
 	void					optimizeDuplicates(std::string name, entry_namesDB* startEntry, size_t startEntryID);
+
+	void					findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id);
 
 };
 

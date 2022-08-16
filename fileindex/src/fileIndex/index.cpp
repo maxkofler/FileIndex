@@ -7,6 +7,7 @@ uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
 	FUN();
 
 	_dirtyDB->clean();
+	_indexedEntries = 0;
 
 	namespace fs = std::filesystem;
 	std::error_code ec;

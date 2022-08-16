@@ -25,7 +25,6 @@ entry_namesDB* FileIndex::db_add_entry(std::string name, fs_entry* entry){
 	}
 
 	FSCrate_add(crate, entry);
-	_indexedEntries++;
 
 	return searchRes.dbEntry;
 }

@@ -7,8 +7,6 @@
 
 #include <deque>
 
-void findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id);
-
 void FileIndex::optimizeDuplicates(std::string name, entry_namesDB* startEntry, size_t startEntryID){
 	FUN();
 
@@ -21,7 +19,7 @@ void FileIndex::optimizeDuplicates(std::string name, entry_namesDB* startEntry, 
 		LOGD("[FileIndex][optimizeDuplicates] Total count of \"" + name + "\": " + std::to_string(cleanDBCrate->count));
 }
 
-void findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id){
+void FileIndex::findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id){
 
 	bool proceed = true;
 	
@@ -52,6 +50,7 @@ void findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameStri
 		if (ok){
 			FSCrate_add(crate, (fs_entry*)entry->data);
 			entry->data = nullptr;
+			_savedDuplicateNames++;
 		}
 	}
 }

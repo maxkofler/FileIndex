@@ -39,13 +39,20 @@ int main(int argc, char** argv){
 
 	LOGD("Done indexing");
 
+	auto optimizeStart = high_resolution_clock::now();
 	index.optimizeDB();
+	auto optimizeStop = high_resolution_clock::now();
+	auto optimizeDuration = duration_cast<milliseconds>(optimizeStop - optimizeStart);
 
 	LOGU(	"Done! " + std::to_string(index.getDB()->getEntriesCount()) + " entries in database, " + 
-			std::to_string(index.getDB()->getBytesUsed()) + " bytes used in " + std::to_string(indexDuration.count()) + "ms");
+			std::to_string(index.getDB()->getBytesUsed()) + " bytes used");
 
 	LOGU(	"Total entries indexed: " + std::to_string(index.getIndexedEntriesCount()));
 	LOGU(	"Saved duplicated names: " + std::to_string(index.getSavedDuplicatesCount()));
+	LOGU(	"Remaining names in DB: " + std::to_string(index.getDB()->getEntriesCount()));
+
+	LOGU(	"Indexing took " + std::to_string(indexDuration.count()) + " ms");
+	LOGU(	"Optimizing took " + std::to_string(optimizeDuration.count()) + " ms");
 
 	bool run = true;
 	std::string search;
