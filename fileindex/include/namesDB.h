@@ -37,6 +37,12 @@ public:
 	~NamesDB();
 
 	/**
+	 * @brief	Creates a new database from an existing one
+	 * @param	other			The database to copy
+	 */
+	NamesDB(const NamesDB& other);
+
+	/**
 	 * @brief	Expands the internal database by the supplied amount of blocks
 	 * @param	count			The amount of blocks to expand by
 	 * @return	If false, the database could not be expanded, DELETE IT AFTER A FAILURE!!!

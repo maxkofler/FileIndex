@@ -18,7 +18,6 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 	uint8_t size_entry = sizeof(entry_namesDB) + str.length();
 
 	//Allocate enough memory for this operation
-	//while((_blockCount * _blockSize) < (_bytesUsed + size_entry))
 	while(_bytesAllocated < (_bytesUsed + size_entry))
 		expand();
 
@@ -27,7 +26,7 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 
 	//Set the entries carried entry
 	if (entry_insert == nullptr){
-		LOGMEM("[NamesDB][add]  Replacing entry 'nullptr' with custom representation 0xFFFFFFFFFFFFFFFF");
+		LOGMEM("[NamesDB][add] Replacing entry 'nullptr' with custom representation 0xFFFFFFFFFFFFFFFF");
 		entry->data = (void*) ENTRY_NULLPTR;
 	} else 
 		entry->data = entry_insert;
