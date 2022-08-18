@@ -18,7 +18,8 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 	uint8_t size_entry = sizeof(entry_namesDB) + str.length();
 
 	//Allocate enough memory for this operation
-	while((_blockCount * _blockSize) < (_bytesUsed + size_entry))
+	//while((_blockCount * _blockSize) < (_bytesUsed + size_entry))
+	while(_bytesAllocated < (_bytesUsed + size_entry))
 		expand();
 
 	//Get a pointer to the begin of this new entry

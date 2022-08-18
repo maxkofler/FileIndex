@@ -157,6 +157,11 @@ private:
 	size_t						_blockCount = 0;
 
 	/**
+	 * @brief	The amount of bytes allocated to the entries field (is _blockSize * _blockCount)
+	 */
+	size_t						_bytesAllocated = 0;
+
+	/**
 	 * @brief	The bytes used of the entries field
 	 */
 	size_t						_bytesUsed = 0;

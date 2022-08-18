@@ -13,6 +13,7 @@ void NamesDB::clean(){
 	}
 
 	_blockCount = 0;
+	_bytesAllocated = 0;
 	_bytesUsed = 0;
 	_count_entries = 0;
 	_last_entry = nullptr;
