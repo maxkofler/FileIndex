@@ -18,11 +18,11 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 	uint8_t size_entry = sizeof(entry_namesDB) + str.length();
 
 	//Allocate enough memory for this operation
-	while((_size_entries * _blockSize) < (_used_bytes + size_entry))
+	while((_blockCount * _blockSize) < (_bytesUsed + size_entry))
 		expand();
 
 	//Get a pointer to the begin of this new entry
-	entry_namesDB* entry = (entry_namesDB*)(_entries + _used_bytes);
+	entry_namesDB* entry = (entry_namesDB*)(_entries + _bytesUsed);
 
 	//Set the entries carried entry
 	if (entry_insert == nullptr){
@@ -33,11 +33,11 @@ size_t NamesDB::add(std::string str, void* entry_insert){
 
 	//Set the entry name length and copy the name
 	entry->nameLen = str.length();
-	uint8_t* nameStart = _entries + _used_bytes + sizeof(entry_namesDB);
+	uint8_t* nameStart = _entries + _bytesUsed + sizeof(entry_namesDB);
 	std::memcpy(nameStart, str.c_str(), str.length());
 
 	//Update the database
-	_used_bytes += size_entry;
+	_bytesUsed += size_entry;
 	_last_entry = entry;
 
 	//Determine the id of this entry, add it and return it

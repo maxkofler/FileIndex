@@ -9,7 +9,7 @@ size_t NamesDB::getEntriesCount(){
 }
 
 size_t NamesDB::getBytesUsed(){
-	return _used_bytes;
+	return _bytesUsed;
 }
 
 entry_namesDB* NamesDB::getNextEntry(entry_namesDB* current){

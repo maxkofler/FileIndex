@@ -12,8 +12,8 @@ void NamesDB::clean(){
 		_entries = nullptr;
 	}
 
-	_size_entries = 0;
-	_used_bytes = 0;
+	_blockCount = 0;
+	_bytesUsed = 0;
 	_count_entries = 0;
 	_last_entry = nullptr;
 }

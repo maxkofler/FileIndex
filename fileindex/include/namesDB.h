@@ -152,14 +152,14 @@ private:
 	size_t						_blockSize;
 
 	/**
-	 * @brief	The size of the entries field in blocks
+	 * @brief	The amount of blocks reserved
 	 */
-	size_t						_size_entries = 0;
+	size_t						_blockCount = 0;
 
 	/**
-	 * @brief	The bytes used of the entries block
+	 * @brief	The bytes used of the entries field
 	 */
-	size_t						_used_bytes = 0;
+	size_t						_bytesUsed = 0;
 
 	/**
 	 * @brief	The amount of entries stored in this database
