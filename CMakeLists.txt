@@ -8,6 +8,9 @@ include_directories(Log/include)
 include_directories(cliapp/include)
 include_directories(fileindex/include)
 
+set(LOG_MAXLEVEL 12 CACHE STRING "Set the maximum log level")
+set(LOG_NOCHECK ON CACHE BOOL "Disable Log checks")
+
 add_subdirectory(Log)
 add_subdirectory(fileindex)
 

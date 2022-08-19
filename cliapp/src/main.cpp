@@ -38,6 +38,7 @@ int main(int argc, char** argv){
 	auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
 
 	LOGD("Done indexing");
+	LOGU("Optimizing...");
 
 	auto optimizeStart = high_resolution_clock::now();
 	index.optimizeDB();
