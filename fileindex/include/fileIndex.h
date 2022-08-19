@@ -77,13 +77,6 @@ private:
 	size_t					_indexedEntries = 0;
 
 	/**
-	 * @brief	Appends the supplied entry to the database, if it already exists, it adds it to the crate
-	 * @param	name		The name of the entry to add
-	 * @param	entry		The new entry to add
-	 */
-	entry_namesDB*			db_add_entry(std::string name, fs_entry* entry);
-
-	/**
 	 * @brief	Indexes the supplied path blindly, no checks are made
 	 * @param	parent		The parent directory
 	 * @param	path		The path to index
@@ -91,7 +84,7 @@ private:
 	 */
 	void					index_blind(fs_dir* parent, std::string path, bool recursive = true);
 
-	void					optimizeDuplicates(std::string name, entry_namesDB* startEntry, size_t startEntryID);
+	void					optimizeDuplicates(std::string& name, entry_namesDB* startEntry, size_t startEntryID);
 
 	void					findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id);
 

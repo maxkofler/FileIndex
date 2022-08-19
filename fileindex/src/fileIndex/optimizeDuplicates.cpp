@@ -7,11 +7,14 @@
 
 #include <deque>
 
-void FileIndex::optimizeDuplicates(std::string name, entry_namesDB* startEntry, size_t startEntryID){
+void FileIndex::optimizeDuplicates(std::string& name, entry_namesDB* startEntry, size_t startEntryID){
 	FUN();
 
-	entry_namesDB* cleanDBEntry = db_add_entry(name, (fs_entry*)startEntry->data);
-	fs_crate* cleanDBCrate = (fs_crate*)cleanDBEntry->data;
+	//entry_namesDB* cleanDBEntry = db_add_entry(name, (fs_entry*)startEntry->data);
+	//fs_crate* cleanDBCrate = (fs_crate*)cleanDBEntry->data;
+
+	fs_crate* cleanDBCrate = new fs_crate;
+	_db->add(name, cleanDBCrate);
 
 	findAllExactMatchesFast(_dirtyDB, cleanDBCrate, name, NamesDB::getNextEntry(startEntry), startEntryID+1);
 
