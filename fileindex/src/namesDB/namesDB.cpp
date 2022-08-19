@@ -3,6 +3,8 @@
 
 #include "namesDB.h"
 
+#include <cstring>
+
 NamesDB::NamesDB(size_t blockSize){
 	FUN();
 	DEBUG_EX("NamesDB::NamesDB()");

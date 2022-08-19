@@ -3,6 +3,8 @@
 
 #include "namesDB.h"
 
+#include <cstring>
+
 namesDB_searchRes NamesDB::searchFirst(std::string search, bool exact, size_t search_start){
 	FUN();
 	DEBUG_EX("NamesDB::searchFirst()");

@@ -15,6 +15,8 @@ uint32_t FSCrate_expand(fs_crate* crate, uint32_t amount){
 	uint32_t prevCount = crate->count;
 	uint32_t newSpace = prevCount + amount;
 
+	LOGMEM("[FSCrate][expand] Expanding crate to " + std::to_string(newSpace) + " entries...");
+
 	//Allocate memory for the new array
 	fs_entry** newEntries = new fs_entry*[newSpace];
 

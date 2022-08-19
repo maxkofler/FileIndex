@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <algorithm>
 
 int main(int argc, char** argv){
 	using namespace std::chrono;
