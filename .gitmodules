@@ -1,3 +1,6 @@
 [submodule "Log"]
 	path = Log
 	url = https://github.com/maxkofler/Log
+[submodule "NamesDB"]
+	path = NamesDB
+	url = https://github.com/maxkofler/NamesDB
