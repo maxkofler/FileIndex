@@ -23,7 +23,8 @@ void FileIndex::optimizeDuplicates(std::string& name, entry_namesDB* startEntry,
 }
 
 void FileIndex::findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id){
-
+	FUN();
+	
 	bool proceed = true;
 	
 	size_t nameLen = nameString.length();

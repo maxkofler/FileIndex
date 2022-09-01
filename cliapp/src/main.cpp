@@ -11,12 +11,12 @@ int main(int argc, char** argv){
 	using namespace std::chrono;
 	hlog = new Log::Log(Log::A);
 
+	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, true);
+	hlog->setFeature(Log::FEATURE_PROFILE, true);
+
 	std::ofstream* outFile = new std::ofstream();
 	outFile->open("trace.json", std::ios::out);
 	hlog->setProfileStream(outFile);
-
-	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, true);
-	hlog->setFeature(Log::FEATURE_PROFILE, true);
 
 	{
 		FUN();
