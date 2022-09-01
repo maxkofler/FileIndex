@@ -6,6 +6,6 @@ include_directories(include)
 
 file(GLOB_RECURSE CXX_SOURCES "src/**.cpp")
 
-add_executable(${PROJECT_NAME} ${CXX_SOURCES})
+add_executable(fileindexcli ${CXX_SOURCES})
 
-target_link_libraries(fileindex)
+target_link_libraries(fileindexcli fileindex log)
