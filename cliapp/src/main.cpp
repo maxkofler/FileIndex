@@ -47,6 +47,16 @@ int main(int argc, char** argv){
 		auto optimizeStop = high_resolution_clock::now();
 		auto optimizeDuration = duration_cast<milliseconds>(optimizeStop - optimizeStart);
 
+		LOGU(	"Storing database...");
+		{
+			std::ofstream dbFile;
+			dbFile.open("db.bin", std::ios::binary | std::ios::out);
+
+			index.getDB()->exportDB(dbFile);
+
+			dbFile.close();
+		}
+
 		LOGU(	"Done! " + std::to_string(index.getDB()->getEntriesCount()) + " entries in database, " + 
 				std::to_string(index.getDB()->getBytesUsed()) + " bytes used");
 
