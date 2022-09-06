@@ -8,7 +8,7 @@ FileIndex::FileIndex(NamesDB* db){
 
 	if (db == nullptr){
 		LOGD("[FileIndex] No main database supplied, creating one...");
-		_db = new NamesDB();
+		_db = new NamesDB("main");
 		_externalDB = false;
 	} else {
 		_db = db;
@@ -16,7 +16,7 @@ FileIndex::FileIndex(NamesDB* db){
 	}
 
 	LOGMEM("[FileIndex] Creating dirty database...");
-	_dirtyDB = new NamesDB();
+	_dirtyDB = new NamesDB("dirty");
 }
 
 FileIndex::~FileIndex(){

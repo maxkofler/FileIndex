@@ -9,9 +9,9 @@
 
 int main(int argc, char** argv){
 	using namespace std::chrono;
-	hlog = new Log::Log(Log::A);
+	hlog = new Log::Log(Log::MEM);
 
-	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, true);
+	hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
 	hlog->setFeature(Log::FEATURE_PROFILE, true);
 
 	std::ofstream* outFile = new std::ofstream();
