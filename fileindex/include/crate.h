@@ -18,6 +18,8 @@ template<typename T> crate_s<T>* crate_new(){
 
     newCrate->size = 0;
     newCrate->data = nullptr;
+
+    return newCrate;
 }
 
 /**

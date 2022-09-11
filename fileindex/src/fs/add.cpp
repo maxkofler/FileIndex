@@ -2,7 +2,6 @@
 #include "debug.h"
 
 #include "fs.h"
-#include "fsCrate.h"
 #include "crate.h"
 
 //TODO: Tests
@@ -14,16 +13,16 @@ void FS::add(const std::string& name, const fs_entry& entry){
     while(_size_entries < (_count_entries+1))
         expand();
 
+    //Add the new entry
+    _entries[_count_entries] = entry;
+    _count_entries++;
+
     if (_useDirtyDB){
-        _dirtyDB->add(name, (void*)_count_entries);
+        _dirtyDB->add(name, (void*)(_count_entries-1));
     } else {
-        LOGUE("[FS][add] Unimplemented path!");
-        //fs_crate* crate = new fs_crate;
-        //FSCrate_add(crate, );
-        //_db.add(name, crate);
+        crate_s<size_t>* newCrate = crate_new<size_t>();
+        crate_add<size_t>(newCrate, _count_entries-1);
+        _db->add(name, newCrate);
     }
 
-    _entries[_count_entries] = entry;
-
-    _count_entries++;
 }
