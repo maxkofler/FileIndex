@@ -3,6 +3,7 @@
 
 #include "namesDB.h"
 #include "fstypes.h"
+#include "crate.h"
 
 #ifndef FS_DEFAULT_CHUNK_SIZE
     #define FS_DEFAULT_CHUNK_SIZE 32
@@ -76,6 +77,11 @@ private:
      * @brief   The dirty db that gets used
      */
     NamesDB*                    _dirtyDB = nullptr;
+
+    /**
+     * @brief   The array containing all the crates
+     */
+    crate_s<size_t>*            _crates = nullptr;
 
     /**
      * @brief   The entries to build up the filesystem tree

@@ -1,5 +1,7 @@
 
 #include "fileIndexOld.h"
+#include "fileIndex.h"
+#include "fs.h"
 #include "log.h"
 
 #include <iostream>
@@ -28,6 +30,10 @@ int main(int argc, char** argv){
 		std::string rootName = argv[1];
 		LOGU("Indexing \"" + rootName + "\"...");
 
+		NamesDB fsDB("FS-main");
+		FS fs(&fsDB, false);
+		FileIndex fileIndex(&fs);
+
 		FileIndexOld index;
 
 		fs_dir* root = new fs_dir;
@@ -35,7 +41,8 @@ int main(int argc, char** argv){
 		root->nameID = index.getDB()->add(rootName, root);
 
 		auto indexStart = high_resolution_clock::now();
-		index.index(root, rootName, true);
+		//index.index(root, rootName, true);
+		fileIndex.index(root, rootName, true);
 		auto indexStop = high_resolution_clock::now();
 		auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
 
@@ -52,13 +59,13 @@ int main(int argc, char** argv){
 			std::ofstream dbFile;
 			dbFile.open("db.bin", std::ios::binary | std::ios::out);
 
-			index.getDB()->exportDB(dbFile);
+			fsDB.exportDB(dbFile);
 
 			dbFile.close();
 		}
 
-		LOGU(	"Done! " + std::to_string(index.getDB()->getEntriesCount()) + " entries in database, " + 
-				std::to_string(index.getDB()->getBytesUsed()) + " bytes used");
+		LOGU(	"Done! " + std::to_string(fsDB.getEntriesCount()) + " entries in database, " + 
+				std::to_string(fsDB.getBytesUsed()) + " bytes used");
 
 		LOGU(	"Total entries indexed: " + std::to_string(index.getIndexedEntriesCount()));
 		LOGU(	"Saved duplicated names: " + std::to_string(index.getSavedDuplicatesCount()));
@@ -73,11 +80,11 @@ int main(int argc, char** argv){
 		while(run){
 			std::cout << ">>>";
 			std::cin >> search;
-			if (search.length() == 0)
+			if (feof(stdin))
 				break;
 
 			auto start = high_resolution_clock::now();
-			auto res = index.getDB()->searchAll(search, false);
+			auto res = fsDB.searchAll(search, false);
 
 			std::sort(res.begin(), res.end(), [](const namesDB_searchRes &a, const namesDB_searchRes &b) -> bool {
 				return a.matchRemaining > b.matchRemaining;

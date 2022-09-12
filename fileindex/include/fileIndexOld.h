@@ -1,5 +1,5 @@
-#ifndef __FILEINDEX_H__
-#define __FILEINDEX_H__
+#ifndef __FILEINDEX_OLD_H__
+#define __FILEINDEX_OLD_H__
 
 #include "namesDB.h"
 #include "fstypes.h"
