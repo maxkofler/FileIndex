@@ -43,12 +43,10 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 			}
 		} else {
 
-			/*
-			fs_file* newFile = new fs_file;
-			newFile->parent = parent;
+			fs_file newFile;
+			newFile.parentID = parentID;
 			
-			_fs->add(curName,*newFile);
-			*/
+			_fs->add(curName, newFile);
 		}
 
 		_indexedEntries++;

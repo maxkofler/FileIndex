@@ -17,3 +17,10 @@ NamesDB* FS::getDirtyDB(){
     else
         return nullptr;
 }
+
+crate_s<size_t>* FS::getCrate(size_t id){
+    if (id >= _crates.size())
+        return nullptr;
+
+    return &_crates._data[id];
+}

@@ -6,6 +6,8 @@
 #include "crate.h"
 #include "dArray.h"
 
+#include <deque>
+
 #ifndef FS_DEFAULT_CHUNK_SIZE
     #define FS_DEFAULT_CHUNK_SIZE 32
 #endif
@@ -35,6 +37,27 @@ public:
      * @return  fs_entry*       nullptr if id out of bounds
      */
     fs_entry*                   getEntry(size_t id);
+
+    /**
+     * @brief   Returns a pointer to the crate with the matching id
+     * @param   id              The id of the requested crate
+     * @return  crate_s<size_t>*, nullptr on out of bounds
+     */
+    crate_s<size_t>*            getCrate(size_t id);           
+
+    /**
+     * @brief   Returns a deque describing the path to the supplied entry, starting with the root
+     * @param   id              The id of the entry
+     * @return  std::deque<fs_entry>
+     */
+    std::deque<fs_entry>        getEntryPath(size_t id);
+
+    /**
+     * @brief   Returns a string describing the path to the supplied entry
+     * @param   id              The id of the entry
+     * @return  std::string
+     */
+    std::string                 getEntryPathString(size_t id);
 
     /**
      * @brief   Returns a pointer to the main Database for this filesystem

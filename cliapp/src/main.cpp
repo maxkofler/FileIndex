@@ -87,6 +87,14 @@ int main(int argc, char** argv){
 
             for (namesDB_searchRes entry : res){
                 std::cout << "> " << NamesDB::getEntryName(entry.dbEntry) << std::endl;
+
+                /*auto crate = fs.getCrate((size_t)entry.data);
+                if (crate == nullptr)
+                    continue;
+                
+                for (size_t crateIndex = 0; crateIndex < crate->size; crateIndex++){
+                    std::cout << crateIndex << " > " << fs.getEntryPathString(crate->data[crateIndex]);
+                }*/
             }
 
             std::cout << ">> " << res.size() << " hits in " << duration.count() << " ms" << std::endl;
