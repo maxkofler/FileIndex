@@ -1,9 +1,9 @@
 #include "log.h"
-#include "fileIndex.h"
+#include "fileIndexOld.h"
 
 #include <filesystem>
 
-uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
+uint64_t FileIndexOld::index(fs_dir* parent, std::string pathStr, bool recursive){
 	FUN();
 
 	_dirtyDB->clean();

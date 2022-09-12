@@ -1,5 +1,5 @@
 
-#include "fileIndex.h"
+#include "fileIndexOld.h"
 #include "log.h"
 
 #include <iostream>
@@ -28,7 +28,7 @@ int main(int argc, char** argv){
 		std::string rootName = argv[1];
 		LOGU("Indexing \"" + rootName + "\"...");
 
-		FileIndex index;
+		FileIndexOld index;
 
 		fs_dir* root = new fs_dir;
 		root->parent = nullptr;

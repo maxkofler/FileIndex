@@ -2,12 +2,12 @@
 #define FRIEND_NAMES_DB
 
 #include "log.h"
-#include "fileIndex.h"
+#include "fileIndexOld.h"
 #include "fsCrate.h"
 
 #include <deque>
 
-void FileIndex::optimizeDuplicates(std::string& name, entry_namesDB* startEntry, size_t startEntryID){
+void FileIndexOld::optimizeDuplicates(std::string& name, entry_namesDB* startEntry, size_t startEntryID){
 	FUN();
 
 	//entry_namesDB* cleanDBEntry = db_add_entry(name, (fs_entry*)startEntry->data);
@@ -22,7 +22,7 @@ void FileIndex::optimizeDuplicates(std::string& name, entry_namesDB* startEntry,
 		LOGD("[FileIndex][optimizeDuplicates] Total count of \"" + name + "\": " + std::to_string(cleanDBCrate->count));
 }
 
-void FileIndex::findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id){
+void FileIndexOld::findAllExactMatchesFast(NamesDB* db, fs_crate* crate, std::string& nameString, entry_namesDB* entry, size_t id){
 	FUN();
 	
 	bool proceed = true;

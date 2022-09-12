@@ -1,11 +1,11 @@
 #include "log.h"
-#include "fileIndex.h"
+#include "fileIndexOld.h"
 
 #include <filesystem>
 
 namespace fs = std::filesystem;
 
-void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive){
+void FileIndexOld::index_blind(fs_dir* parent, std::string pathStr, bool recursive){
 	FUN();
 
 	std::error_code ec;

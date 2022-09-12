@@ -1,11 +1,11 @@
 #define FRIEND_NAMES_DB
 
 #include "log.h"
-#include "fileIndex.h"
+#include "fileIndexOld.h"
 
 #include <string>
 
-size_t FileIndex::optimizeDB(){
+size_t FileIndexOld::optimizeDB(){
 	FUN();
 
 	_db->clean();

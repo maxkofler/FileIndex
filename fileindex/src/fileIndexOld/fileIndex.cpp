@@ -1,8 +1,8 @@
 #include "log.h"
-#include "fileIndex.h"
+#include "fileIndexOld.h"
 #include "debug.h"
 
-FileIndex::FileIndex(NamesDB* db){
+FileIndexOld::FileIndexOld(NamesDB* db){
 	FUN();
 	DEBUG_EX("FileIndex::FileIndex()");
 
@@ -19,7 +19,7 @@ FileIndex::FileIndex(NamesDB* db){
 	_dirtyDB = new NamesDB("dirty");
 }
 
-FileIndex::~FileIndex(){
+FileIndexOld::~FileIndexOld(){
 	FUN();
 
 	if (!_externalDB){
