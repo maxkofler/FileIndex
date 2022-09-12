@@ -9,8 +9,8 @@ fs_entry* FS::getEntry(size_t id){
     FUN();
     DEBUG_EX("FS::getEntry()");
 
-    if (id > _count_entries-1)
+    if (id > _entries.size()-1)
         return nullptr;
 
-    return &_entries[id];
+    return &_entries._data[id];
 }

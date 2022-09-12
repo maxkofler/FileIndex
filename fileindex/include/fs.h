@@ -4,6 +4,7 @@
 #include "namesDB.h"
 #include "fstypes.h"
 #include "crate.h"
+#include "dArray.h"
 
 #ifndef FS_DEFAULT_CHUNK_SIZE
     #define FS_DEFAULT_CHUNK_SIZE 32
@@ -34,12 +35,6 @@ public:
      * @return  fs_entry*       nullptr if id out of bounds
      */
     fs_entry*                   getEntry(size_t id);
-
-    /**
-     * @brief   Expands the internal database by the supplied amount
-     * @param   amount          The amount of entries to expand (0 for default)
-     */
-    void                        expand(size_t amount = 0);
 
     /**
      * @brief   Returns a pointer to the main Database for this filesystem
@@ -81,22 +76,12 @@ private:
     /**
      * @brief   The array containing all the crates
      */
-    crate_s<size_t>*            _crates = nullptr;
+    DArray<crate_s<size_t>>     _crates;
 
     /**
      * @brief   The entries to build up the filesystem tree
      */
-    fs_entry*                   _entries = nullptr;
-
-    /**
-     * @brief   The amount of entry places used
-     */
-    size_t                      _count_entries = 0;
-
-    /**
-     * @brief   The size of the entries array
-     */
-    size_t                      _size_entries = 0;
+    DArray<fs_entry>            _entries;
 
 };
 

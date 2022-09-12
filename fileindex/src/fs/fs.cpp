@@ -25,6 +25,4 @@ FS::~FS(){
 
     if (_useDirtyDB)
         delete _dirtyDB;
-
-    delete _entries;
 }
