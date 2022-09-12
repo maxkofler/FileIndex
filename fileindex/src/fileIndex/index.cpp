@@ -3,16 +3,11 @@
 
 #include <filesystem>
 
-uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
+uint64_t FileIndex::index(std::string pathStr, bool recursive){
 	FUN();
 
 	namespace fs = std::filesystem;
 	std::error_code ec;
-
-	if (parent == nullptr){
-		LOGUE("[FileIndex][index] Tried to add new entries to nullptr directory");
-		return 0;
-	}
 
 	//Check if the path even exists
 	bool exists = fs::exists(pathStr, ec);
@@ -38,7 +33,12 @@ uint64_t FileIndex::index(fs_dir* parent, std::string pathStr, bool recursive){
 		return 0;
 	}
 
-	index_blind(parent, pathStr, recursive);
+	fs_dir rootDir;
+	rootDir.parentID = 0;
+
+	size_t rootID = add(pathStr, rootDir);
+
+	index_blind(rootID, pathStr, recursive);
 
 	return _indexedEntries;
 }

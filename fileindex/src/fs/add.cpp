@@ -15,8 +15,9 @@ size_t FS::add(const std::string& name, const fs_entry& entry){
     _entries.add(entry);
 
     if (_useDirtyDB){
-        _dirtyDB->add(name, (void*)(_entries.lastID()));
+        //_dirtyDB->add(name, (void*)(_entries.lastID()));
     } else {
+        /*
         crate_s<size_t> newCrate;
         newCrate.data = nullptr;
         newCrate.size = 0;
@@ -26,6 +27,7 @@ size_t FS::add(const std::string& name, const fs_entry& entry){
         crate_add<size_t>(&_crates._data[_entries.lastID()], _entries.lastID());
 
         _db->add(name, (void*)(_crates.lastID()));
+        */
     }
 
     return _entries._size-1;

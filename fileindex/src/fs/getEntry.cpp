@@ -12,5 +12,5 @@ fs_entry* FS::getEntry(size_t id){
     if (id > _entries.size()-1)
         return nullptr;
 
-    return &_entries._data[id];
+    return &(_entries._data[id]);
 }

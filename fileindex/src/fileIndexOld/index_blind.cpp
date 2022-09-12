@@ -33,7 +33,7 @@ void FileIndexOld::index_blind(fs_dir* parent, std::string pathStr, bool recursi
 		if (entry.is_directory()){
 
 			fs_dir* newDir = new fs_dir;
-			newDir->parent = parent;
+			//newDir->parent = parent;
 
 			_dirtyDB->add(curName, (fs_entry*)newDir);
 			//_db->add(curName, (fs_entry*)newDir);
@@ -45,7 +45,7 @@ void FileIndexOld::index_blind(fs_dir* parent, std::string pathStr, bool recursi
 		} else {
 
 			fs_file* newFile = new fs_file;
-			newFile->parent = parent;
+			//newFile->parent = parent;
 			
 			_dirtyDB->add(curName, (fs_entry*)newFile);
 			//_db->add(curName, (fs_entry*)newFile);

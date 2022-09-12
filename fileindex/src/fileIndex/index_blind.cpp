@@ -5,7 +5,7 @@
 
 namespace fs = std::filesystem;
 
-void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive){
+void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive){
 	FUN();
 
 	std::error_code ec;
@@ -32,21 +32,23 @@ void FileIndex::index_blind(fs_dir* parent, std::string pathStr, bool recursive)
 		//Add directories and enter them if wanted
 		if (entry.is_directory()){
 
-			fs_dir* newDir = new fs_dir;
-			newDir->parent = parent;
+			fs_dir newDir;
+			newDir.parentID = parentID;
 
-			_fs->add(curName, *newDir);
+			size_t dirID = add(curName, newDir);
 
 			if (recursive){
 				LOGIO("[FileIndex][index] Entering directory \"" + curPath + "\"");
-				index_blind(newDir, curPath, recursive);
+				index_blind(dirID, curPath, recursive);
 			}
 		} else {
 
+			/*
 			fs_file* newFile = new fs_file;
 			newFile->parent = parent;
 			
 			_fs->add(curName,*newFile);
+			*/
 		}
 
 		_indexedEntries++;
