@@ -6,7 +6,7 @@
 
 //TODO: Tests
 
-void FS::add(const std::string& name, const fs_entry& entry){
+size_t FS::add(const std::string& name, const fs_entry& entry){
     FUN();
     DEBUG_EX("FS::add()");
 
@@ -25,4 +25,5 @@ void FS::add(const std::string& name, const fs_entry& entry){
         _db->add(name, newCrate);
     }
 
+    return _count_entries-1;
 }

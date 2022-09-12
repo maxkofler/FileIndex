@@ -18,18 +18,42 @@ public:
      */
     FS(NamesDB* db, bool useDirtyDB = false, size_t chunkSize = FS_DEFAULT_CHUNK_SIZE);
 
+    ~FS();
+
     /**
      * @brief   Adds the supplied filesystem entry with the name
      * @param   name            The name to add
      * @param   entry           The entry to add
      */
-    void                        add(const std::string& name, const fs_entry& entry);
+    size_t                      add(const std::string& name, const fs_entry& entry);
+
+    /**
+     * @brief   Gets a pointer to the filesystem entry with the supplied id
+     * @param   id              The id to get
+     * @return  fs_entry*       nullptr if id out of bounds
+     */
+    fs_entry*                   getEntry(size_t id);
 
     /**
      * @brief   Expands the internal database by the supplied amount
      * @param   amount          The amount of entries to expand (0 for default)
      */
     void                        expand(size_t amount = 0);
+
+    /**
+     * @brief   Returns a pointer to the main Database for this filesystem
+     */
+    NamesDB*                    getDB();
+
+    /**
+     * @brief   If this filesystem should use a dirty database
+     */
+    bool                        getUseDirtyDB();
+
+    /**
+     * @brief   Returns the dirty database if existing, else nullptr
+     */
+    NamesDB*                    getDirtyDB();
 
 private:
 

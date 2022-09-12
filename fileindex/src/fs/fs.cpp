@@ -17,3 +17,14 @@ FS::FS(NamesDB* db, bool useDirtyDB, size_t chunkSize) : _useDirtyDB(useDirtyDB)
     if (_useDirtyDB)
         _dirtyDB = new NamesDB("fs_dirty_db");
 }
+
+FS::~FS(){
+    FUN();
+
+    LOGMEM("[FS] Cleaning up instance...");
+
+    if (_useDirtyDB)
+        delete _dirtyDB;
+
+    delete _entries;
+}
