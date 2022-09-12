@@ -38,7 +38,7 @@ public:
      */
     void expand(size_t amount = DARRAY_DEFAULT_CHUNK_SIZE){
         size_t newAllocated = _allocated + amount;
-        T* newData = new T[_size];
+        T* newData = new T[newAllocated];
 
         std::memcpy(newData, _data, _allocated);
 
