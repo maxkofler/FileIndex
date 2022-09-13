@@ -9,6 +9,8 @@
 #include <chrono>
 #include <algorithm>
 
+#include <filesystem>
+
 int main(int argc, char** argv){
     using namespace std::chrono;
     hlog = new Log::Log(Log::MEM);
@@ -23,39 +25,56 @@ int main(int argc, char** argv){
     {
         FUN();
 
-        if (argc != 2){
-            LOGUE("Usage: ./fileindexcli <path to index>");
-        }
-
-        std::string rootName = argv[1];
-        LOGU("Indexing \"" + rootName + "\"...");
-
         NamesDB fsDB("FS-main");
         FS fs(&fsDB, false);
         FileIndex fileIndex(&fs);
 
-        auto indexStart = high_resolution_clock::now();
-        fileIndex.index(rootName, true);
-        auto indexStop = high_resolution_clock::now();
-        auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
+        if (std::filesystem::exists("db.bin")){
+            LOGU("Importing existing database...");
 
-        LOGD("Done indexing");
-        LOGU("Optimizing...");
+            std::ifstream dbFile;
+            dbFile.open("db.bin", std::ios::binary | std::ios::in);
 
-        auto optimizeStart = high_resolution_clock::now();
-        //fileIndex.optimizeDB();
-        auto optimizeStop = high_resolution_clock::now();
-        auto optimizeDuration = duration_cast<milliseconds>(optimizeStop - optimizeStart);
-
-        LOGU(	"Storing database...");
-        {
-            std::ofstream dbFile;
-            dbFile.open("db.bin", std::ios::binary | std::ios::out);
-
-            fsDB.exportDB(dbFile);
+            if (!fsDB.importDB(dbFile)){
+                LOGUE("Failed to import DB, renamed it to <name>.corrupted");
+                std::filesystem::rename("db.bin", "db.bin.corrupted");
+            }
 
             dbFile.close();
+        } else if (argc != 2){
+            LOGUE("Usage: ./fileindexcli <path to index>");
+        } else {
+            std::string rootName = argv[1];
+            LOGU("Indexing \"" + rootName + "\"...");
+
+            auto indexStart = high_resolution_clock::now();
+            fileIndex.index(rootName, true);
+            auto indexStop = high_resolution_clock::now();
+            auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
+
+            LOGD("Done indexing");
+            LOGU("Optimizing...");
+
+            auto optimizeStart = high_resolution_clock::now();
+            //fileIndex.optimizeDB();
+            auto optimizeStop = high_resolution_clock::now();
+            auto optimizeDuration = duration_cast<milliseconds>(optimizeStop - optimizeStart);
+
+            LOGU(	"Storing database...");
+            {
+                std::ofstream dbFile;
+                dbFile.open("db.bin", std::ios::binary | std::ios::out);
+
+                fsDB.exportDB(dbFile);
+
+                dbFile.close();
+            }
+
+            LOGU(	"Indexing took " + std::to_string(indexDuration.count()) + " ms");
+            LOGU(	"Optimizing took " + std::to_string(optimizeDuration.count()) + " ms");
         }
+
+        
 
         LOGU(	"Done! " + std::to_string(fsDB.getEntriesCount()) + " entries in database, " + 
                 std::to_string(fsDB.getBytesUsed()) + " bytes used");
@@ -63,9 +82,6 @@ int main(int argc, char** argv){
         //LOGU(	"Total entries indexed: " + std::to_string(index.getIndexedEntriesCount()));
         //LOGU(	"Saved duplicated names: " + std::to_string(index.getSavedDuplicatesCount()));
         //LOGU(	"Remaining names in DB: " + std::to_string(index.getDB()->getEntriesCount()));
-
-        LOGU(	"Indexing took " + std::to_string(indexDuration.count()) + " ms");
-        LOGU(	"Optimizing took " + std::to_string(optimizeDuration.count()) + " ms");
 
         bool run = true;
         std::string search;
