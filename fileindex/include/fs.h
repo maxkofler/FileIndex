@@ -74,7 +74,9 @@ public:
      */
     NamesDB*                    getDirtyDB();
 
+#ifndef FRIEND_FS
 private:
+#endif
 
     /**
      * @brief   The database that stores the names of the filesystem

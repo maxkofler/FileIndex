@@ -1,5 +1,6 @@
 
 //#include "fileIndexOld.h"
+#define FRIEND_FS
 #include "fileIndex.h"
 #include "fs.h"
 #include "log.h"
@@ -29,7 +30,7 @@ int main(int argc, char** argv){
         FS fs(&fsDB, false);
         FileIndex fileIndex(&fs);
 
-        if (std::filesystem::exists("db.bin")){
+        if (std::filesystem::exists("dbb.bin")){
             LOGU("Importing existing database...");
 
             std::ifstream dbFile;
@@ -94,26 +95,34 @@ int main(int argc, char** argv){
 
             auto start = high_resolution_clock::now();
             auto res = fsDB.searchAll(search, false);
+            auto stop = high_resolution_clock::now();
+            auto searchDuration = duration_cast<milliseconds>(stop - start);
 
+            start = high_resolution_clock::now();
             std::sort(res.begin(), res.end(), [](const namesDB_searchRes &a, const namesDB_searchRes &b) -> bool {
                 return a.matchRemaining > b.matchRemaining;
             });
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<milliseconds>(stop - start);
+            stop = high_resolution_clock::now();
+            auto sortDuration = duration_cast<milliseconds>(stop - start);
+            
 
             for (namesDB_searchRes entry : res){
-                std::cout << "> " << NamesDB::getEntryName(entry.dbEntry) << std::endl;
+                auto crate = fs.getCrate((size_t)entry.data);
 
-                /*auto crate = fs.getCrate((size_t)entry.data);
-                if (crate == nullptr)
-                    continue;
+                std::cout << "> " << NamesDB::getEntryName(entry.dbEntry);
+                std::cout << " (";
+                std::cout << "crateID=" << (size_t)entry.data;
+                std::cout << " crateSize=" << crate->size;
+                std::cout << ")" << std::endl;
+
                 
-                for (size_t crateIndex = 0; crateIndex < crate->size; crateIndex++){
-                    std::cout << crateIndex << " > " << fs.getEntryPathString(crate->data[crateIndex]);
-                }*/
+                /*for (size_t crateIndex = 0; crateIndex < crate->size; crateIndex++){
+                    std::cout << crateIndex << " > " << fs.getEntryPathString(crate->data[crateIndex]) << std::endl;
+                }
+                */
             }
 
-            std::cout << ">> " << res.size() << " hits in " << duration.count() << " ms" << std::endl;
+            std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;
         }
     }
     

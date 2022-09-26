@@ -22,10 +22,12 @@ size_t FS::add(const std::string& name, const fs_entry& entry){
         
         _crates.add(newCrate);
 
-        crate_add<size_t>(&_crates._data[_entries.lastID()], _entries.lastID());
+        _crates._data[_crates.lastID()].size = 0;
+        _crates._data[_crates.lastID()].data = nullptr;
+        crate_add<size_t>(&_crates._data[_crates.lastID()], _entries.lastID());
 
-        _db->add(name, (void*)(_crates.lastID()));
+        _db->add(name, (void*)_crates.lastID());
     }
 
-    return _entries._size-1;
+    return _entries.lastID();
 }

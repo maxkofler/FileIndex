@@ -40,7 +40,9 @@ public:
         size_t newAllocated = _allocated + amount;
         T* newData = new T[newAllocated];
 
-        std::memcpy(newData, _data, _allocated);
+        //std::memcpy(newData, _data, _size*sizeof(T));
+        for (size_t i = 0; i < _size; i++)
+            newData[i] = _data[i];
 
         delete _data;
         _data = newData;
