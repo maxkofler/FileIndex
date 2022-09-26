@@ -5,28 +5,19 @@
 
 //TODO: Tests
 
-std::deque<fs_entry> FS::getEntryPath(size_t entryID){
+void FS::getEntryPath(size_t entryID, std::deque<fs_entry>& path){
     FUN();
     DEBUG_EX("FS::getEntryPath()");
 
-    std::deque<fs_entry> path;
-
     if (entryID >= _entries.size())
-        return path;
+        return;
 
-    fs_entry* curEntry = &_entries._data[entryID];
-    path.push_front(*curEntry);
-    size_t nextEntryID = curEntry->parentID;
+    auto entry = _entries._data[entryID];
 
-    while(nextEntryID != 0){
-        curEntry = &_entries._data[nextEntryID];
-        path.push_front(*curEntry);
-        size_t nextEntryID = curEntry->parentID;
+    if (entry.parentID != 0) {
+        getEntryPath(entry.parentID, path);
     }
-
-    path.push_front(_entries._data[0]);
-
-    return path;
+    path.push_back(entry);
 }
 
 std::string FS::getEntryPathString(size_t entryID){
@@ -38,10 +29,11 @@ std::string FS::getEntryPathString(size_t entryID){
     if (entryID >= _entries.size())
         return pathStr;
 
-    auto path = getEntryPath(entryID);
+    std::deque<fs_entry> path;
+    getEntryPath(entryID, path);
 
     for (fs_entry& entry : path){
-        pathStr += _db->getEntryName(_db->getDBEntry(entry.nameID)) + '/';
+        pathStr += _db->getName(entry.nameID) + '/';
     }
 
     pathStr.erase(pathStr.length()-1);

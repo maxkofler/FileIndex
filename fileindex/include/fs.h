@@ -50,7 +50,7 @@ public:
      * @param   id              The id of the entry
      * @return  std::deque<fs_entry>
      */
-    std::deque<fs_entry>        getEntryPath(size_t id);
+    void        getEntryPath(size_t id, std::deque<fs_entry>& path);
 
     /**
      * @brief   Returns a string describing the path to the supplied entry

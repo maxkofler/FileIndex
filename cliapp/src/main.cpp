@@ -14,7 +14,7 @@
 
 int main(int argc, char** argv){
     using namespace std::chrono;
-    hlog = new Log::Log(Log::MEM);
+    hlog = new Log::Log(Log::F);
 
     hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
     hlog->setFeature(Log::FEATURE_PROFILE, true);
@@ -108,18 +108,10 @@ int main(int argc, char** argv){
 
             for (namesDB_searchRes entry : res){
                 auto crate = fs.getCrate((size_t)entry.data);
-
-                std::cout << "> " << NamesDB::getEntryName(entry.dbEntry);
-                std::cout << " (";
-                std::cout << "crateID=" << (size_t)entry.data;
-                std::cout << " crateSize=" << crate->size;
-                std::cout << ")" << std::endl;
-
                 
-                /*for (size_t crateIndex = 0; crateIndex < crate->size; crateIndex++){
-                    std::cout << crateIndex << " > " << fs.getEntryPathString(crate->data[crateIndex]) << std::endl;
+                for (size_t crateIndex = 0; crateIndex < crate->size; crateIndex++){
+                    std::cout << " > " << fs.getEntryPathString(crate->data[crateIndex]) << std::endl;
                 }
-                */
             }
 
             std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;
