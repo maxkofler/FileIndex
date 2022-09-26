@@ -18,9 +18,9 @@ public:
     /**
      * @brief   Creates a new filesystem
      * @param   db              The database to use, nullptr to create a new one
-     * @param   useDirtyDB      Whether to use a dirty db that gets cleaned afterwards or accepts duplicates (default: false)
+     * @param   chunkSize       The size of the chunks allocated
      */
-    FS(NamesDB* db, bool useDirtyDB = false, size_t chunkSize = FS_DEFAULT_CHUNK_SIZE);
+    FS(NamesDB* db, size_t chunkSize = FS_DEFAULT_CHUNK_SIZE);
 
     ~FS();
 
@@ -48,9 +48,9 @@ public:
     /**
      * @brief   Returns a deque describing the path to the supplied entry, starting with the root
      * @param   id              The id of the entry
-     * @return  std::deque<fs_entry>
+     * @param   path            A reference to the path to append to
      */
-    void        getEntryPath(size_t id, std::deque<fs_entry>& path);
+    void                        getEntryPath(size_t id, std::deque<fs_entry>& path);
 
     /**
      * @brief   Returns a string describing the path to the supplied entry
@@ -63,16 +63,6 @@ public:
      * @brief   Returns a pointer to the main Database for this filesystem
      */
     NamesDB*                    getDB();
-
-    /**
-     * @brief   If this filesystem should use a dirty database
-     */
-    bool                        getUseDirtyDB();
-
-    /**
-     * @brief   Returns the dirty database if existing, else nullptr
-     */
-    NamesDB*                    getDirtyDB();
 
 #ifndef FRIEND_FS
 private:
@@ -87,21 +77,6 @@ private:
      * @brief   The amount of blocks to expand by default
      */
     size_t                      _chunkSize;
-
-    /**
-     * @brief   If this should use a dirty database
-     */
-    bool                        _useDirtyDB = false;
-
-    /**
-     * @brief   The dirty db that gets used
-     */
-    NamesDB*                    _dirtyDB = nullptr;
-
-    /**
-     * @brief   The array containing all the crates
-     */
-    DArray<crate_s<size_t>>     _crates;
 
     /**
      * @brief   The entries to build up the filesystem tree

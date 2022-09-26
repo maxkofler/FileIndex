@@ -30,7 +30,7 @@ int main(int argc, char** argv){
         FS fs(&fsDB, false);
         FileIndex fileIndex(&fs);
 
-        if (std::filesystem::exists("dbb.bin")){
+        if (std::filesystem::exists("db.bin")){
             LOGU("Importing existing database...");
 
             std::ifstream dbFile;
@@ -107,11 +107,7 @@ int main(int argc, char** argv){
             
 
             for (namesDB_searchRes entry : res){
-                auto crate = fs.getCrate((size_t)entry.data);
-                
-                for (size_t crateIndex = 0; crateIndex < crate->size; crateIndex++){
-                    std::cout << " > " << fs.getEntryPathString(crate->data[crateIndex]) << std::endl;
-                }
+                std::cout << " > " << fs.getEntryPathString((size_t)entry.data) << std::endl;
             }
 
             std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;
