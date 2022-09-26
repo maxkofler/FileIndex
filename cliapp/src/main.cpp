@@ -41,6 +41,11 @@ int main(int argc, char** argv){
                 std::filesystem::rename("db.bin", "db.bin.corrupted");
             }
 
+            if (!fs.importFS(dbFile)){
+                LOGUE("Failed to import FS, renamed it to <name>.corrupted");
+                std::filesystem::rename("db.bin", "db.bin.corrupted");
+            }
+
             dbFile.close();
         } else if (argc != 2){
             LOGUE("Usage: ./fileindexcli <path to index>");
@@ -67,6 +72,7 @@ int main(int argc, char** argv){
                 dbFile.open("db.bin", std::ios::binary | std::ios::out);
 
                 fsDB.exportDB(dbFile);
+                fs.exportFS(dbFile);
 
                 dbFile.close();
             }
@@ -104,10 +110,9 @@ int main(int argc, char** argv){
             });
             stop = high_resolution_clock::now();
             auto sortDuration = duration_cast<milliseconds>(stop - start);
-            
 
             for (namesDB_searchRes entry : res){
-                std::cout << " > " << fs.getEntryPathString((size_t)entry.data) << std::endl;
+                std::cout << fsDB.getName(fs.getEntry((size_t)entry.data)->nameID) << " (" << fs.getEntryPathString((size_t)entry.data) << ")" << std::endl;
             }
 
             std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;

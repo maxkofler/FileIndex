@@ -49,6 +49,12 @@ public:
         _allocated = newAllocated;
     }
 
+    void clean(){
+        delete _data;
+        _size = 0;
+        _allocated = 0;
+    }
+
     size_t lastID(){
         return _size-1;
     }

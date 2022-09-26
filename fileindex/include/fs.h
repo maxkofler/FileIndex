@@ -7,6 +7,8 @@
 #include "dArray.h"
 
 #include <deque>
+#include <ostream>
+#include <istream>
 
 #ifndef FS_DEFAULT_CHUNK_SIZE
     #define FS_DEFAULT_CHUNK_SIZE 32
@@ -63,6 +65,19 @@ public:
      * @brief   Returns a pointer to the main Database for this filesystem
      */
     NamesDB*                    getDB();
+
+    /**
+	 * @brief	Exports this filesystems contents to the supplied stream
+	 * @param	outStream		The stream to export to
+	 */
+	void						exportFS(std::ostream& outStream);
+
+	/**
+	 * @brief	Imports the contents of this filesystem form the supplied stream
+	 * @note	This clears the contents of this filesystem
+	 * @param	inStream		The stream to import from
+	 */
+	bool						importFS(std::istream& inStream);
 
 #ifndef FRIEND_FS
 private:
