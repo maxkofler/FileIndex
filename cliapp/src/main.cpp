@@ -81,7 +81,7 @@ int main(int argc, char** argv){
             LOGU(	"Optimizing took " + std::to_string(optimizeDuration.count()) + " ms");
         }
 
-        
+        fsDB.updateIndex();
 
         LOGU(	"Done! " + std::to_string(fsDB.getEntriesCount()) + " entries in database, " + 
                 std::to_string(fsDB.getBytesUsed()) + " bytes used");

@@ -14,6 +14,7 @@ include_directories(NamesDB/include)
 
 set(LOG_MAXLEVEL 12 CACHE STRING "Set the maximum log level")
 set(LOG_NOCHECK ON CACHE BOOL "Disable Log checks")
+set(LOG_NOMUTEX ON CACHE BOOL "Disable Log mutexes")
 
 add_subdirectory(Log)
 add_subdirectory(fileindex)
