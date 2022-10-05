@@ -5,6 +5,8 @@
 #include "fs.h"
 #include "log.h"
 
+#include "config.h"
+
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -14,7 +16,7 @@
 
 int main(int argc, char** argv){
     using namespace std::chrono;
-    hlog = new Log::Log(Log::F);
+    hlog = new Log::Log(Log::U);
 
     hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
     hlog->setFeature(Log::FEATURE_PROFILE, true);
@@ -22,6 +24,11 @@ int main(int argc, char** argv){
     std::ofstream* outFile = new std::ofstream();
     outFile->open("trace.json", std::ios::out);
     hlog->setProfileStream(outFile);
+
+    config_t conf = parseFromCLI(argc, argv);
+    if (!conf.ok)
+        return -1;
+    applyConfig(conf);
 
     {
         FUN();
@@ -47,10 +54,9 @@ int main(int argc, char** argv){
             }
 
             dbFile.close();
-        } else if (argc != 2){
-            LOGUE("Usage: ./fileindexcli <path to index>");
         } else {
-            std::string rootName = argv[1];
+            //std::string rootName = argv[1];
+            std::string rootName = conf.indexPath;
             LOGU("Indexing \"" + rootName + "\"...");
 
             auto indexStart = high_resolution_clock::now();

@@ -4,3 +4,6 @@
 [submodule "NamesDB"]
 	path = NamesDB
 	url = https://github.com/maxkofler/NamesDB
+[submodule "args"]
+	path = args
+	url = https://github.com/Taywee/args

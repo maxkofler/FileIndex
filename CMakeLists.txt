@@ -6,11 +6,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(ADDITIONAL_LIBRARIES "")
 
-include_directories(include)
-include_directories(Log/include)
 include_directories(cliapp/include)
 include_directories(fileindex/include)
+
+include_directories(Log/include)
 include_directories(NamesDB/include)
+
+include_directories(args)
 
 set(LOG_MAXLEVEL 12 CACHE STRING "Set the maximum log level")
 set(LOG_NOCHECK ON CACHE BOOL "Disable Log checks")
