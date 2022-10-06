@@ -3,7 +3,7 @@
 
 #include <filesystem>
 
-uint64_t FileIndex::index(std::string pathStr, bool recursive){
+size_t FileIndex::index(std::string pathStr, bool recursive){
 	FUN();
 
 	namespace fs = std::filesystem;
