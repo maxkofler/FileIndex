@@ -18,6 +18,7 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 	}
 
 	std::string curPath, curName;
+	bool isDir = false;
 
 	//Start indexing
 	for (fs::directory_entry entry : dirIt){
@@ -28,9 +29,11 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 		//Ignore symlinks
 		if (entry.is_symlink())
 			continue;
-		
+
+		isDir = entry.is_directory();
+
 		//Add directories and enter them if wanted
-		if (entry.is_directory()){
+		if (isDir){
 
 			fs_dir newDir;
 			newDir.parentID = parentID;
@@ -48,6 +51,9 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 			
 			_fs->add(curName, newFile);
 		}
+
+		if (_callback_indexed != nullptr)
+			_callback_indexed(curPath, _indexedEntries, isDir);
 
 		_indexedEntries++;
 	}
