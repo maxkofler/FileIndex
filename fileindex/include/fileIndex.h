@@ -43,7 +43,9 @@ public:
      */
     void                        removeCBFSEntryIndexed();
 
+#ifndef FRIEND_FILEINDEX
 private:
+#endif
 
     /**
      * @brief   The filesystem to use

@@ -6,6 +6,7 @@
 
 #include "log.h"
 #include "fails.h"
+#include "debug.h"
 
 #define FRIEND_FILEINDEX
 

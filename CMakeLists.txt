@@ -28,6 +28,7 @@ if (${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
 endif()
 
 option(BUILD_DOCS "Generate Docs" OFF)
+
 if(BUILD_DOCS)
 	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/docs)
 endif()

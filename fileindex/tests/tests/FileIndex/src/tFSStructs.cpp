@@ -18,21 +18,3 @@ TEST(FileIndex, FSEntry_Structs){
 	ASSERT_FALSE(fileP->isDir);
 
 }
-
-TEST(FileIndex, FSEntry_Structs_FSTree){
-	FUN();
-
-	fs_dir root;
-	
-	fs_dir childDir;
-	childDir.parent = &root;
-
-	fs_file childFile;
-	childFile.parent = &childDir;
-
-	fs_entry* childDirP = &childDir;
-	fs_entry* childFileP = &childFile;
-	
-	ASSERT_EQ(&root, childDirP->parent);
-	ASSERT_EQ(&childDir, childFileP->parent);
-}

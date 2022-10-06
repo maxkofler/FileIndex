@@ -83,3 +83,5 @@ names.txt
 #VSCode files
 .vscode/*
 .vscode
+
+fileindex/googletest
