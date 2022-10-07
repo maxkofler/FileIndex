@@ -21,7 +21,7 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 	bool isDir = false;
 
 	//Start indexing
-	for (fs::directory_entry entry : dirIt){
+    for (fs::directory_entry entry : dirIt){
 		curPath = entry.path().string();
 		curName = entry.path().stem().string() + entry.path().extension().string();
 		LOGF("[FileIndex][index] Found directory entry \"" + curPath + "\", DB name: \"" + curName + "\"");
@@ -53,7 +53,7 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 		}
 
 		if (_callback_indexed != nullptr)
-			_callback_indexed(curPath, _indexedEntries, isDir);
+            _callback_indexed(curPath, _indexedEntries, isDir, _callback_udata);
 
 		_indexedEntries++;
 	}

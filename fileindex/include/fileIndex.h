@@ -32,11 +32,13 @@ public:
     /**
      * @brief   Adds a callback that gets called every time the index() function finds a filesystem entry
      * @param   callback        The callback function
+     *  @param  udata           A pointer for user data
      *  @param  path            A const std::string_view& for passing the path of the entry
      *  @param  id              The id of the indexed entry
      *  @param  isDir           True if the entry is a directory
+     * @param   udata           The user data to supply on every call
      */
-    void                        setCBFSEntryIndexed(void (*callback)(const std::string_view& path, size_t id, bool isDir));
+    void                        setCBFSEntryIndexed(void (*callback)(const std::string_view& path, size_t id, bool isDir, void* udata), void* udata);
 
     /**
      * @brief   Removes the previously set callback for every indexed fs entry
@@ -63,7 +65,12 @@ private:
      * @param   id              The id of the indexed entry
      * @param   isDir           True if the entry is a directory
      */
-    void                        (*_callback_indexed)(const std::string_view& path, size_t id, bool isDir) = nullptr;
+    void                        (*_callback_indexed)(const std::string_view& path, size_t id, bool isDir, void* udata) = nullptr;
+
+    /**
+     * @brief   The user data to return when the callback gets called
+     */
+    void*                       _callback_udata = nullptr;
 
     /**
      * @brief   Indexes the supplied path blindly, no checks are made

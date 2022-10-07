@@ -23,7 +23,7 @@ TEST(FileIndex, setCBFSEntryIndexed_debug){
 }
 
 static size_t calls_to_handler = 0;
-void callback_handler(const std::string_view& name, size_t id, bool isDir){
+void callback_handler(const std::string_view& name, size_t id, bool isDir, void* udata){
 	calls_to_handler++;
 }
 
@@ -35,7 +35,7 @@ TEST(FileIndex, setCBFSEntryIndexed_check){
 	FS fs(&db);
 	FileIndex index(&fs);
 
-	index.setCBFSEntryIndexed(&callback_handler);
+	index.setCBFSEntryIndexed(&callback_handler, nullptr);
 	ASSERT_EQ(&callback_handler, index._callback_indexed) << "The setCBFSEntryIndexed() function does not set the callback!";
 
 	calls_to_handler = 0;
