@@ -22,6 +22,9 @@ add_subdirectory(Log)
 add_subdirectory(fileindex)
 add_subdirectory(NamesDB)
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 if (${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
 	message("Forcing the GNU compiler to link against stdc++fs")
 	set(ADDITIONAL_LIBRARIES ${LEAF_ADDITIONAL_LIBRARIES} stdc++fs)
@@ -43,4 +46,4 @@ file(GLOB_RECURSE CLI_CXX_SOURCES "cliapp/src/**.cpp")
 
 add_executable(fileindexcli ${CLI_CXX_SOURCES})
 
-target_link_libraries(fileindexcli log fileindex ${ADDITIONAL_LIBRARIES})
+target_link_libraries(fileindexcli log fileindex Threads::Threads ${ADDITIONAL_LIBRARIES})
