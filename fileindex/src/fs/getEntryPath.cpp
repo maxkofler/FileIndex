@@ -17,6 +17,7 @@ void FS::getEntryPath(size_t entryID, std::deque<fs_entry>& path){
     if (entry.parentID != 0) {
         getEntryPath(entry.parentID, path);
     }
+
     path.push_back(entry);
 }
 

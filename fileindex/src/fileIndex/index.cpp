@@ -3,7 +3,7 @@
 
 #include <filesystem>
 
-size_t FileIndex::index(std::string pathStr, bool recursive){
+size_t FileIndex::index(std::string pathStr, bool recursive, std::string crateStr){
 	FUN();
 
 	namespace fs = std::filesystem;
@@ -33,10 +33,15 @@ size_t FileIndex::index(std::string pathStr, bool recursive){
 		return 0;
 	}
 
+	if (crateStr.empty())
+		crateStr = pathStr;
+
 	fs_dir rootDir;
 	rootDir.parentID = 0;
 
-	size_t rootID = add(pathStr, rootDir);
+	size_t rootID = add(crateStr, rootDir);
+
+	LOGD("[FileIndex][index] Indexing " + pathStr + " into crate " + crateStr);
 
 	index_blind(rootID, pathStr, recursive);
 

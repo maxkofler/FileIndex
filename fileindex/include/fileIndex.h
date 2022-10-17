@@ -12,9 +12,10 @@ public:
      * @brief	Indexes the supplied path if it is a directory
      * @param	path		    The path to index
      * @param	recursive	    If this function should enter subdirectories (default: true)
+     * @param   rootName        The name of the root, the supplied directory should be indexed into
      * @return	size_t          The amount of entries found
      */
-    size_t                      index(std::string path, bool recursive = true);
+    size_t                      index(std::string path, bool recursive = true, std::string rootName = "");
 
     /**
      * @brief   Adds the supplied entry to the internal FS

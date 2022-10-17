@@ -65,12 +65,6 @@ int main(int argc, char** argv){
             auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
 
             LOGD("Done indexing");
-            LOGU("Optimizing...");
-
-            auto optimizeStart = high_resolution_clock::now();
-            //fileIndex.optimizeDB();
-            auto optimizeStop = high_resolution_clock::now();
-            auto optimizeDuration = duration_cast<milliseconds>(optimizeStop - optimizeStart);
 
             LOGU(	"Storing database...");
             {
@@ -84,17 +78,12 @@ int main(int argc, char** argv){
             }
 
             LOGU(	"Indexing took " + std::to_string(indexDuration.count()) + " ms");
-            LOGU(	"Optimizing took " + std::to_string(optimizeDuration.count()) + " ms");
         }
 
         fsDB.updateIndex();
 
         LOGU(	"Done! " + std::to_string(fsDB.getEntriesCount()) + " entries in database, " + 
                 std::to_string(fsDB.getBytesUsed()) + " bytes used");
-
-        //LOGU(	"Total entries indexed: " + std::to_string(index.getIndexedEntriesCount()));
-        //LOGU(	"Saved duplicated names: " + std::to_string(index.getSavedDuplicatesCount()));
-        //LOGU(	"Remaining names in DB: " + std::to_string(index.getDB()->getEntriesCount()));
 
         bool run = true;
         std::string search;
@@ -117,8 +106,10 @@ int main(int argc, char** argv){
             stop = high_resolution_clock::now();
             auto sortDuration = duration_cast<milliseconds>(stop - start);
 
+            std::string pathStr;
             for (namesDB_searchRes entry : res){
-                std::cout << fsDB.getName(fs.getEntry((size_t)entry.data)->nameID) << " (" << fs.getEntryPathString((size_t)entry.data) << ")" << std::endl;
+                pathStr = fs.getEntryPathString((size_t)entry.data);
+                std::cout << fsDB.getName(fs.getEntry((size_t)entry.data)->nameID) << " (" << pathStr << ")" << std::endl;
             }
 
             std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;

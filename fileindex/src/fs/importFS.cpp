@@ -13,7 +13,7 @@ bool FS::importFS(std::istream& instream){
 	_entries.clean();
 
 	instream.read((char*)&_entries._size, sizeof(size_t));
-	LOGMEM("[FS][importFS] Importing " + std::to_string(_bytesUsed) + " bytes into filesystem...");
+	LOGMEM("[FS][importFS] Importing " + std::to_string(_entries._size) + " bytes into filesystem...");
 
 	if (!instream){
 		LOGE(	"[FS][importFS] Failed to import stream contents to filesystem: EOF in length header, read bytes: " + std::to_string(instream.gcount()));
