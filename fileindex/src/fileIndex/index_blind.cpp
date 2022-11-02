@@ -33,8 +33,8 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 	//Start indexing
     for (fs::directory_entry entry : dirIt){
 		#ifdef _WIN32
-			curPath = ConvertWideToUtf8(entry.path().string());
-			curName = ConvertWideToUtf8(entry.path().stem().string()) + ConvertWideToUtf8(entry.path().extension().string());
+			curPath = ConvertWideToUtf8(entry.path().wstring());
+			curName = ConvertWideToUtf8(entry.path().stem().wstring()) + ConvertWideToUtf8(entry.path().extension().wstring());
 		#else
 			curPath = entry.path().string();
 			curName = entry.path().stem().string() + entry.path().extension().string();
