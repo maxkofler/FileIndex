@@ -48,11 +48,6 @@ int main(int argc, char** argv){
                 std::filesystem::rename("db.bin", "db.bin.corrupted");
             }
 
-            if (!fs.importFS(dbFile)){
-                LOGUE("Failed to import FS, renamed it to <name>.corrupted");
-                std::filesystem::rename("db.bin", "db.bin.corrupted");
-            }
-
             dbFile.close();
         } else {
             //std::string rootName = argv[1];
@@ -72,7 +67,6 @@ int main(int argc, char** argv){
                 dbFile.open("db.bin", std::ios::binary | std::ios::out);
 
                 fsDB.exportDB(dbFile);
-                fs.exportFS(dbFile);
 
                 dbFile.close();
             }

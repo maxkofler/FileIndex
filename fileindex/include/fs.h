@@ -61,19 +61,6 @@ public:
      */
     NamesDB<fs_entry>*          getDB();
 
-    /**
-	 * @brief	Exports this filesystems contents to the supplied stream
-	 * @param	outStream		The stream to export to
-	 */
-	void						exportFS(std::ostream& outStream);
-
-	/**
-	 * @brief	Imports the contents of this filesystem form the supplied stream
-	 * @note	This clears the contents of this filesystem
-	 * @param	inStream		The stream to import from
-	 */
-	bool						importFS(std::istream& inStream);
-
 #ifndef FRIEND_FS
 private:
 #endif
@@ -87,11 +74,6 @@ private:
      * @brief   The amount of blocks to expand by default
      */
     size_t                      _chunkSize;
-
-    /**
-     * @brief   The entries to build up the filesystem tree
-     */
-    //DArray<fs_entry>            _entries;
 
 };
 
