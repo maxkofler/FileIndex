@@ -13,12 +13,6 @@ FS::FS(NamesDB<fs_entry>* db, size_t chunkSize) : _chunkSize(chunkSize){
     }
 
     _db = db;
-
-    if (_db->getEntriesCount() == 0){
-        fs_dir dir;
-        dir.parentID = 0;
-        add(std::string("fs"), dir);
-    }
 }
 
 FS::~FS(){

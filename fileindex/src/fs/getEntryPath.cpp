@@ -13,10 +13,12 @@ void FS::getEntryPath(size_t entryID, std::deque<fs_entry>& path){
     if (entry == nullptr)
         return;
 
-    if (entry->parentID != 0) {
+    if (entry->parentID != FS_ROOT_PARENTID) {
+        LOGMEM("[FS][getEntryPath] Getting parents of " + fs_entry_str(*entry));
         getEntryPath(entry->parentID, path);
     }
 
+    LOGMEM("[FS][getEntryPath] Appending " + fs_entry_str(*entry));
     path.push_back(*entry);
 }
 

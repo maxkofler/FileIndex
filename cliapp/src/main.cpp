@@ -108,10 +108,6 @@ int main(int argc, char** argv){
 
             std::string pathStr;
             for (namesDB_searchRes entry : res){
-                if (entry.code != 0)
-                    continue;
-                if (entry.data == nullptr)
-                    continue;
                 pathStr = fs.getEntryPathString(entry.id);
                 std::cout << fsDB.getName(entry.data->nameID) << " (" << pathStr << ")" << std::endl;
             }

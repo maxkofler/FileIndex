@@ -14,6 +14,8 @@
     #define FS_DEFAULT_CHUNK_SIZE 32
 #endif
 
+#define FS_ROOT_PARENTID UINT64_MAX
+
 class FS{
 
 public:

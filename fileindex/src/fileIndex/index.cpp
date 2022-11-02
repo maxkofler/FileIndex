@@ -37,7 +37,7 @@ size_t FileIndex::index(std::string pathStr, bool recursive, std::string crateSt
 		crateStr = pathStr;
 
 	fs_dir rootDir;
-	rootDir.parentID = 0;
+	rootDir.parentID = FS_ROOT_PARENTID;
 
 	size_t rootID = add(crateStr, rootDir);
 

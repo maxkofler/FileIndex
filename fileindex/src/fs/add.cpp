@@ -12,7 +12,8 @@ size_t FS::add(const std::string& name, const fs_entry& oEntry){
 
     fs_entry entry = oEntry;
 
-    entry.nameID = _db->getEntriesCount()-1;
+    entry.nameID =  _db->getEntriesCount();
+
     LOGMEM("[FS][add] Added entry " + fs_entry_str(entry) + ": " + name);
     return _db->add(name, entry);
 }
