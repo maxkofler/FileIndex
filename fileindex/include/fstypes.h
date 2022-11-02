@@ -3,16 +3,13 @@
 
 #ifdef _WIN32
     #define GNU_ATTRIBUTE_PACKED
-    #define WINDOWS_PACKED_START #pragma pack(push, 1)
-    #define WINDOWS_PACKED_STOP #pragma pack(pop)
 #else
     #define GNU_ATTRIBUTE_PACKED __attribute__((packed))
-    #define WINDOWS_PACKED_START
-    #define WINDOWS_PACKED_STOP
 #endif
 
-WINDOWS_PACKED_START
-
+#ifdef _WIN32
+	#pragma pack(push, 1)
+#endif
 /**
  * @brief	The base filesystem entry for the different filesystem types
  */
@@ -40,7 +37,9 @@ typedef struct s_fs_dir : public fsentry_s{
     }
 } GNU_ATTRIBUTE_PACKED fs_dir;
 
-WINDOWS_PACKED_STOP
+#ifdef _WIN32
+	#pragma pack(pop)
+#endif
 
 /**
  * @brief   Returns information about the fs_entry in string form
