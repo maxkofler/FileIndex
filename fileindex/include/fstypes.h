@@ -28,4 +28,10 @@ typedef struct s_fs_dir : public fsentry_s{
     }
 } __attribute__((packed)) fs_dir;
 
+/**
+ * @brief   Returns information about the fs_entry in string form
+ * @param   entry       The entry to inform about
+ */
+std::string fs_entry_str(fs_entry& entry);
+
 #endif

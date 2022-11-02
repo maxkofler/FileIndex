@@ -6,11 +6,13 @@
 
 //TODO: Tests
 
-size_t FS::add(const std::string& name, const fs_entry& entry){
+size_t FS::add(const std::string& name, const fs_entry& oEntry){
     FUN();
     DEBUG_EX("FS::add()");
 
-    auto id = _db->add(name, entry);
-    _db->getEntry(_db->getEntriesCount()-1)->nameID = id;
-    return id;
+    fs_entry entry = oEntry;
+
+    entry.nameID = _db->getEntriesCount()-1;
+    LOGMEM("[FS][add] Added entry " + fs_entry_str(entry) + ": " + name);
+    return _db->add(name, entry);
 }
