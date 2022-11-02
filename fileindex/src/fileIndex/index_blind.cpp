@@ -3,6 +3,16 @@
 
 #include <filesystem>
 
+#ifdef _WIN32
+	#include <Windows.h>
+	std::string ConvertWideToUtf8(const std::wstring& wstr){
+		int count = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), wstr.length(), NULL, 0, NULL, NULL);
+		std::string str(count, 0);
+		WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &str[0], count, NULL, NULL);
+		return str;
+	}
+#endif
+
 namespace fs = std::filesystem;
 
 void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive){
@@ -22,8 +32,13 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 
 	//Start indexing
     for (fs::directory_entry entry : dirIt){
-		curPath = entry.path().string();
-		curName = entry.path().stem().string() + entry.path().extension().string();
+		#ifdef _WIN32
+			curPath = ConvertWideToUtf8(entry.path().string());
+			curName = ConvertWideToUtf8(entry.path().stem().string()) + ConvertWideToUtf8(entry.path().extension().string());
+		#else
+			curPath = entry.path().string();
+			curName = entry.path().stem().string() + entry.path().extension().string();
+		#endif
 		LOGF("[FileIndex][index] Found directory entry \"" + curPath + "\", DB name: \"" + curName + "\"");
 
 		//Ignore symlinks
