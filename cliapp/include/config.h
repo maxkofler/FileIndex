@@ -3,7 +3,7 @@
 
 #include <string>
 
-typedef struct {
+typedef struct config_s {
 	bool				ok = false;
 	uint8_t				verbosity = 0;
 	std::string			indexPath = "./";

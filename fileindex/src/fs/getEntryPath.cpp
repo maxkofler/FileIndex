@@ -9,16 +9,15 @@ void FS::getEntryPath(size_t entryID, std::deque<fs_entry>& path){
     FUN();
     DEBUG_EX("FS::getEntryPath()");
 
-    if (entryID >= _entries.size())
+    fs_entry* entry = _db->getEntry(entryID);
+    if (entry == nullptr)
         return;
 
-    auto entry = _entries._data[entryID];
-
-    if (entry.parentID != 0) {
-        getEntryPath(entry.parentID, path);
+    if (entry->parentID != 0) {
+        getEntryPath(entry->parentID, path);
     }
 
-    path.push_back(entry);
+    path.push_back(*entry);
 }
 
 std::string FS::getEntryPathString(size_t entryID){
@@ -27,7 +26,7 @@ std::string FS::getEntryPathString(size_t entryID){
 
     std::string pathStr;
 
-    if (entryID >= _entries.size())
+    if (entryID >= _db->getEntriesCount())
         return pathStr;
 
     std::deque<fs_entry> path;
@@ -37,7 +36,8 @@ std::string FS::getEntryPathString(size_t entryID){
         pathStr += _db->getName(entry.nameID) + '/';
     }
 
-    pathStr.erase(pathStr.length()-1);
+    if (pathStr.length() > 0)
+        pathStr.erase(pathStr.length()-1);
 
     return pathStr;
 }

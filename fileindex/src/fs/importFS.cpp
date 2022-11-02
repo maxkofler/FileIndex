@@ -10,6 +10,9 @@ bool FS::importFS(std::istream& instream){
 	FUN();
 	DEBUG_EX("FS::importFS()");
 
+	#warning TODO: Remove this function
+
+	/*
 	_entries.clean();
 
 	instream.read((char*)&_entries._size, sizeof(size_t));
@@ -30,6 +33,7 @@ bool FS::importFS(std::istream& instream){
 		_entries.clean();
 		return false;
 	}
+	*/
 
 	return true;
 }

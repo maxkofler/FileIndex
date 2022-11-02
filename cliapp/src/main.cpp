@@ -1,9 +1,9 @@
 
 //#include "fileIndexOld.h"
 #define FRIEND_FS
+#include "log.h"
 #include "fileIndex.h"
 #include "fs.h"
-#include "log.h"
 
 #include "config.h"
 
@@ -33,7 +33,7 @@ int main(int argc, char** argv){
     {
         FUN();
 
-        NamesDB fsDB("FS-main");
+        NamesDB<fs_entry> fsDB("FS-main");
         FS fs(&fsDB, false);
         FileIndex fileIndex(&fs);
 
@@ -100,7 +100,7 @@ int main(int argc, char** argv){
             auto searchDuration = duration_cast<milliseconds>(stop - start);
 
             start = high_resolution_clock::now();
-            std::sort(res.begin(), res.end(), [](const namesDB_searchRes &a, const namesDB_searchRes &b) -> bool {
+            std::sort(res.begin(), res.end(), [](const namesDB_searchRes<fs_entry> &a, const namesDB_searchRes<fs_entry> &b) -> bool {
                 return a.matchRemaining > b.matchRemaining;
             });
             stop = high_resolution_clock::now();
@@ -108,8 +108,12 @@ int main(int argc, char** argv){
 
             std::string pathStr;
             for (namesDB_searchRes entry : res){
-                pathStr = fs.getEntryPathString((size_t)entry.data);
-                std::cout << fsDB.getName(fs.getEntry((size_t)entry.data)->nameID) << " (" << pathStr << ")" << std::endl;
+                if (entry.code != 0)
+                    continue;
+                if (entry.data == nullptr)
+                    continue;
+                pathStr = fs.getEntryPathString(entry.id);
+                std::cout << fsDB.getName(entry.data->nameID) << " (" << pathStr << ")" << std::endl;
             }
 
             std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;

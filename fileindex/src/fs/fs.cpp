@@ -5,11 +5,11 @@
 
 //TODO: Tests
 
-FS::FS(NamesDB* db, size_t chunkSize) : _chunkSize(chunkSize){
+FS::FS(NamesDB<fs_entry>* db, size_t chunkSize) : _chunkSize(chunkSize){
     FUN();
 
     if (db == nullptr){
-        db = new NamesDB("fs_db");
+        db = new NamesDB<fs_entry>("fs_db");
     }
 
     _db = db;

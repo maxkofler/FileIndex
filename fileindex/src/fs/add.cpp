@@ -10,9 +10,7 @@ size_t FS::add(const std::string& name, const fs_entry& entry){
     FUN();
     DEBUG_EX("FS::add()");
 
-    //Add the new entry
-    _entries.add(entry);
-    _entries._data[_entries.lastID()].nameID = _db->add(name, (void*)(_entries.lastID()));
-
-    return _entries.lastID();
+    auto id = _db->add(name, entry);
+    _db->getEntry(_db->getEntriesCount()-1)->nameID = id;
+    return id;
 }

@@ -3,6 +3,6 @@
 
 #include "fs.h"
 
-NamesDB* FS::getDB(){
+NamesDB<fs_entry>* FS::getDB(){
     return _db;
 }

@@ -22,7 +22,7 @@ public:
      * @param   db              The database to use, nullptr to create a new one
      * @param   chunkSize       The size of the chunks allocated
      */
-    FS(NamesDB* db, size_t chunkSize = FS_DEFAULT_CHUNK_SIZE);
+    FS(NamesDB<fs_entry>* db, size_t chunkSize = FS_DEFAULT_CHUNK_SIZE);
 
     ~FS();
 
@@ -38,14 +38,7 @@ public:
      * @param   id              The id to get
      * @return  fs_entry*       nullptr if id out of bounds
      */
-    fs_entry*                   getEntry(size_t id);
-
-    /**
-     * @brief   Returns a pointer to the crate with the matching id
-     * @param   id              The id of the requested crate
-     * @return  crate_s<size_t>*, nullptr on out of bounds
-     */
-    crate_s<size_t>*            getCrate(size_t id);           
+    fs_entry*                   getEntry(size_t id); 
 
     /**
      * @brief   Returns a deque describing the path to the supplied entry, starting with the root
@@ -64,7 +57,7 @@ public:
     /**
      * @brief   Returns a pointer to the main Database for this filesystem
      */
-    NamesDB*                    getDB();
+    NamesDB<fs_entry>*          getDB();
 
     /**
 	 * @brief	Exports this filesystems contents to the supplied stream
@@ -86,7 +79,7 @@ private:
     /**
      * @brief   The database that stores the names of the filesystem
      */
-    NamesDB*                    _db = nullptr;
+    NamesDB<fs_entry>*          _db = nullptr;
 
     /**
      * @brief   The amount of blocks to expand by default
@@ -96,7 +89,7 @@ private:
     /**
      * @brief   The entries to build up the filesystem tree
      */
-    DArray<fs_entry>            _entries;
+    //DArray<fs_entry>            _entries;
 
 };
 
