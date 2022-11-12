@@ -89,7 +89,7 @@ int main(int argc, char** argv){
                 break;
 
             auto start = high_resolution_clock::now();
-            auto res = fsDB.searchAll(search, false);
+            auto res = fsDB.searchAll(search, false, false);
             auto stop = high_resolution_clock::now();
             auto searchDuration = duration_cast<milliseconds>(stop - start);
 
