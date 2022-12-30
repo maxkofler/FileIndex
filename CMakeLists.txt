@@ -20,7 +20,6 @@ set(LOG_NOMUTEX ON CACHE BOOL "Disable Log mutexes")
 
 add_subdirectory(Log)
 add_subdirectory(fileindex)
-add_subdirectory(NamesDB)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
