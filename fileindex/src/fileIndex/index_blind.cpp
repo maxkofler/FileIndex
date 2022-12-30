@@ -15,7 +15,7 @@
 
 namespace fs = std::filesystem;
 
-void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive){
+void FileIndex::index_blind(const std::string& relPath, const std::string& pathStr, bool recursive){
 	FUN();
 
 	std::error_code ec;
@@ -39,6 +39,7 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 			curPath = entry.path().string();
 			curName = entry.path().stem().string() + entry.path().extension().string();
 		#endif
+		std::string curRelPath = relPath + curName;
 		LOGF("[FileIndex][index] Found directory entry \"" + curPath + "\", DB name: \"" + curName + "\"");
 
 		//Ignore symlinks
@@ -50,25 +51,18 @@ void FileIndex::index_blind(size_t parentID, std::string pathStr, bool recursive
 		//Add directories and enter them if wanted
 		if (isDir){
 
-			fs_dir newDir;
-			newDir.parentID = parentID;
-
-			size_t dirID = add(curName, newDir);
+			add(curRelPath);
 
 			if (recursive){
 				LOGIO("[FileIndex][index] Entering directory \"" + curPath + "\"");
-				index_blind(dirID, curPath, recursive);
+				index_blind(curRelPath + "/", curPath, recursive);
 			}
 		} else {
-
-			fs_file newFile;
-			newFile.parentID = parentID;
-			
-			_fs->add(curName, newFile);
+			add(curRelPath);
 		}
 
 		if (_callback_indexed != nullptr)
-            _callback_indexed(curPath, _indexedEntries, isDir, _callback_udata);
+            _callback_indexed(curPath, isDir, _callback_udata);
 
 		_indexedEntries++;
 	}

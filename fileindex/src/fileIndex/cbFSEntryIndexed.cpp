@@ -3,7 +3,7 @@
 
 #include "fileIndex.h"
 
-void FileIndex::setCBFSEntryIndexed(void (*callback)(const std::string_view& path, size_t id, bool isDir, void* udata), void* udata){
+void FileIndex::setCBFSEntryIndexed(void (*callback)(const std::string_view& path, bool isDir, void* udata), void* udata){
 	FUN();
 	DEBUG_EX("FileIndex::setCBFSEntryIndexed()");
 

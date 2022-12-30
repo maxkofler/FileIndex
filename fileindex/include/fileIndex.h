@@ -19,11 +19,9 @@ public:
 
     /**
      * @brief   Adds the supplied entry to the internal FS
-     * @param   name            The name of the entry
-     * @param   entry           The entry to add
-     * @return  size_t          The id of the added entry
+     * @param   path            The path of the entry
      */
-    size_t                      add(std::string& name, fs_entry entry);
+    bool                        add(std::string& path);
 
     /**
      * @brief   Returns the internal filesystem
@@ -35,11 +33,10 @@ public:
      * @param   callback        The callback function
      *  @param  udata           A pointer for user data
      *  @param  path            A const std::string_view& for passing the path of the entry
-     *  @param  id              The id of the indexed entry
      *  @param  isDir           True if the entry is a directory
      * @param   udata           The user data to supply on every call
      */
-    void                        setCBFSEntryIndexed(void (*callback)(const std::string_view& path, size_t id, bool isDir, void* udata), void* udata);
+    void                        setCBFSEntryIndexed(void (*callback)(const std::string_view& path, bool isDir, void* udata), void* udata);
 
     /**
      * @brief   Removes the previously set callback for every indexed fs entry
@@ -63,10 +60,9 @@ private:
     /**
      * @brief   The callback for every fs entry found
      * @param   path            A const std::string_view& for passing the path of the entry
-     * @param   id              The id of the indexed entry
      * @param   isDir           True if the entry is a directory
      */
-    void                        (*_callback_indexed)(const std::string_view& path, size_t id, bool isDir, void* udata) = nullptr;
+    void                        (*_callback_indexed)(const std::string_view& path, bool isDir, void* udata) = nullptr;
 
     /**
      * @brief   The user data to return when the callback gets called
@@ -75,11 +71,11 @@ private:
 
     /**
      * @brief   Indexes the supplied path blindly, no checks are made
-     * @param   parentID        The ID of the parent directory
+     * @param   relPath         The relative path to the root (the crate name too): myCrate/etc/ -> /etc/
      * @param   path            The path to index
      * @param   recursive       If this function should enter subdirectories (default: true)
      */
-    void                        index_blind(size_t parentID, std::string path, bool recursive = true);
+    void                        index_blind(const std::string& relPath, const std::string& path, bool recursive = true);
 
 };
 
