@@ -5,14 +5,17 @@
 
 //TODO: Tests
 
-FS::FS(NamesDB<fs_entry>* db, size_t chunkSize) : _chunkSize(chunkSize){
+FS::FS() : _sql("fs.sql"){
     FUN();
 
-    if (db == nullptr){
-        db = new NamesDB<fs_entry>("fs_db");
+    {//Create the table if not existing
+        std::string cmd = "CREATE TABLE IF NOT EXISTS entries (";
+        cmd += "id INTEGER PRIMARY KEY AUTOINCREMENT,";
+        cmd += "path TEXT UNIQUE NOT NULL);";
+        if (!_sql.exec(cmd)){
+            LOGUE("SQL failed: " + _sql.getError());
+        }
     }
-
-    _db = db;
 }
 
 FS::~FS(){

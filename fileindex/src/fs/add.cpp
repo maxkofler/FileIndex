@@ -5,15 +5,16 @@
 #include "crate.h"
 
 //TODO: Tests
-
-size_t FS::add(const std::string& name, const fs_entry& oEntry){
+bool FS::add(const std::string& path){
     FUN();
     DEBUG_EX("FS::add()");
 
-    fs_entry entry = oEntry;
+    std::string sql = "INSERT INTO entries (path) VALUES (\"" + path + "\");";
+    if (!_sql.exec(sql)){
+        LOGUE("[SQL Error] '" + _sql.getError() + "' when adding " + path);
+        return false;
+    }
 
-    entry.nameID =  _db->getEntriesCount();
-
-    LOGMEM("[FS][add] Added entry " + fs_entry_str(entry) + ": " + name);
-    return _db->add(name, entry);
+    LOGMEM("[FS][add] Added entry " + path);
+    return true;
 }
