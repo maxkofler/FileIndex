@@ -33,51 +33,20 @@ int main(int argc, char** argv){
     {
         FUN();
 
-        NamesDB<fs_entry> fsDB("FS-main");
-        FS fs(&fsDB, false);
+        FS fs;
         FileIndex fileIndex(&fs);
 
-        if (std::filesystem::exists("db.bin")){
-            LOGU("Importing existing database...");
+        std::string rootName = conf.indexPath;
+        LOGU("Indexing \"" + rootName + "\"...");
 
-            std::ifstream dbFile;
-            dbFile.open("db.bin", std::ios::binary | std::ios::in);
+        auto indexStart = high_resolution_clock::now();
+        fileIndex.index(rootName, true, "fsroot");
+        auto indexStop = high_resolution_clock::now();
+        auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
 
-            if (!fsDB.importDB(dbFile)){
-                LOGUE("Failed to import DB, renamed it to <name>.corrupted");
-                std::filesystem::rename("db.bin", "db.bin.corrupted");
-            }
+        LOGD("Done indexing");
 
-            dbFile.close();
-        } else {
-            //std::string rootName = argv[1];
-            std::string rootName = conf.indexPath;
-            LOGU("Indexing \"" + rootName + "\"...");
-
-            auto indexStart = high_resolution_clock::now();
-            fileIndex.index(rootName, true);
-            auto indexStop = high_resolution_clock::now();
-            auto indexDuration = duration_cast<milliseconds>(indexStop - indexStart);
-
-            LOGD("Done indexing");
-
-            LOGU(	"Storing database...");
-            {
-                std::ofstream dbFile;
-                dbFile.open("db.bin", std::ios::binary | std::ios::out);
-
-                fsDB.exportDB(dbFile);
-
-                dbFile.close();
-            }
-
-            LOGU(	"Indexing took " + std::to_string(indexDuration.count()) + " ms");
-        }
-
-        fsDB.updateIndex();
-
-        LOGU(	"Done! " + std::to_string(fsDB.getEntriesCount()) + " entries in database, " + 
-                std::to_string(fsDB.getBytesUsed()) + " bytes used");
+        LOGU("Indexing took " + std::to_string(indexDuration.count()) + " ms");
 
         bool run = true;
         std::string search;
@@ -88,6 +57,7 @@ int main(int argc, char** argv){
             if (feof(stdin))
                 break;
 
+            /*
             auto start = high_resolution_clock::now();
             auto res = fsDB.searchAll(search, false, false);
             auto stop = high_resolution_clock::now();
@@ -107,6 +77,7 @@ int main(int argc, char** argv){
             }
 
             std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;
+            */
         }
     }
     
