@@ -19,9 +19,9 @@ public:
 
     /**
      * @brief   Adds the supplied entry to the internal FS
-     * @param   path            The path of the entry
+     * @param   entry           The fs_entry to add
      */
-    bool                        add(std::string& path);
+    bool                        add(fs_entry& entry);
 
     /**
      * @brief   Returns the internal filesystem
@@ -71,11 +71,11 @@ private:
 
     /**
      * @brief   Indexes the supplied path blindly, no checks are made
-     * @param   relPath         The relative path to the root (the crate name too): myCrate/etc/ -> /etc/
      * @param   path            The path to index
+     * @param   parentDir       The parent directory
      * @param   recursive       If this function should enter subdirectories (default: true)
      */
-    void                        index_blind(const std::string& relPath, const std::string& path, bool recursive = true);
+    void                        index_blind(const std::string& path, fs_dir& parentDir, bool recursive = true);
 
 };
 

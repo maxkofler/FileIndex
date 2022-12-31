@@ -3,8 +3,8 @@
 
 #include "fileIndex.h"
 
-bool FileIndex::add(std::string& path){
+bool FileIndex::add(fs_entry& entry){
     FUN();
 
-    return _fs->add(path);
+    return _fs->add(entry);
 }
