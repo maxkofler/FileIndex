@@ -5,14 +5,14 @@
 
 //TODO: Tests
 
-FS::FS() : _sql("fs.sql"){
+FS::FS(SQL& sql) : _sql(sql){
     FUN();
 
     {//Create the table if not existing
         std::string cmd = "CREATE TABLE IF NOT EXISTS entries (";
         cmd += "id INTEGER PRIMARY KEY AUTOINCREMENT,";
         cmd += "path TEXT UNIQUE NOT NULL);";
-        if (!_sql.exec(cmd)){
+        if (_sql.exec(cmd).code){
             LOGUE("SQL failed: " + _sql.getError());
         }
     }

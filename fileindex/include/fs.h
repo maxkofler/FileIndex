@@ -10,7 +10,7 @@
 class FS{
 
 public:
-    FS();
+    FS(SQL& sql);
     ~FS();
 
     /**
@@ -26,7 +26,7 @@ private:
     /**
      * @brief   The SQL wrapper for the core filesystem database
      */
-    SQL                         _sql;
+    SQL&                        _sql;
 };
 
 #endif

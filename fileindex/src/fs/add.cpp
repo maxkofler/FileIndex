@@ -10,7 +10,7 @@ bool FS::add(const std::string& path){
     DEBUG_EX("FS::add()");
 
     std::string sql = "INSERT INTO entries (path) VALUES (\"" + path + "\");";
-    if (!_sql.exec(sql)){
+    if (_sql.exec(sql).code){
         LOGUE("[SQL Error] '" + _sql.getError() + "' when adding " + path);
         return false;
     }
