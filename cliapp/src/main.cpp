@@ -33,7 +33,8 @@ int main(int argc, char** argv){
     {
         FUN();
 
-        FS fs;
+        SQL sql("fs.db");
+        FS fs(sql);
         FileIndex fileIndex(&fs);
 
         std::string rootName = conf.indexPath;
@@ -57,27 +58,16 @@ int main(int argc, char** argv){
             if (feof(stdin))
                 break;
 
-            /*
             auto start = high_resolution_clock::now();
-            auto res = fsDB.searchAll(search, false, false);
+            auto res = fs.search(search);
             auto stop = high_resolution_clock::now();
             auto searchDuration = duration_cast<milliseconds>(stop - start);
 
-            start = high_resolution_clock::now();
-            std::sort(res.begin(), res.end(), [](const namesDB_searchRes<fs_entry> &a, const namesDB_searchRes<fs_entry> &b) -> bool {
-                return a.matchRemaining > b.matchRemaining;
-            });
-            stop = high_resolution_clock::now();
-            auto sortDuration = duration_cast<milliseconds>(stop - start);
-
-            std::string pathStr;
-            for (namesDB_searchRes entry : res){
-                pathStr = fs.getEntryPathString(entry.id);
-                std::cout << fsDB.getName(entry.data->nameID) << " (" << pathStr << ")" << std::endl;
+            for(fs_entry entry : res){
+                std::cout << fs.getPathString(entry) << std::endl;
             }
 
-            std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << " ms ("  << sortDuration.count() << " ms sorting)" << std::endl;
-            */
+            std::cout << ">> " << res.size() << " hits in " << searchDuration.count() << "ms" << std::endl;
         }
     }
     
