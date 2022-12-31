@@ -2,6 +2,7 @@
 #define __FS_H__
 
 #include "sql.h"
+#include "fstypes.h"
 
 #include <deque>
 #include <ostream>
@@ -15,9 +16,44 @@ public:
 
     /**
      * @brief   Adds the supplied filesystem entry with the name
-     * @param   path            The path to add
+     * @param   fsEntry         The filesystem entry to add (id and nameID gets filled in)
      */
-    bool                        add(const std::string& path);
+    bool                        add(fs_entry& entry);
+
+    /**
+     * @brief   Searches the filesystem for the searched string
+     * @param   search          The string to search for
+     * @param   matchCase       If the search casing has to match
+     * @param   exact           If the string has to match exactly
+     * @return  std::deque<fs_entry>
+     */
+    std::deque<fs_entry>        search(const std::string& search, bool matchCase = false, bool exact = false);
+
+    /**
+     * @brief   Resolves all upper fs_entries of the supplied entry (The parent directories)
+     * @param   entry           The entry to process
+     * @return  std::deque<fs_entry>
+     */
+    std::deque<fs_entry>        getPath(fs_entry& entry);
+
+    /**
+     * @brief   Returns the whole path for the supplied entry
+     * @param   entry           The entry to process
+     * @return  std::string
+     */
+    std::string                 getPathString(fs_entry& entry);
+
+    /**
+     * @brief   Queries the database for the complete entry according to the supplied id
+     * @param   id              The ID of the searched entry
+     * @return  fs_entry        id = 0 on error
+     */
+    fs_entry                    getEntryByID(uint64_t id);
+
+    /**
+     * @brief   Returns a reference to the used SQL object
+     */
+    SQL&                        getSQL(){return _sql;}
 
 #ifndef FRIEND_FS
 private:
