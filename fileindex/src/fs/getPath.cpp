@@ -12,12 +12,16 @@ std::deque<fs_entry> FS::getPath(fs_entry& entry){
 
     fs_entry curEntry = entry;
 
-    while (curEntry.parentID != 0){
+    while (true){
         ret.push_front(curEntry);
+
+        if (curEntry.parentID == 0)
+            break;
 
         curEntry = getEntryByID(curEntry.parentID);
         if (curEntry.id == 0)
             break;
+
     }
 
     return ret;
