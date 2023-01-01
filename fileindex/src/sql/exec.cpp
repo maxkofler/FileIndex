@@ -36,9 +36,13 @@ SQL_res SQL::exec(std::string cmd){
 		return res;
 	}
 
+	_m_exec.lock();
+
 	_sql_res.clear();
 	res.code = sqlite3_exec(_db, cmd.c_str(), s_sqlite3_callback, this, NULL);
 	res.result = _sql_res;
+
+	_m_exec.unlock();
 
 	return res;
 }

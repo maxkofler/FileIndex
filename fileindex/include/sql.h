@@ -3,6 +3,7 @@
 
 #include <string>
 #include <deque>
+#include <mutex>
 
 #ifdef SQLITE_VERSION
 	#define SQL_TYPE sqlite3
@@ -47,6 +48,11 @@ private:
 	 * @brief	The result of the last exec operation
 	 */
 	std::deque<std::deque<std::string>>		_sql_res;
+
+	/**
+	 * @brief	A mutex protectig the SQLite DB from simultaneous access
+	 */
+	std::mutex								_m_exec;
 
 	/**
 	 * @brief	The callback for the incoming data
