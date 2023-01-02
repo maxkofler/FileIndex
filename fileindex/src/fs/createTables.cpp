@@ -6,7 +6,8 @@
 void FS::createTables(){
     FUN();
 
-    {//Enable foreign key support
+    {//Execute some pragmas
+        _sql.exec("PRAGMA encoding='UTF-8';");
         _sql.exec("PRAGMA foreign_keys = ON;");
     }
 
