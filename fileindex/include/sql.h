@@ -19,7 +19,7 @@ struct SQL_res{
 class SQL{
 
 public:
-	SQL(std::string sqlFile);
+	SQL(std::string sqlFile = "");
 	~SQL();
 
 	/**
@@ -32,6 +32,18 @@ public:
 	 * @brief	Returns a string containing the last error thrown
 	 */
 	std::string								getError();
+
+	/**
+	 * @brief	Saves the contents of the currently loaded database into the supplied file
+	 * @param	outFile						The file path to save to
+	 */
+	bool									save(std::string outFile);
+
+	/**
+	 * @brief	Closes the currently loaded database and loads a new one from the supplied file
+	 * @param	inFile						The file to load from
+	 */
+	bool									load(std::string inFile);
 
 private:
 	/**

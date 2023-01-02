@@ -7,14 +7,12 @@
 SQL::SQL(std::string sqlFile) : _sqlFile(sqlFile){
 	FUN();
 
-	int res = sqlite3_open(sqlFile.c_str(), &_db);
-
-	if (res){
-		LOGUE("[SQL] Failed to connect to SQL file " + sqlFile + ": " + getError());
-		sqlite3_free(_db);
-		_db = nullptr;
-		return;
+	if (sqlFile == ""){
+		LOGI("[SQL] Creating memory database...");
+		_sqlFile = ":memory:";
 	}
+
+	load(_sqlFile);
 }
 
 SQL::~SQL(){
