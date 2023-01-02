@@ -8,6 +8,8 @@
 #include <ostream>
 #include <istream>
 
+#include <stdint.h>
+
 class FS{
 
 public:
@@ -54,6 +56,11 @@ public:
      * @brief   Returns a reference to the used SQL object
      */
     SQL&                        getSQL(){return _sql;}
+
+    /**
+     * @brief   Creates the SQL tables needed for the filesystem to work
+     */
+    void                        createTables();
 
 #ifndef FRIEND_FS
 private:
