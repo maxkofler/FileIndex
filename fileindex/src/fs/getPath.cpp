@@ -10,18 +10,23 @@ std::deque<fs_entry> FS::getPath(fs_entry& entry){
 
     std::deque<fs_entry> ret;
 
-    fs_entry curEntry = entry;
+    std::string cmd;
+    cmd += "WITH parent AS(";
+    cmd += " SELECT *";
+    cmd += " FROM entries WHERE id = " + std::to_string(entry.id);
+    cmd += " UNION ALL";
+    cmd += " SELECT entries.*";
+    cmd += " FROM entries JOIN parent ON entries.id = parent.parentID)";
+    cmd += " SELECT p.id, p.nameID, p.parentID, p.isDir, n.name";
+    cmd += " FROM parent p, names n WHERE p.nameID = n.id;";
 
-    while (true){
-        ret.push_front(curEntry);
+    SQL_res res = _sql.exec(cmd);
+    if (res.code){
+        LOGUE("[SQL Error] " + _sql.getError() + " when looking up path of " + fs_entry_str(entry));
+    }
 
-        if (curEntry.parentID == 0)
-            break;
-
-        curEntry = getEntryByID(curEntry.parentID);
-        if (curEntry.id == 0)
-            break;
-
+    for (std::deque<std::string> line : res.result){
+        ret.push_front(fs_entry_parse(line.at(3), line.at(0), line.at(4), line.at(1), line.at(2)));
     }
 
     return ret;
