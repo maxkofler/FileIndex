@@ -3,10 +3,14 @@
 
 #include <stdint.h>
 #include <string>
+#include <deque>
+#include <iostream>
 
 /**
  * @brief	The base filesystem entry for the different filesystem types
  */
+struct fsentry_s;
+
 typedef struct fsentry_s {
     bool                isDir;
     uint64_t            id;
@@ -49,5 +53,36 @@ std::string fs_entry_str(fs_entry& entry);
  * @return fs_entry
  */
 fs_entry fs_entry_parse(std::string isDir, std::string id, std::string name, std::string nameID, std::string parentID);
+
+class FSEntry{
+public:
+    FSEntry(std::string isDir, std::string id, std::string name, std::string nameID, std::string parentID);
+    FSEntry(bool isDir, uint64_t id, const std::string& name, uint64_t nameID, uint64_t parentID);
+
+    bool                    isDir;
+    uint64_t                id;
+    std::string             name;
+    uint64_t                nameID;
+    uint64_t                parentID;
+};
+
+class FSDir : public FSEntry{
+public:
+    FSDir(std::string id, std::string name, std::string nameID, std::string parentID);
+    FSDir(const FSEntry& other);
+    FSDir(const FSEntry* other);
+    ~FSDir();
+
+    /**
+     * @brief   Get a string describiong the members of this directory recursively
+     * @param   depth       The starting depth
+     */
+    std::string getRecMembersString(size_t depth = 1);
+
+    /**
+     * @brief   All the Members of this directory
+     */
+    std::deque<FSEntry*>    members;
+};
 
 #endif
