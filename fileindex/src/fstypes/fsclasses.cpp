@@ -37,25 +37,16 @@ FSDir::FSDir(const FSEntry* other)
 	LOGMEM("[FSDir] Creating new FSDir from FSEntry pointer");
 }
 
-FSDir::~FSDir(){
-	FUN();
-
-	for (FSEntry* i : this->members){
-		LOGMEM("[FSDir][" + this->name + "] Deleting member " + i->name);
-		delete i;
-	}
-}
-
 std::string FSDir::getRecMembersString(size_t depth){
 	std::string ret;
 
-	for (FSEntry* entry : this->members){
+	for (auto entry : this->members){
 		for (size_t i = 0; i < depth; i++)
 			ret += "_";
 		ret += entry->name + "\n";
 
 		if (entry->isDir)
-			ret += ((FSDir*)entry)->getRecMembersString(depth+1);
+			ret += ((FSDir*)entry.get())->getRecMembersString(depth+1);
 	}
 
 	return ret;

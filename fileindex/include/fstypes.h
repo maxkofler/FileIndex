@@ -71,7 +71,6 @@ public:
     FSDir(std::string id, std::string name, std::string nameID, std::string parentID);
     FSDir(const FSEntry& other);
     FSDir(const FSEntry* other);
-    ~FSDir();
 
     /**
      * @brief   Get a string describiong the members of this directory recursively
@@ -82,7 +81,7 @@ public:
     /**
      * @brief   All the Members of this directory
      */
-    std::deque<FSEntry*>    members;
+    std::deque<std::shared_ptr<FSEntry>> members;
 };
 
 #endif
