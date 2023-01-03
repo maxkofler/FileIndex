@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.5)
 project(FileIndex)
 
-find_package(SQLite3)
+add_subdirectory(sqlite3-cmake)
 
 include_directories(include)
-include_directories(${SQLite3_INCLUDE_DIRS})
+include_directories(sqlite3-cmake/src)
 
 file(GLOB_RECURSE HEADERS "include/**.h")
 file(GLOB_RECURSE CXXSOURCES "src/**.cpp")
 
 add_library(fileindex ${HEADERS} ${CXXSOURCES})
-target_link_libraries(fileindex log ${SQLite3_LIBRARIES})
+target_link_libraries(fileindex log sqlite3)
 
 option(FILEINDEX_TESTS "Build FileIndex tests" OFF)
 

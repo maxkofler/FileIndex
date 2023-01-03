@@ -4,3 +4,6 @@
 [submodule "args"]
 	path = args
 	url = https://github.com/Taywee/args
+[submodule "fileindex/sqlite3-cmake"]
+	path = fileindex/sqlite3-cmake
+	url = https://github.com/maxkofler/sqlite3-cmake
