@@ -32,6 +32,15 @@ public:
     std::deque<fs_entry>        search(const std::string& search, bool matchCase = false, bool exact = false);
 
     /**
+     * @brief   Searches the filesystem for the searched string
+     * @param   search          The string to search for
+     * @param   matchCase       If the search casing has to match
+     * @param   exact           If the string has to match exactly
+     * @return  std::deque<std::shared_ptr<FSDir>>  The root handles
+     */
+    std::deque<std::shared_ptr<FSDir>> searchTree(const std::string& search, bool matchCase = false, bool exact = false);
+
+    /**
      * @brief   Resolves all upper fs_entries of the supplied entry (The parent directories)
      * @param   entry           The entry to process
      * @return  std::deque<fs_entry>
