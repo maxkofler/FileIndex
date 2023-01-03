@@ -46,6 +46,11 @@ public:
     std::string                 getPathString(fs_entry& entry);
 
     /**
+     * @brief   Returns a deque containing all the root entries (where parentID=0)
+     */
+    std::deque<fs_entry>        getRoots();
+
+    /**
      * @brief   Queries the database for the complete entry according to the supplied id
      * @param   id              The ID of the searched entry
      * @return  fs_entry        id = 0 on error
