@@ -2,6 +2,8 @@
 
 #include "fstypes.h"
 
+#include <algorithm>
+
 FSEntry::FSEntry(FSDir* parent_, std::string isDir_, std::string id_, std::string name_, std::string nameID_, std::string parentID_)
 : parent(parent_), isDir(std::stoi(isDir_)), id(std::stoi(id_)), name(name_), nameID(std::stoi(nameID_)), parentID(std::stoi(parentID_)){
 	FUN();

@@ -5,6 +5,7 @@
 #include <string>
 #include <deque>
 #include <iostream>
+#include <memory>
 
 /**
  * @brief	The base filesystem entry for the different filesystem types
