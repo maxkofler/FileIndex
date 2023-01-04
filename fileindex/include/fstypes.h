@@ -54,21 +54,40 @@ std::string fs_entry_str(fs_entry& entry);
  */
 fs_entry fs_entry_parse(std::string isDir, std::string id, std::string name, std::string nameID, std::string parentID);
 
+class FSDir;
+
 class FSEntry{
 public:
-    FSEntry(std::string isDir, std::string id, std::string name, std::string nameID, std::string parentID);
-    FSEntry(bool isDir, uint64_t id, const std::string& name, uint64_t nameID, uint64_t parentID);
+    FSEntry(FSDir* parent, std::string isDir, std::string id, std::string name, std::string nameID, std::string parentID);
+    FSEntry(FSDir* parent, bool isDir, uint64_t id, const std::string& name, uint64_t nameID, uint64_t parentID);
 
-    bool                    isDir;
-    uint64_t                id;
-    std::string             name;
-    uint64_t                nameID;
-    uint64_t                parentID;
+    /**
+     * @brief   Returns a shared_ptr to the child with the id, else nullptr
+     * @param   id              The if of the child
+     */
+    std::shared_ptr<FSEntry>    child(size_t id);
+
+    /**
+     * @brief   Returns the amount of children this FSEntry has, if this is a FSDir, else 0
+     */
+    size_t                      childCount();
+
+    /**
+     * @brief   Returns the index this FSEntry is in its parent, else 0
+     */
+    size_t                      childNumber();
+
+    bool                        isDir;
+    uint64_t                    id;
+    std::string                 name;
+    uint64_t                    nameID;
+    FSDir*                      parent;
+    uint64_t                    parentID;
 };
 
 class FSDir : public FSEntry{
 public:
-    FSDir(std::string id, std::string name, std::string nameID, std::string parentID);
+    FSDir(FSDir* parent, std::string id, std::string name, std::string nameID, std::string parentID);
     FSDir(const FSEntry& other);
     FSDir(const FSEntry* other);
 
