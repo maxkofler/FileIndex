@@ -73,15 +73,15 @@ public:
     FSDir(const FSEntry* other);
 
     /**
-     * @brief   Get a string describiong the members of this directory recursively
-     * @param   depth       The starting depth
+     * @brief   Get a string describiong the children of this directory recursively
+     * @param   depth           The starting depth
      */
-    std::string getRecMembersString(size_t depth = 1);
+    std::string                 getRecChildrenString(size_t depth = 1);
 
     /**
-     * @brief   All the Members of this directory
+     * @brief   All the children of this directory
      */
-    std::deque<std::shared_ptr<FSEntry>> members;
+    std::deque<std::shared_ptr<FSEntry>> children;
 };
 
 #endif

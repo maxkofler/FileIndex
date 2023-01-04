@@ -37,16 +37,23 @@ FSDir::FSDir(const FSEntry* other)
 	LOGMEM("[FSDir] Creating new FSDir from FSEntry pointer");
 }
 
-std::string FSDir::getRecMembersString(size_t depth){
+std::string FSDir::getRecChildrenString(size_t depth){
 	std::string ret;
 
-	for (auto entry : this->members){
+	for (auto entry : this->children){
 		for (size_t i = 0; i < depth; i++)
 			ret += "_";
-		ret += entry->name + "\n";
+		ret += entry->name;
+		if (entry->parent){
+			ret += "(parent=" + entry->parent->name;
+			ret += " childNumber=" + std::to_string(entry->childNumber());
+			ret += " childCount=" + std::to_string(entry->childCount());
+			ret += ")";
+		}
+		ret += "\n";
 
 		if (entry->isDir)
-			ret += ((FSDir*)entry.get())->getRecMembersString(depth+1);
+			ret += ((FSDir*)entry.get())->getRecChildrenString(depth+1);
 	}
 
 	return ret;
