@@ -51,11 +51,11 @@ std::deque<fs_entry> FS::search(const std::string& search, bool matchCase, bool 
     return ret;
 }
 
-std::deque<std::shared_ptr<FSDir>> FS::searchTree(const std::string& search, bool matchCase, bool exact){
+FSDir FS::searchTree(const std::string& search, bool matchCase, bool exact){
     FUN();
     DEBUG_EX("FS::searchTree()");
 
-    std::deque<std::shared_ptr<FSDir>> ret;
+    FSDir ret(nullptr, "0", "fsresroot", "0", "0");
     std::string cmd;
 
     //Check for matching case
@@ -114,7 +114,7 @@ std::deque<std::shared_ptr<FSDir>> FS::searchTree(const std::string& search, boo
 
                 //If this is a root, add it to the roots
                 if (nEntry->parentID == 0){
-                    ret.push_back(std::shared_ptr<FSDir>{nDir});
+                    ret.children.push_back(std::shared_ptr<FSDir>{nDir});
                     continue;
                 }
             }

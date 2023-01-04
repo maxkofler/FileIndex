@@ -36,9 +36,9 @@ public:
      * @param   search          The string to search for
      * @param   matchCase       If the search casing has to match
      * @param   exact           If the string has to match exactly
-     * @return  std::deque<std::shared_ptr<FSDir>>  The root handles
+     * @return  FSDir the absolute root containing the roots and their children
      */
-    std::deque<std::shared_ptr<FSDir>> searchTree(const std::string& search, bool matchCase = false, bool exact = false);
+    FSDir                       searchTree(const std::string& search, bool matchCase = false, bool exact = false);
 
     /**
      * @brief   Resolves all upper fs_entries of the supplied entry (The parent directories)
