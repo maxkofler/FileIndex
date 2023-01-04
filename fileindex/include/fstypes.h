@@ -98,6 +98,11 @@ public:
     std::string                 getRecChildrenString(size_t depth = 1);
 
     /**
+     * @brief   Sorts all the children of all subdirectories alphabetically
+     */
+    void                        sortChildrenRec();
+
+    /**
      * @brief   All the children of this directory
      */
     std::deque<std::shared_ptr<FSEntry>> children;
