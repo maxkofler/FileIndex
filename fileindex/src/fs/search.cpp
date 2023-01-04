@@ -100,7 +100,7 @@ std::deque<std::shared_ptr<FSDir>> FS::searchTree(const std::string& search, boo
         FSEntry* nEntry;
         for (std::deque<std::string> entry : res.result){
             //Construct the new FSEntry
-            nEntry = new FSEntry(entry.at(3), entry.at(0), entry.at(4), entry.at(1), entry.at(2));
+            nEntry = new FSEntry(nullptr, entry.at(3), entry.at(0), entry.at(4), entry.at(1), entry.at(2));
 
             //If this is a directory
             if (nEntry->isDir){
@@ -121,7 +121,8 @@ std::deque<std::shared_ptr<FSDir>> FS::searchTree(const std::string& search, boo
 
             //Add it to its parent
             LOGD("Adding '" + nEntry->name + "' to '" + dirs[nEntry->parentID]->name);
-            dirs[nEntry->parentID]->members.push_back(std::shared_ptr<FSEntry>{nEntry});
+            nEntry->parent = dirs[nEntry->parentID];
+            dirs[nEntry->parentID]->children.push_back(std::shared_ptr<FSEntry>{nEntry});
         }
     }
 
