@@ -100,17 +100,22 @@ std::string FSDir::getRecChildrenString(size_t depth){
 void FSDir::sortChildrenRec(){
 	FUN();
 
-	std::sort(this->children.begin(), this->children.end(), [](const std::shared_ptr<FSEntry>& first, const std::shared_ptr<FSEntry>& second){
+	if (this->childCount() == 1){
+		if (this->children.at(0)->isDir)
+			((FSDir*)this->children.at(0).get())->sortChildrenRec();
+	} else {
+		std::sort(this->children.begin(), this->children.end(), [](const std::shared_ptr<FSEntry>& first, const std::shared_ptr<FSEntry>& second){
 
-		if (first->isDir)
-			((FSDir*)first.get())->sortChildrenRec();
+			if (first->isDir)
+				((FSDir*)first.get())->sortChildrenRec();
 
-		return std::lexicographical_compare(
-			first->name.begin(), first->name.end(),
-			second->name.begin(), second->name.end(),
-			[](const char& char1, const char& char2) {
-				return tolower(char1) < tolower(char2);
-			}
-		);
-	});
+			return std::lexicographical_compare(
+				first->name.begin(), first->name.end(),
+				second->name.begin(), second->name.end(),
+				[](const char& char1, const char& char2) {
+					return tolower(char1) < tolower(char2);
+				}
+			);
+		});
+	}
 }
