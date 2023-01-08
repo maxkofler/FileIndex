@@ -39,6 +39,12 @@ public:
      * @return  FSDir the absolute root containing the roots and their children
      */
     FSDir                       searchTree(const std::string& search, bool matchCase = false, bool exact = false);
+    
+    /**
+     * @brief   Removes the supplied filesystem entry and all of its children
+     * @param   entry           The entry to remove
+     */
+    void                        remove(const fsentry_s& entry);
 
     /**
      * @brief   Resolves all upper fs_entries of the supplied entry (The parent directories)
