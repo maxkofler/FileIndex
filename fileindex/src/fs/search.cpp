@@ -97,24 +97,23 @@ FSDir FS::searchTree(const std::string& search, bool matchCase, bool exact){
         //This map is for caching
         std::map<uint64_t, FSDir*> dirs;
 
-        FSEntry* nEntry;
+        std::shared_ptr<FSEntry> nEntry;
         for (std::deque<std::string> entry : res.result){
-            //Construct the new FSEntry
-            nEntry = new FSEntry(nullptr, entry.at(3), entry.at(0), entry.at(4), entry.at(1), entry.at(2));
+
+            //Construct the new FSEntry, if it is a directory, create a new FSDir
+            if (std::stoi(entry.at(3)) == 0)
+                nEntry = std::make_shared<FSEntry>(nullptr, entry.at(3), entry.at(0), entry.at(4), entry.at(1), entry.at(2));
+            else
+                nEntry = std::make_shared<FSDir>(nullptr, entry.at(0), entry.at(4), entry.at(1), entry.at(2));
 
             //If this is a directory
             if (nEntry->isDir){
-                FSDir* nDir = new FSDir(nEntry);
-                //We can now delete nEntry and replace it with nDir
-                delete nEntry;
-                nEntry = nDir;
-
                 //Add the directory to the dirs
-                dirs[nEntry->id] = nDir;
+                dirs[nEntry->id] = (FSDir*)nEntry.get();
 
                 //If this is a root, add it to the roots
                 if (nEntry->parentID == 0){
-                    ret.children.push_back(std::shared_ptr<FSDir>{nDir});
+                    ret.children.push_back(nEntry);
                     continue;
                 }
             }
