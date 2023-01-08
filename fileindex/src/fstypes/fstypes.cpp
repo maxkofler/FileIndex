@@ -1,7 +1,7 @@
 #include <string>
 #include "fstypes.h"
 
-std::string fs_entry_str(fs_entry& entry){
+std::string fs_entry_str(const fs_entry& entry){
 	return 	"DIR=" + std::to_string(entry.isDir) +
 			" id=" + std::to_string(entry.id) +
 			" name=" + entry.name +

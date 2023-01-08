@@ -42,7 +42,7 @@ typedef struct s_fs_dir : public fsentry_s{
  * @brief   Returns information about the fs_entry in string form
  * @param   entry       The entry to inform about
  */
-std::string fs_entry_str(fs_entry& entry);
+std::string fs_entry_str(const fs_entry& entry);
 
 /**
  * @brief   Parses the fs_entry from the supplied strings
