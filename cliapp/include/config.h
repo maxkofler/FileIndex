@@ -7,6 +7,7 @@ typedef struct config_s {
 	bool				ok = false;
 	uint8_t				verbosity = 0;
 	std::string			indexPath = "./";
+	std::string			databasePath = "fs.sql";
 } config_t;
 
 /**

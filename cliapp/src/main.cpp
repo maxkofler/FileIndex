@@ -33,7 +33,7 @@ int main(int argc, char** argv){
     {
         FUN();
 
-        SQL sql("fs.db");
+        SQL sql(conf.databasePath);
         FS fs(sql);
         FileIndex fileIndex(&fs);
 
